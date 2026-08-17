@@ -1,0 +1,69 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FactTable from '@/components/FactTable.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Deposit Guide | Pak Rummy Official';
+const description =
+  'How deposits generally work on real-money Rummy apps in Pakistan, plus current verification status for Pak Rummy deposit limits and methods.';
+const path = '/deposit/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Guides', href: '/guides/' },
+  { name: 'Deposit Guide', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Deposit Guide</h1>
+      <p class="page-hero__summary">
+        Deposits on Pakistani real-money gaming apps typically run through mobile wallets like
+        Easypaisa or JazzCash. We haven't yet confirmed Pak Rummy's specific methods or limits, so
+        this guide covers the general process and flags exactly what's unconfirmed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <FactTable
+        caption="Deposit facts"
+        rows={[
+          { label: 'Supported payment methods', fact: SITE.paymentMethods },
+          { label: 'Minimum deposit', fact: SITE.minDepositPkr, formatter: (v: number) => `${SITE.currencySymbol}${v}` },
+          { label: 'Maximum deposit', fact: SITE.maxDepositPkr, formatter: (v: number) => `${SITE.currencySymbol}${v}` },
+        ]}
+      />
+
+      <h2>Typical deposit steps</h2>
+      <ol class="steps">
+        <li>Open the wallet/deposit section inside the app.</li>
+        <li>Choose your payment method and enter the amount.</li>
+        <li>Complete the payment in your mobile wallet app (Easypaisa/JazzCash) or card flow.</li>
+        <li>Wait for confirmation — most deposits reflect within minutes; see our guide on <a href="/guides/mobile-wallet-deposit-delay/">what to do if a deposit is delayed</a>.</li>
+      </ol>
+
+      <h2>Before you deposit</h2>
+      <ul>
+        <li>Complete <a href="/account-verification/">account verification</a> first where possible — it avoids withdrawal delays later.</li>
+        <li>Only deposit through the app's own payment flow, never to a personal account number someone sends you directly.</li>
+        <li>Set a deposit budget in advance — see our <a href="/responsible-gaming/">responsible gaming</a> page.</li>
+      </ul>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/easypaisa-jazzcash/">Easypaisa and JazzCash overview</a></li>
+          <li><a href="/withdrawal/">Withdrawal guide</a></li>
+          <li><a href="/bonuses/">Current promotions</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

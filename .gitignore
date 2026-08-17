@@ -1,0 +1,36 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# environment
+.env
+.env.production
+
+# editor/OS
+.DS_Store
+Thumbs.db
+
+# logs
+npm-debug.log*
+
+# archived legacy site (superseded, kept locally for reference only — see
+# archive/legacy-static-site/README.md; not pushed since it contains
+# real people's photos misused as fake testimonials and other flagged
+# content that shouldn't be publicly redistributed, even in git history)
+/archive/
+
+# raw/unprocessed source assets already copied into public/images/ and
+# src/assets/ in optimized form — the originals aren't needed to build
+# or deploy the site
+/Pak.png
+/aviator.jpg
+/teenpatti.png
+/Slots.webp
+/Ludo.webp
+
+# redundant root copy of the APK — the copy the site actually serves
+# lives in public/downloads/pakrummy.apk and stays tracked
+/pakrummy_85NU87SXTZ8.apk

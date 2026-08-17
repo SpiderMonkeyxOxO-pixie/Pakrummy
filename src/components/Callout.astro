@@ -1,0 +1,28 @@
+---
+interface Props {
+  variant?: 'info' | 'warning';
+  title?: string;
+}
+
+const { variant = 'info', title } = Astro.props;
+---
+
+<div class={`callout ${variant === 'warning' ? 'callout-warning' : ''}`} role={variant === 'warning' ? 'note' : undefined}>
+  {title && <p class="callout-title">{title}</p>}
+  <div class="callout-body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .callout-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+    color: var(--color-ivory);
+  }
+
+  .callout-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+</style>

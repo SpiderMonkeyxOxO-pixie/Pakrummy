@@ -1,0 +1,21 @@
+{
+  "name": "Pak Rummy Official",
+  "short_name": "Pak Rummy Official",
+  "description": "Independent Pakistan information hub for the Pak Rummy app: verified download status, guides, and support.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07151C",
+  "theme_color": "#07151C",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/images/pak-rummy-app-icon.png",
+      "sizes": "190x190",
+      "type": "image/png"
+    }
+  ]
+}

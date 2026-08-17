@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const title = 'Page Not Found | Pak Rummy Official';
+const description = "The page you're looking for doesn't exist on PakRummyOfficial.com.";
+---
+
+<BaseLayout title={title} description={description} path="/404/" robots="noindex, follow">
+  <section class="section not-found">
+    <div class="container container-prose">
+      <p class="eyebrow">404</p>
+      <h1>We couldn't find that page</h1>
+      <p>
+        The page you're looking for may have moved or never existed. Try one of these instead:
+      </p>
+      <ul class="link-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/download/">Download status</a></li>
+        <li><a href="/games/">Games</a></li>
+        <li><a href="/customer-service/">Customer service</a></li>
+        <li><a href="/sitemap/">Full sitemap</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 50vh;
+  }
+</style>

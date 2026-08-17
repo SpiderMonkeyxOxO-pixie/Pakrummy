@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import GameCard from '@/components/GameCard.astro';
+import Callout from '@/components/Callout.astro';
+import { VERIFIED_GAMES, UNVERIFIED_GAMES } from '@/config/games';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Games: What We\'ve Confirmed | Pak Rummy Official';
+const description =
+  "Every game confirmed available on the Pak Rummy app: Rummy, Teen Patti, Poker, Slots, Aviator, Crash, and Ludo.";
+const path = '/games/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Games', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs, type: 'CollectionPage' });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Games</h1>
+      <p class="page-hero__summary">
+        Rummy, Teen Patti, Poker, Slots, Aviator, Crash, and Ludo are all confirmed available on
+        the Pak Rummy app. Six were verified directly against the app's own bundled module list;
+        Ludo rests on operator confirmation plus supporting (not conclusive) technical evidence —
+        see its page for exactly what that means.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <h2>Confirmed games</h2>
+      <div class="grid-games">
+        {VERIFIED_GAMES.map((game) => <GameCard game={game} />)}
+      </div>
+    </div>
+  </section>
+
+  {
+    UNVERIFIED_GAMES.length > 0 && (
+      <section class="section-tight">
+        <div class="container container-prose">
+          <Callout title="Not yet confirmed on the Pak Rummy app">
+            <p>
+              We checked the app's own bundled module manifest specifically for the game below and
+              didn't find a match — we're not publishing it as available on the strength of a
+              rumor or a competitor's page.
+            </p>
+          </Callout>
+          <div class="grid-games">
+            {UNVERIFIED_GAMES.map((game) => <GameCard game={game} />)}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/download/">Download status</a></li>
+          <li><a href="/bonuses/">Current promotions</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid-games {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+import { GAMES } from '@/config/games';
+
+const title = 'Poker on Pak Rummy: Hand Rankings and Betting Basics';
+const description =
+  "Poker is confirmed available on the Pak Rummy app via its core poker module. Here's how standard poker hand rankings and betting rounds work.";
+const path = '/games/poker/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Games', href: '/games/' },
+  { name: 'Poker', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+const game = GAMES.find((g) => g.slug === 'poker')!;
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <img
+        src="/images/poker-game-art.png"
+        alt="Poker game artwork from the Pak Rummy app"
+        width="96"
+        height="96"
+        style="border-radius: var(--radius-md); margin-bottom: var(--space-4);"
+      />
+      <Breadcrumbs items={crumbs} />
+      <h1>Poker on Pak Rummy</h1>
+      <p class="page-hero__summary">
+        Poker on the app is built on its core poker module. We haven't independently confirmed
+        the exact variant offered (Texas Hold'em is the most common online), so this page covers
+        standard poker hand rankings and betting structure that apply across most variants.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      {game.verificationNote && (
+        <Callout title="How we confirmed this">
+          <p>{game.verificationNote}</p>
+        </Callout>
+      )}
+
+      <h2>Hand rankings (highest to lowest)</h2>
+      <ol class="steps">
+        <li><strong>Royal Flush</strong> — A-K-Q-J-10, all the same suit.</li>
+        <li><strong>Straight Flush</strong> — five consecutive cards, all the same suit.</li>
+        <li><strong>Four of a Kind</strong> — four cards of the same rank.</li>
+        <li><strong>Full House</strong> — three of a kind plus a pair.</li>
+        <li><strong>Flush</strong> — five cards of the same suit, not in sequence.</li>
+        <li><strong>Straight</strong> — five consecutive cards of mixed suits.</li>
+        <li><strong>Three of a Kind</strong> — three cards of the same rank.</li>
+        <li><strong>Two Pair</strong> — two separate pairs.</li>
+        <li><strong>Pair</strong> — two cards of the same rank.</li>
+        <li><strong>High Card</strong> — none of the above; highest card wins.</li>
+      </ol>
+
+      <h2>How betting rounds typically work</h2>
+      <p>
+        In community-card formats like Texas Hold'em, each player gets private "hole" cards, and
+        betting happens in stages as shared community cards are revealed: an initial round before
+        any community cards ("pre-flop"), then after the first three community cards ("the
+        flop"), then after a fourth card ("the turn"), and after a fifth and final card ("the
+        river"). On each round you can check, bet, call, raise, or fold.
+      </p>
+
+      <Callout title="Exact variant and table stakes are unverified">
+        <p>
+          We haven't confirmed whether the app's poker module is Texas Hold'em, a different
+          variant, or offers more than one. Table stakes, blinds, and rake (if any) are configured
+          per table — check the table's own info screen before joining.
+        </p>
+      </Callout>
+
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li>Check our <a href="/download/">download status page</a> before installing anything.</li>
+        <li>Complete <a href="/register-login/">registration</a> and, before you plan to withdraw, <a href="/account-verification/">account verification</a>.</li>
+        <li>Start at a low-stake table while you confirm which variant and rules the app's poker tables actually use.</li>
+      </ol>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/games/">All games</a></li>
+          <li><a href="/download/">Download status</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+
+      <p class="fine-print">
+        Real-money poker involves financial risk. Play within a budget you've set in advance —
+        see our <a href="/responsible-gaming/">responsible gaming</a> page.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

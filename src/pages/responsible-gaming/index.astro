@@ -1,0 +1,88 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import FactTable from '@/components/FactTable.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Responsible Gaming | Pak Rummy Official';
+const description =
+  'Practical limits and support guidance for real-money Rummy play: budget setting, warning signs, and where to get help in Pakistan.';
+const path = '/responsible-gaming/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Help', href: '/customer-service/' },
+  { name: 'Responsible Gaming', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Responsible Gaming</h1>
+      <p class="page-hero__summary">
+        Pak Rummy is a real-money game for adults 18 and older. It is entertainment, not a source
+        of income, and it carries real financial risk. Set limits before you play, not after
+        you've already lost more than planned.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title="18+ only">
+        <p>
+          Real-money gaming is restricted to adults. If you are under {SITE.minimumAge}, do not
+          use this app or any real-money gaming platform.
+        </p>
+      </Callout>
+
+      <h2>Set limits before you start</h2>
+      <ul>
+        <li><strong>Set a budget</strong> you can afford to lose completely, and stop when you reach it.</li>
+        <li><strong>Set a time limit</strong> for each session and stick to it, even mid-game.</li>
+        <li><strong>Never chase losses</strong> — increasing stakes to "win back" a loss is one of the clearest warning signs of harmful play.</li>
+        <li><strong>Never borrow money to play</strong>, from a person, a loan app, or a credit line.</li>
+        <li><strong>Take regular breaks</strong> — gaming apps are designed to keep sessions long; a scheduled break interrupts that by design.</li>
+      </ul>
+
+      <h2>Warning signs to watch for</h2>
+      <ul>
+        <li>Playing to escape stress, sadness, or boredom rather than for enjoyment.</li>
+        <li>Lying to family or friends about how much time or money you're spending.</li>
+        <li>Neglecting work, sleep, or relationships because of play.</li>
+        <li>Feeling irritable or anxious when you try to cut back.</li>
+      </ul>
+
+      <h2>Self-exclusion and account limits</h2>
+      <p>
+        We haven't confirmed Pak Rummy's specific self-exclusion or deposit-limit tools yet. If
+        the app offers deposit limits, cool-off periods, or self-exclusion inside account
+        settings, use them proactively rather than waiting until play feels out of control.
+      </p>
+
+      <h2>Where to get help</h2>
+      <FactTable
+        caption="Support contact"
+        rows={[{ label: 'Dedicated responsible-gaming contact', fact: SITE.responsibleGamingContact }]}
+      />
+      <p>
+        If you're in financial or emotional distress related to gaming, speak to a trusted family
+        member, a licensed counsellor, or a national mental-health helpline in Pakistan — this is
+        more effective and more immediate than anything an app or website can offer you.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/age-restrictions/">Age restrictions</a></li>
+          <li><a href="/legal-status/">Legal status</a></li>
+          <li><a href="/customer-service/">Customer service</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

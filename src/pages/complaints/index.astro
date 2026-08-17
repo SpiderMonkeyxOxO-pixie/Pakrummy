@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTAButton from '@/components/CTAButton.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Complaints and Dispute Process | Pak Rummy Official';
+const description =
+  'How to raise a complaint about your Pak Rummy account, and how to report a suspected fake or copycat site to PakRummyOfficial.com.';
+const path = '/complaints/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Help', href: '/customer-service/' },
+  { name: 'Complaints', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Complaints</h1>
+      <p class="page-hero__summary">
+        We are an independent information site and cannot resolve account, deposit, or withdrawal
+        disputes on your behalf — those go to the operator directly. What we can do is help you
+        report suspected fake sites and escalate correctly.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>Account, deposit, or withdrawal complaints</h2>
+      <ol class="steps">
+        <li>Gather evidence first: transaction IDs, timestamps, and screenshots.</li>
+        <li>Raise it through the app's own support channel or the operator support details on our <a href="/customer-service/">customer service page</a>.</li>
+        <li>Keep a written record of every response, including dates.</li>
+        <li>If the operator doesn't resolve it, consult your payment provider's (Easypaisa/JazzCash/bank) own dispute process for the transaction itself.</li>
+      </ol>
+
+      <Callout variant="warning" title="We cannot access or influence your account">
+        <p>
+          We have no access to Pak Rummy's systems, balances, or support queue. Contacting us
+          about an account-specific dispute will not speed up a resolution with the operator.
+        </p>
+      </Callout>
+
+      <h2>Reporting a suspected fake or copycat site</h2>
+      <p>
+        If you believe a site or app is impersonating Pak Rummy — see the red flags on our
+        <a href="/official-domains/">official domains page</a> — you can report it to us so we can
+        factor it into our verification research.
+      </p>
+      <CTAButton href={`mailto:${SITE.editorialContactEmail}`} label={`Report to ${SITE.editorialContactEmail}`} variant="secondary" />
+
+      <h2>Correcting information on this site</h2>
+      <p>
+        If something on PakRummyOfficial.com is wrong or out of date, see our
+        <a href="/corrections-policy/">corrections policy</a> for how to flag it and how quickly
+        we aim to respond.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/customer-service/">Customer service</a></li>
+          <li><a href="/official-domains/">Official domains guidance</a></li>
+          <li><a href="/corrections-policy/">Corrections policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

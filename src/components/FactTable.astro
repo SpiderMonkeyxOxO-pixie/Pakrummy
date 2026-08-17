@@ -1,0 +1,69 @@
+---
+import type { Verified } from '@/config/site';
+import { isVerifiedFact, factText, isFactObject } from '@/lib/verification';
+
+interface FactRow {
+  label: string;
+  fact: Verified<unknown> | string;
+  formatter?: (value: never) => string;
+}
+
+interface Props {
+  caption?: string;
+  rows: FactRow[];
+}
+
+const { caption, rows } = Astro.props;
+
+interface PreparedRow {
+  label: string;
+  displayValue: string;
+  isFact: boolean;
+  isVerified: boolean;
+}
+
+const preparedRows: PreparedRow[] = rows.map((row: FactRow) => {
+  const factIsObject = isFactObject(row.fact);
+  if (!factIsObject) {
+    return { label: row.label, displayValue: row.fact as string, isFact: false, isVerified: true };
+  }
+  const fact = row.fact as Verified<unknown>;
+  const formatter = row.formatter as ((v: unknown) => string) | undefined;
+  return {
+    label: row.label,
+    displayValue: factText(fact, formatter),
+    isFact: true,
+    isVerified: isVerifiedFact(fact),
+  };
+});
+---
+
+<div class="scroll-table">
+  <table class="fact-table">
+    {caption && <caption>{caption}</caption>}
+    <tbody>
+      {
+        preparedRows.map((row) => (
+          <tr>
+            <th scope="row">{row.label}</th>
+            <td>
+              <span>{row.displayValue}</span>
+              {row.isFact && (
+                <span class={`badge ${row.isVerified ? 'badge-verified' : 'badge-unverified'}`}>
+                  {row.isVerified ? 'Verified' : 'Unverified'}
+                </span>
+              )}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  td span:first-child {
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+</style>

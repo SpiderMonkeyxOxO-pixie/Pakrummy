@@ -1,0 +1,56 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTAButton from '@/components/CTAButton.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Contact PakRummyOfficial.com';
+const description =
+  'How to reach PakRummyOfficial.com for corrections, press, DMCA notices, or privacy requests. Not for Pak Rummy account support.';
+const path = '/contact/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Company', href: '/about/' },
+  { name: 'Contact', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs, type: 'ContactPage' });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Contact Us</h1>
+      <p class="page-hero__summary">
+        Use this address for anything related to PakRummyOfficial.com itself. For Pak Rummy
+        account issues, see <a href="/customer-service/">customer service</a> instead — we have
+        no access to the operator's systems.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>Editorial and general contact</h2>
+      <CTAButton href={`mailto:${SITE.editorialContactEmail}`} label={`Email ${SITE.editorialContactEmail}`} variant="primary" />
+
+      <h2>What to include</h2>
+      <ul>
+        <li><strong>Corrections:</strong> the page URL and what's inaccurate — see our <a href="/corrections-policy/">corrections policy</a>.</li>
+        <li><strong>DMCA notices:</strong> see our <a href="/dmca/">DMCA page</a> for required information.</li>
+        <li><strong>Privacy requests:</strong> see our <a href="/privacy-policy/">privacy policy</a> for what data we hold and how to request its deletion.</li>
+        <li><strong>Suspected fake sites or impersonation:</strong> see <a href="/complaints/">complaints</a>.</li>
+      </ul>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/customer-service/">Pak Rummy support status</a></li>
+          <li><a href="/complaints/">Complaints</a></li>
+          <li><a href="/about/">About us</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Promo Code: What to Check Before You Use One';
+const description =
+  "There is no verified active Pak Rummy promo code today. Here's how to evaluate one if you find it, and the terms that always matter.";
+const path = '/promo-code/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Bonuses', href: '/bonuses/' },
+  { name: 'Promo Code', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Promo Code</h1>
+      <p class="page-hero__summary">
+        We do not have a verified active Pak Rummy promo code to publish today, and we won't
+        invent one. This page explains how to evaluate any code you come across and the terms
+        that matter more than the headline percentage.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title="No verified promo code right now">
+        <p>
+          Codes circulating on forums, social media, or referral links are not something we can
+          vouch for unless we've confirmed them directly with the operator. Treat any code you
+          find elsewhere with the same source-checking approach as our
+          <a href="/official-domains/">official domains guidance</a>.
+        </p>
+      </Callout>
+
+      <h2>What actually matters in a bonus offer</h2>
+      <ul>
+        <li><strong>Wagering requirement</strong> — how many times you must play through the bonus before withdrawing anything tied to it.</li>
+        <li><strong>Expiry window</strong> — how long you have to use the bonus before it's forfeited.</li>
+        <li><strong>Game eligibility</strong> — whether the bonus applies to all games or only specific tables.</li>
+        <li><strong>Maximum withdrawal cap</strong> — some bonuses cap how much of your winnings from bonus funds you can actually withdraw.</li>
+        <li><strong>Minimum deposit to unlock it</strong> — and whether that deposit itself is refundable if you change your mind.</li>
+      </ul>
+
+      <h2>If a code asks you to pay before you receive anything</h2>
+      <p>
+        A legitimate promo code is applied during or after a deposit you initiate — it should
+        never require a separate "activation fee" or a payment to an individual's personal
+        account. Treat that pattern as a scam regardless of which brand it claims to represent.
+      </p>
+
+      <h2>What we'll publish once a code is verified</h2>
+      <p>
+        When we can confirm an active Pak Rummy promotion directly, we'll publish it on our
+        <a href="/bonuses/">bonuses page</a> with the complete terms alongside the headline offer
+        — not before.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/bonuses/">Current promotions</a></li>
+          <li><a href="/deposit/">Deposit guide</a></li>
+          <li><a href="/complaints/">Report a suspicious offer</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

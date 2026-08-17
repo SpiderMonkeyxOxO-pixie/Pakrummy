@@ -1,0 +1,99 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+import { GAMES } from '@/config/games';
+
+const title = 'Ludo on Pak Rummy: Rules and How to Win';
+const description =
+  'Ludo is confirmed available on the Pak Rummy app. The classic 4-player race-to-home board game: core rules, dice mechanics, and how a round is won.';
+const path = '/games/ludo/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Games', href: '/games/' },
+  { name: 'Ludo', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+const game = GAMES.find((g) => g.slug === 'ludo')!;
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <img
+        src="/images/ludo-game-art.webp"
+        alt="Ludo game artwork"
+        width="96"
+        height="96"
+        style="border-radius: var(--radius-md); margin-bottom: var(--space-4);"
+      />
+      <Breadcrumbs items={crumbs} />
+      <h1>Ludo on Pak Rummy</h1>
+      <p class="page-hero__summary">
+        Ludo is the classic dice-and-token race game: up to four players each move a set of
+        tokens from their home yard, around the board, and into their home column — first player
+        to bring all their tokens home wins.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      {game.verificationNote && (
+        <Callout title="How we confirmed this">
+          <p>{game.verificationNote}</p>
+        </Callout>
+      )}
+
+      <h2>Core rules</h2>
+      <ul>
+        <li>Each player has four tokens that start in their own coloured home yard.</li>
+        <li>Rolling a six lets you move a token out of the yard onto your starting square on the board.</li>
+        <li>On each turn, move one token forward around the board by the number shown on the dice.</li>
+        <li>Landing exactly on a square occupied by an opponent's token sends that token back to its yard — unless the square is a marked "safe" square, where tokens of different colours can share space.</li>
+        <li>Once a token completes a full lap, it turns up the coloured home column leading to the centre.</li>
+        <li>A token needs the exact roll to enter the centre home space — an overshoot means it waits for a better roll.</li>
+        <li>The first player to bring all four tokens home wins that round.</li>
+      </ul>
+
+      <h2>Rolling a six</h2>
+      <p>
+        Rolling a six typically grants an extra roll, letting you either bring a new token into
+        play or keep moving one already on the board. Most rule sets cap this at three sixes in a
+        row before the turn passes automatically, to stop a single roll streak from dominating the
+        round.
+      </p>
+
+      <Callout title="Table-specific rules and stakes are unverified">
+        <p>
+          Exact table stakes, player counts per table, and any house-rule variations (such as
+          whether captured tokens must restart from zero or a partial position) are configured
+          per table inside the app — we haven't independently catalogued them. Check the table's
+          own info screen before joining.
+        </p>
+      </Callout>
+
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li>Check our <a href="/download/">download status page</a> before installing anything.</li>
+        <li>Complete <a href="/register-login/">registration</a> before you play for real money.</li>
+        <li>Start at a low-stake table while you confirm the app's specific table rules and player-count options.</li>
+      </ol>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/games/">All games</a></li>
+          <li><a href="/download/">Download status</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+
+      <p class="fine-print">
+        Real-money Ludo involves financial risk. Play within a budget you've set in advance — see
+        our <a href="/responsible-gaming/">responsible gaming</a> page.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

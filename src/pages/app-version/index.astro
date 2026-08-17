@@ -1,0 +1,80 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FactTable from '@/components/FactTable.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy App Version and Changelog | Pak Rummy Official';
+const description =
+  'Current confirmed version, build number, and changelog status for the Pak Rummy Android app, tracked and updated by our editorial team.';
+const path = '/app-version/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Guides', href: '/guides/' },
+  { name: 'App Updates', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy App Version</h1>
+      <p class="page-hero__summary">
+        We track the Pak Rummy app's version number, build, and changelog so you can confirm
+        you're running the latest release. Version, build, and file facts below come from the
+        build we host on our <a href="/download/">download page</a>; release date and changelog
+        history remain unconfirmed since the operator hasn't published either.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <img
+        src="/images/pak-rummy-app-icon.png"
+        alt="The official Pak Rummy app icon"
+        width="64"
+        height="64"
+        style="border-radius: var(--radius-md); margin-bottom: var(--space-4);"
+      />
+      <h2>Version facts</h2>
+      <FactTable
+        caption="Pak Rummy version information"
+        rows={[
+          { label: 'Current version', fact: SITE.appVersion },
+          { label: 'Build number', fact: SITE.appBuildNumber },
+          { label: 'Release date', fact: SITE.appReleaseDate },
+          { label: 'Last updated', fact: SITE.appLastVerifiedDate },
+          { label: 'Changelog', fact: SITE.appChangelogUrl },
+        ]}
+      />
+
+      <h2>Why version tracking matters</h2>
+      <p>
+        Real-money gaming apps distributed as APKs update outside the Play Store's automatic
+        update pipeline, so you can end up running an outdated build without realizing it. An
+        outdated build can mean missing bug fixes, or — in a worse case — a build that isn't
+        served by the developer anymore, which is a signal worth checking before you trust it.
+      </p>
+
+      <h2>What changed?</h2>
+      <p>
+        Version 1.1.2 (build 112) is the first build we've verified and tracked — there's no prior
+        confirmed version to compare it against yet. From here on, every version change we confirm
+        gets logged on our <a href="/updates/">updates page</a> with the date it was verified.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/download/">Check download status</a></li>
+          <li><a href="/updates/">All updates</a></li>
+          <li><a href="/safety/">APK safety checklist</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

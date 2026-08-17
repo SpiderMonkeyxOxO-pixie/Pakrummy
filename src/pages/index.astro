@@ -1,0 +1,268 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/Hero.astro';
+import StatusPanel from '@/components/StatusPanel.astro';
+import TelegramWidget from '@/components/TelegramWidget.astro';
+import GameCard from '@/components/GameCard.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { GAMES } from '@/config/games';
+import {
+  buildJsonLdGraph,
+  getOrganizationSchema,
+  getWebsiteSchema,
+  getWebPageSchema,
+} from '@/lib/schema';
+
+const title = 'Pak Rummy: Verified App Information for Pakistan | Official';
+const description =
+  "Independent, editorially verified Pak Rummy resource for Pakistan: download status, safety checks, guides, bonuses and support in one place.";
+const canonical = new URL('/', SITE.productionUrl).toString();
+
+const updates = (await getCollection('updates')).sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+const jsonLd = buildJsonLdGraph([
+  getOrganizationSchema(),
+  getWebsiteSchema(),
+  getWebPageSchema({ url: canonical, name: title, description }),
+]);
+
+const whyPoints = [
+  { title: 'Verified, not guessed', body: "checked against the app's own files or the operator directly." },
+  { title: 'Independent', body: "not the operator — nothing to gain from overselling availability." },
+  { title: 'Built for Pakistan', body: 'PKR, Easypaisa, JazzCash, local device context.' },
+  { title: 'Mobile-first', body: 'tested down to 360px.' },
+];
+
+const gettingStartedSteps = [
+  { title: 'Check download status', href: '/download/' },
+  { title: 'Install the APK', href: '/install/' },
+  { title: 'Register your account', href: '/register-login/' },
+  { title: 'Verify before you withdraw', href: '/account-verification/' },
+  { title: 'Know where to get help', href: '/customer-service/' },
+];
+
+const faqs = [
+  {
+    q: 'Is Pak Rummy legal to play in Pakistan?',
+    a: 'Availability and legality depend on applicable law and platform policy, and we do not provide legal advice.',
+    href: '/legal-status/',
+  },
+  {
+    q: 'Is the Pak Rummy APK safe to install?',
+    a: "Safety depends on verifying the source, signature, and checksum before installing.",
+    href: '/safety/',
+  },
+  {
+    q: 'How do I withdraw winnings from Pak Rummy?',
+    a: 'Identity verification plus a payout request from your linked payment method.',
+    href: '/withdrawal/',
+  },
+];
+
+const latestItems = [
+  ...updates.slice(0, 2).map((entry) => ({ title: entry.data.title, href: `/updates/${entry.slug}/`, date: entry.data.publishDate })),
+  ...guides.slice(0, 2).map((entry) => ({ title: entry.data.title, href: `/guides/${entry.slug}/` })),
+];
+---
+
+<BaseLayout title={title} description={description} path="/" jsonLd={jsonLd}>
+  <Hero />
+
+  <section class="section-tight">
+    <div class="container">
+      <StatusPanel />
+    </div>
+  </section>
+
+  <section class="section-tight section-light">
+    <div class="container container-prose">
+      <h2>What is Pak Rummy?</h2>
+      <p>
+        Pak Rummy is a mobile app built around 13-card Rummy for real-money play, aimed at
+        players in Pakistan. It's distributed as a direct APK rather than through the Play Store,
+        which is why source and file verification matter more than usual.
+      </p>
+      <ul class="why-list">
+        {
+          whyPoints.map((point) => (
+            <li><strong>{point.title}</strong> — {point.body}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <h2>Pak Rummy games and modes</h2>
+      <p>Seven games are confirmed directly against the app's own bundled module list.</p>
+      <div class="grid-games">
+        {GAMES.map((game) => <GameCard game={game} />)}
+      </div>
+      <p class="fine-print"><a href="/games/">See the full games hub &rarr;</a></p>
+    </div>
+  </section>
+
+  <section class="section-tight section-light">
+    <div class="container container-prose">
+      <h2>Bonuses and safety</h2>
+      <Callout title="No verified active promotion">
+        <p>
+          We haven't independently confirmed an active bonus offer — see
+          <a href="/bonuses/">how we evaluate bonus terms</a>.
+        </p>
+      </Callout>
+      <p>
+        Before installing, we check the source, the checksum, and whether requested permissions
+        are proportionate. Full facts on <a href="/app-version/">app version</a>, the
+        <a href="/safety/">safety checklist</a>, and <a href="/official-domains/">official domains</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container">
+      <h2>How to get started</h2>
+      <ol class="get-started">
+        {
+          gettingStartedSteps.map((step, index) => (
+            <li class="get-started__item">
+              <span class="get-started__index">{index + 1}</span>
+              <a href={step.href}>{step.title}</a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section-tight section-light">
+    <div class="container container-prose">
+      <h2>Pakistan player FAQ</h2>
+      <dl class="faq">
+        {
+          faqs.map((item) => (
+            <div class="faq__item">
+              <dt>{item.q}</dt>
+              <dd>
+                {item.a} <a href={item.href}>Read more &rarr;</a>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  {
+    latestItems.length > 0 && (
+      <section class="section-tight">
+        <div class="container container-prose">
+          <h2>Latest from us</h2>
+          <ul class="link-list">
+            {latestItems.map((item) => (
+              <li>
+                <a href={item.href}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
+          <p class="fine-print">
+            <a href="/updates/">All updates</a> &middot; <a href="/guides/">All guides</a>
+          </p>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section-tight responsible-band">
+    <div class="container container-prose">
+      <Callout variant="warning" title="Play responsibly">
+        <p>
+          Pak Rummy is a real-money game intended for adults 18 and older. Set a budget and time
+          limit, never chase losses, and never borrow money to play. PakRummyOfficial.com is an
+          independent resource, not the game operator. Read our
+          <a href="/responsible-gaming/">responsible gaming</a> page for support options.
+        </p>
+      </Callout>
+      <p class="fine-print">
+        Edited independently of the Pak Rummy operator — see our <a href="/about/">about page</a>
+        and <a href="/editorial-policy/">editorial policy</a>.
+      </p>
+    </div>
+  </section>
+
+  <TelegramWidget />
+</BaseLayout>
+
+<style>
+  .why-list {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .why-list strong {
+    color: var(--color-text);
+  }
+
+  @media (min-width: 700px) {
+    .why-list {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: var(--space-5);
+    }
+  }
+
+  .get-started {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .get-started__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem 0.4rem 0.4rem;
+  }
+
+  .get-started__item a {
+    font-weight: 600;
+  }
+
+  .get-started__index {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-emerald-strong);
+    color: #032018;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .responsible-band {
+    border-top: 1px solid var(--color-border);
+    background: linear-gradient(180deg, var(--color-navy) 0%, var(--color-navy-raised) 100%);
+  }
+</style>

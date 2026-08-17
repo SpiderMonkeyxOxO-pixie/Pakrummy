@@ -1,0 +1,70 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'How to Install the Pak Rummy APK | Pak Rummy Official';
+const description =
+  'A version-aware walkthrough for installing the Pak Rummy Android APK safely, including the Android permission you need to grant first.';
+const path = '/install/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Guides', href: '/guides/' },
+  { name: 'Install the App', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>How to Install the Pak Rummy APK</h1>
+      <p class="page-hero__summary">
+        Installing Pak Rummy means downloading an APK file directly rather than using the Play
+        Store, then granting Android's "install unknown apps" permission for the app you used to
+        download it. Here's the general process and what to check before you start.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout title="Start with the download page">
+        <p>
+          Use our own <a href="/download/">verified, checksummed download</a> if you haven't
+          already, or compare any file you already have against the checksum published there
+          before you install it.
+        </p>
+      </Callout>
+
+      <h2>Installation steps</h2>
+      <ol class="steps">
+        <li>Confirm the source of your APK file against our <a href="/official-domains/">official domains guidance</a>.</li>
+        <li>Open your device's <strong>Settings</strong>, go to <strong>Apps</strong>, select the app you used to download the file, and enable <strong>Install unknown apps</strong>.</li>
+        <li>Open your downloads and tap the <code>.apk</code> file.</li>
+        <li>Review the permissions Android shows you during install — compare them against our <a href="/apk-permissions/">permissions guide</a>.</li>
+        <li>Tap <strong>Install</strong> and wait for it to finish.</li>
+        <li>Open the app and complete registration — see our <a href="/register-login/">registration and login guide</a>.</li>
+      </ol>
+
+      <h2>If the install fails</h2>
+      <p>
+        A blocked or failed install is usually one of: insufficient storage, an Android version
+        below the app's minimum requirement, or Play Protect flagging the file. See our
+        <a href="/common-errors/">common app errors</a> page for what each message means and what
+        to try next.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/download/">Check download status</a></li>
+          <li><a href="/safety/">APK safety checklist</a></li>
+          <li><a href="/common-errors/">Common app errors</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

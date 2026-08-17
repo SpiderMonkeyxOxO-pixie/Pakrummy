@@ -1,0 +1,98 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { FOOTER_NAV } from '@/config/nav';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Sitemap | Pak Rummy Official';
+const description = 'A full, human-readable list of every page on PakRummyOfficial.com.';
+const path = '/sitemap/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Sitemap', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs, type: 'CollectionPage' });
+
+const guides = await getCollection('guides', ({ data }) => !data.draft);
+const updates = await getCollection('updates');
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Sitemap</h1>
+      <p class="page-hero__summary">Every page on this site, grouped the same way as our footer navigation.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <div class="sitemap-grid">
+        {
+          FOOTER_NAV.map((column) => (
+            <div>
+              <h2>{column.heading}</h2>
+              <ul>
+                {column.links.map((link) => (
+                  <li><a href={link.href}>{link.label}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+
+        <div>
+          <h2>Guide articles</h2>
+          <ul>
+            {guides.map((g) => <li><a href={`/guides/${g.slug}/`}>{g.data.title}</a></li>)}
+          </ul>
+        </div>
+
+        <div>
+          <h2>Update log entries</h2>
+          <ul>
+            {updates.map((u) => <li><a href={`/updates/${u.slug}/`}>{u.data.title}</a></li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sitemap-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .sitemap-grid h2 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .sitemap-grid ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  @media (min-width: 640px) {
+    .sitemap-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sitemap-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FactTable from '@/components/FactTable.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Bonuses: Current Offer Status | Pak Rummy Official';
+const description =
+  'Current verification status of Pak Rummy bonus offers, plus a plain-language explanation of how gaming bonus terms work.';
+const path = '/bonuses/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Bonuses', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Bonuses</h1>
+      <p class="page-hero__summary">
+        We publish bonus offers only once we've confirmed the complete terms, not just a headline
+        percentage. Right now, we have no verified active Pak Rummy bonus to show you.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <FactTable
+        caption="Current bonus status"
+        rows={[{ label: 'Active bonus', fact: SITE.currentBonus }]}
+      />
+
+      <Callout title="Why we don't publish partial bonus terms">
+        <p>
+          A bonus headline without its wagering requirement, expiry, and eligibility rules is
+          effectively marketing copy, not information — see our
+          <a href="/promo-code/">promo code page</a> for what actually matters in an offer.
+        </p>
+      </Callout>
+
+      <h2>How Rummy platform bonuses generally work</h2>
+      <p>
+        Deposit bonuses typically add a percentage of your deposit as bonus funds, unlockable by
+        playing through a wagering multiple before you can withdraw them. Cashback-style
+        promotions instead return a portion of losses over a period, usually capped. Referral
+        bonuses pay the referrer, the referred player, or both, once the referred player meets a
+        minimum deposit or play threshold.
+      </p>
+
+      <h2>What to check before opting in</h2>
+      <ul>
+        <li>The exact wagering requirement, in multiples (e.g. "10x") and which games count toward it.</li>
+        <li>The expiry window for using the bonus.</li>
+        <li>Any cap on how much of your bonus-funded winnings you can withdraw.</li>
+        <li>Whether opting in affects your ability to withdraw your original deposit before wagering completes.</li>
+      </ul>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/promo-code/">Promo code guidance</a></li>
+          <li><a href="/deposit/">Deposit guide</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'DMCA / Copyright Notices | Pak Rummy Official';
+const description = 'How to submit a copyright infringement notice regarding content on PakRummyOfficial.com.';
+const path = '/dmca/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Legal', href: '/terms/' },
+  { name: 'DMCA', href: path },
+];
+const effectiveDate = '17 August 2026';
+const effectiveDateISO = '2026-08-17';
+const jsonLd = buildStandardPageSchema({
+  title,
+  description,
+  path,
+  crumbs,
+  datePublished: effectiveDateISO,
+  dateModified: effectiveDateISO,
+});
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Copyright Notices</h1>
+      <p class="page-hero__summary">
+        All content on PakRummyOfficial.com is original, produced by our editorial team. If you
+        believe content on this site infringes your copyright, here's how to notify us.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <p class="fine-print">Effective date: {effectiveDate} &middot; Last revised: {effectiveDate}</p>
+
+      <h2>How to submit a notice</h2>
+      <p>Email <a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a> with:</p>
+      <ul>
+        <li>A description of the copyrighted work you believe was infringed.</li>
+        <li>The exact URL on this site where the material appears.</li>
+        <li>Your contact information.</li>
+        <li>A statement that you have a good-faith belief the use is unauthorized.</li>
+        <li>A statement, made under penalty of perjury, that the information you've provided is accurate and that you're authorized to act on behalf of the copyright owner.</li>
+      </ul>
+
+      <h2>What happens next</h2>
+      <p>We review each notice and, where warranted, remove or correct the material and respond to you directly.</p>
+
+      <h2>Counter-notices</h2>
+      <p>If you believe content was removed in error, contact us at the same address with an explanation and we'll review it.</p>
+
+      <div class="next-steps">
+        <h2>Related pages</h2>
+        <ul class="link-list">
+          <li><a href="/terms/">Terms of use</a></li>
+          <li><a href="/corrections-policy/">Corrections policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,147 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTAButton from '@/components/CTAButton.astro';
+import FactTable from '@/components/FactTable.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { getSoftwareApplicationSchema, buildJsonLdGraph, getOrganizationSchema, getWebsiteSchema, getWebPageSchema, getBreadcrumbSchema } from '@/lib/schema';
+
+const title = 'Pak Rummy Download: Verified APK Status | Pak Rummy Official';
+const description =
+  'Current verification status of the Pak Rummy Android APK download, including what we could and could not confirm, updated 17 August 2026.';
+const path = '/download/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Download', href: path },
+];
+
+const softwareSchema = getSoftwareApplicationSchema();
+const canonical = new URL(path, SITE.productionUrl).toString();
+const breadcrumbInput = crumbs.map((c) => ({ name: c.name, url: new URL(c.href, SITE.productionUrl).toString() }));
+const jsonLd = buildJsonLdGraph([
+  getOrganizationSchema(),
+  getWebsiteSchema(),
+  getWebPageSchema({ url: canonical, name: title, description, breadcrumb: breadcrumbInput }),
+  getBreadcrumbSchema(breadcrumbInput),
+  softwareSchema,
+]);
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Download</h1>
+      <p class="page-hero__summary">
+        We host this APK directly and verified it ourselves — checksum, manifest, and permissions
+        — on {SITE.appLastVerifiedDate.value}. We did not run it through a third-party malware
+        scanner; see exactly what "verified" does and doesn't mean below before you install it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <div class="download-cta">
+        <img
+          src="/images/pak-rummy-app-icon.png"
+          alt="The official Pak Rummy app icon"
+          width="72"
+          height="72"
+          class="download-cta__icon"
+        />
+        <div class="download-cta__actions">
+          <CTAButton
+            href={SITE.officialDownloadUrl.value}
+            label="Download Pak Rummy APK"
+            unverifiedLabel="Download link not yet verified"
+            reason={SITE.officialDownloadUrl.note}
+          />
+          <p class="fine-print download-cta__note">
+            This is what the app icon should look like. If a download you found elsewhere shows a
+            different icon, treat it as a red flag — see <a href="/official-domains/">official
+            domains guidance</a>.
+          </p>
+        </div>
+      </div>
+
+      <Callout title="What we verified, and what we didn't">
+        <p>
+          We host this file ourselves rather than linking off-site, computed its SHA-256 checksum,
+          and read its package name, version, and permissions straight from its manifest — all on
+          the date shown below. We have <strong>not</strong> run it through a third-party
+          multi-engine scanner such as VirusTotal, since we don't have API access to one from this
+          environment. Recompute the checksum yourself after downloading and compare it against
+          the value below — see our <a href="/safety/">APK safety checklist</a> for how.
+        </p>
+      </Callout>
+
+      <h2>What we've verified</h2>
+      <FactTable
+        caption="Download facts"
+        rows={[
+          { label: 'App name', fact: SITE.brandName },
+          { label: 'Official download URL', fact: SITE.officialDownloadUrl },
+          { label: 'Current version', fact: SITE.appVersion },
+          { label: 'File size', fact: SITE.appFileSizeMb, formatter: (v: number) => `${v} MB` },
+          { label: 'Package name', fact: SITE.appPackageName },
+          { label: 'SHA-256 checksum', fact: SITE.appSha256 },
+          { label: 'Last scanned', fact: SITE.appLastScanDate },
+          { label: 'Minimum Android version', fact: SITE.appMinAndroidVersion },
+        ]}
+      />
+
+      <h2>How to verify your own download matches</h2>
+      <ol class="steps">
+        <li>Download the file using the button above.</li>
+        <li>Compute its SHA-256 checksum yourself — on Windows via <code>certutil -hashfile pakrummy.apk SHA256</code>, on macOS/Linux via <code>shasum -a 256 pakrummy.apk</code>.</li>
+        <li>Compare it character-for-character against the checksum in the table above. If it doesn't match exactly, do not install the file and contact us — see <a href="/complaints/">complaints</a>.</li>
+        <li>Review the permissions Android shows you during install against our <a href="/apk-permissions/">permissions guide</a>.</li>
+      </ol>
+
+      <h2>What we still haven't confirmed</h2>
+      <p>
+        We haven't independently confirmed the operator's legal company name or which domain(s)
+        the operator directly controls — see <a href="/official-domains/">official domains
+        guidance</a>. We do have an operator-supplied support email and live chat link; see
+        <a href="/customer-service/">customer service</a> for what "verified" does and doesn't
+        mean for those. A checksummed file and a confirmed corporate identity are two different
+        kinds of trust; we have the first, not yet the second.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/install/">How to install the APK once you have it</a></li>
+          <li><a href="/app-version/">App version and changelog tracking</a></li>
+          <li><a href="/safety/">APK safety checklist</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .download-cta {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-block: var(--space-5);
+  }
+
+  .download-cta__icon {
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+  }
+
+  .download-cta__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .download-cta__note {
+    max-width: 42ch;
+  }
+</style>

@@ -1,0 +1,86 @@
+---
+/**
+ * Purely decorative, aria-hidden background layer: a faint interlocking
+ * geometric line pattern (inspired by South Asian/Islamic star-and-lattice
+ * motifs) plus a soft, abstract crescent-and-star glow. Deliberately not a
+ * literal flag — no seals, no national emblems.
+ */
+interface Props {
+  variant?: 'hero' | 'section';
+}
+
+const { variant = 'hero' } = Astro.props;
+const patternId = `pk-lattice-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class={`pk-pattern pk-pattern--${variant}`} aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" focusable="false">
+    <defs>
+      <pattern id={patternId} width="72" height="72" patternUnits="userSpaceOnUse">
+        <path
+          d="M36 4 L52 20 L36 36 L20 20 Z M36 36 L52 52 L36 68 L20 52 Z M0 36 L16 20 L32 36 L16 52 Z M40 36 L56 20 L72 36 L56 52 Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1"
+        />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill={`url(#${patternId})`} />
+  </svg>
+
+  {
+    variant === 'hero' && (
+      <div class="pk-glow" >
+        <svg width="420" height="420" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <defs>
+            <radialGradient id="pk-crescent-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#10B981" stop-opacity="0.35" />
+              <stop offset="100%" stop-color="#10B981" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="pk-star-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#F5B942" stop-opacity="0.55" />
+              <stop offset="100%" stop-color="#F5B942" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <path
+            d="M255 70 a120 120 0 1 0 8 208 a150 150 0 1 1 -8 -208 Z"
+            fill="url(#pk-crescent-glow)"
+          />
+          <circle cx="300" cy="140" r="70" fill="url(#pk-star-glow)" />
+        </svg>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .pk-pattern {
+    color: var(--color-ivory);
+  }
+
+  .pk-pattern--hero {
+    opacity: 1;
+  }
+
+  .pk-pattern--hero svg:first-child {
+    opacity: 0.05;
+  }
+
+  .pk-pattern--section svg {
+    opacity: 0.035;
+  }
+
+  .pk-glow {
+    position: absolute;
+    top: -8%;
+    right: -6%;
+    width: min(420px, 60vw);
+    height: min(420px, 60vw);
+    filter: blur(6px);
+  }
+
+  .pk-glow svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -1,0 +1,98 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+import { GAMES } from '@/config/games';
+
+const title = 'Aviator on Pak Rummy: How the Multiplier Game Works';
+const description =
+  'Aviator is confirmed available on the Pak Rummy app. How the rising-multiplier, cash-out-before-it-flies-away mechanic works.';
+const path = '/games/aviator/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Games', href: '/games/' },
+  { name: 'Aviator', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+const game = GAMES.find((g) => g.slug === 'aviator')!;
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <img
+        src="/images/aviator-game-art.jpg"
+        alt="Aviator game artwork"
+        width="96"
+        height="57"
+        style="border-radius: var(--radius-md); margin-bottom: var(--space-4);"
+      />
+      <Breadcrumbs items={crumbs} />
+      <h1>Aviator on Pak Rummy</h1>
+      <p class="page-hero__summary">
+        Aviator is a round-based multiplier game: a plane takes off and a multiplier climbs from
+        1.00x. You place a stake before the round starts, then choose when to cash out — the
+        longer you wait, the higher the multiplier, but if the plane "flies away" before you cash
+        out, you lose your stake.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      {game.verificationNote && (
+        <Callout title="How we confirmed this">
+          <p>{game.verificationNote}</p>
+        </Callout>
+      )}
+
+      <h2>How a round works</h2>
+      <ol class="steps">
+        <li>Place your stake before the round starts — a short countdown usually precedes each round.</li>
+        <li>Once the round begins, the multiplier climbs continuously from 1.00x.</li>
+        <li>Tap "cash out" at any point to lock in a payout of your stake × the multiplier at that moment.</li>
+        <li>If you haven't cashed out when the round ends ("the plane flies away"), your stake is lost.</li>
+        <li>The round-end multiplier is unpredictable — it can end at 1.01x or run into the hundreds, and there's no way to know in advance.</li>
+      </ol>
+
+      <Callout variant="warning" title="Outcome timing is not verified as provably fair">
+        <p>
+          Some platforms in this genre publish a "provably fair" cryptographic method so players
+          can independently verify a round's outcome wasn't manipulated after the fact. We have
+          not confirmed whether Pak Rummy's Aviator implementation offers this, so don't assume it
+          does — check the game's own info screen.
+        </p>
+      </Callout>
+
+      <h2>Related titles bundled with the app</h2>
+      <p>
+        The app's manifest also lists several other titles in the same rising-multiplier genre —
+        CrashX, Aviatrix, JetX, Zeppelin — alongside our separate <a href="/games/crash/">Crash</a>
+        page. They share the same core cash-out-before-it-ends mechanic with different visual
+        themes.
+      </p>
+
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li>Check our <a href="/download/">download status page</a> before installing anything.</li>
+        <li>Complete <a href="/register-login/">registration</a> before you play for real money.</li>
+        <li>Set a per-round stake and a session budget before you start — this genre moves fast.</li>
+      </ol>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/games/crash/">Crash</a></li>
+          <li><a href="/games/">All games</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+
+      <p class="fine-print">
+        Aviator is a fast-paced, real-money chance game. Play within a budget you've set in
+        advance — see our <a href="/responsible-gaming/">responsible gaming</a> page.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

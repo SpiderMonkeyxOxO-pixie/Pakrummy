@@ -1,0 +1,98 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+import { GAMES } from '@/config/games';
+
+const title = 'Teen Patti on Pak Rummy: Rules and Hand Rankings';
+const description =
+  'Teen Patti is confirmed available on the Pak Rummy app. Here are the core rules, blind vs. seen betting, and hand rankings.';
+const path = '/games/teen-patti/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Games', href: '/games/' },
+  { name: 'Teen Patti', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+const game = GAMES.find((g) => g.slug === 'teen-patti')!;
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <img
+        src="/images/teen-patti-game-art.webp"
+        alt="Teen Patti game artwork"
+        width="96"
+        height="96"
+        style="border-radius: var(--radius-md); margin-bottom: var(--space-4);"
+      />
+      <Breadcrumbs items={crumbs} />
+      <h1>Teen Patti on Pak Rummy</h1>
+      <p class="page-hero__summary">
+        Teen Patti ("three cards") is a 3-card betting game: each player is dealt three cards and
+        bets in rounds without redrawing, either "blind" (without looking) or "seen" (after
+        looking), until players fold or a showdown decides the winner.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      {game.verificationNote && (
+        <Callout title="How we confirmed this">
+          <p>{game.verificationNote}</p>
+        </Callout>
+      )}
+
+      <h2>Core rules</h2>
+      <ul>
+        <li>Each player antes a fixed "boot amount" into the pot before cards are dealt.</li>
+        <li>Every player gets three cards face-down from a standard 52-card deck — no community cards.</li>
+        <li>On your turn, bet "blind" (without looking at your cards, for a lower stake) or "seen" (after looking, typically double a blind bet).</li>
+        <li>Betting continues clockwise; a player can fold, or call/raise the current stake, until only one player remains or two remaining players go to a "show."</li>
+        <li>The last remaining player wins the pot without needing to reveal their hand.</li>
+      </ul>
+
+      <h2>Hand rankings (highest to lowest)</h2>
+      <ol class="steps">
+        <li><strong>Trail / Set</strong> — three cards of the same rank (e.g. three Kings).</li>
+        <li><strong>Pure Sequence</strong> — three consecutive cards of the same suit (a straight flush).</li>
+        <li><strong>Sequence / Run</strong> — three consecutive cards of mixed suits.</li>
+        <li><strong>Color</strong> — three cards of the same suit, not in sequence (a flush).</li>
+        <li><strong>Pair</strong> — two cards of the same rank plus one unrelated card.</li>
+        <li><strong>High Card</strong> — none of the above; highest card wins.</li>
+      </ol>
+
+      <Callout title="Table-specific rules and stakes are unverified">
+        <p>
+          Boot amounts, maximum bet caps, and any table-specific variants are configured per table
+          inside the app — we haven't independently catalogued them. Check the table's own info
+          screen before joining.
+        </p>
+      </Callout>
+
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li>Check our <a href="/download/">download status page</a> before installing anything.</li>
+        <li>Complete <a href="/register-login/">registration</a> and, before you plan to withdraw, <a href="/account-verification/">account verification</a>.</li>
+        <li>Start at a low-stake table while you learn the app's specific interface and betting limits.</li>
+      </ol>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/games/">All games</a></li>
+          <li><a href="/download/">Download status</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+
+      <p class="fine-print">
+        Real-money Teen Patti involves financial risk. Play within a budget you've set in advance
+        — see our <a href="/responsible-gaming/">responsible gaming</a> page.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

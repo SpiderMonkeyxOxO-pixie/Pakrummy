@@ -1,0 +1,75 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Age Restrictions | Pak Rummy Official';
+const description =
+  'Pak Rummy and real-money gaming apps in this category are restricted to adults. What that means in practice and how age is typically verified.';
+const path = '/age-restrictions/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Company', href: '/about/' },
+  { name: 'Age Restrictions', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Age Restrictions</h1>
+      <p class="page-hero__summary">
+        Real-money gaming apps, including Pak Rummy, are intended for adults {SITE.minimumAge} and
+        older only. This page explains why the restriction exists and how it's typically enforced.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title={`${SITE.minimumAge}+ only`}>
+        <p>
+          If you are under {SITE.minimumAge}, do not attempt to register for or use Pak Rummy or
+          any real-money gaming platform, regardless of what a website or app claims about age
+          checks.
+        </p>
+      </Callout>
+
+      <h2>Why the restriction exists</h2>
+      <p>
+        Real-money gaming involves genuine financial risk and, in most jurisdictions, legal
+        eligibility to enter binding contracts and gamble is tied to adult age. Minors are also
+        disproportionately vulnerable to compulsive-use patterns that responsible-gaming controls
+        are designed to catch in adults.
+      </p>
+
+      <h2>How age is typically verified</h2>
+      <p>
+        Identity verification (KYC), usually a government-issued ID check before a first
+        withdrawal, is the standard method across this app category — see our
+        <a href="/account-verification/">account verification guide</a>. We haven't confirmed
+        Pak Rummy's specific process.
+      </p>
+
+      <h2>If you're concerned about a minor's access</h2>
+      <p>
+        Device-level parental controls and app-store content restrictions are the most reliable
+        way to prevent installation in the first place, since APK-distributed apps like this one
+        sit outside the Play Store's own age-gating.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+          <li><a href="/legal-status/">Legal status</a></li>
+          <li><a href="/account-verification/">Account verification</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

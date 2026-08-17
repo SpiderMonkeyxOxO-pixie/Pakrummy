@@ -1,0 +1,79 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FactTable from '@/components/FactTable.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Withdrawal Guide | Pak Rummy Official';
+const description =
+  'How withdrawals typically work on real-money Rummy apps, expected processing patterns, and current verification status for Pak Rummy specifically.';
+const path = '/withdrawal/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Guides', href: '/guides/' },
+  { name: 'Withdrawal Guide', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Withdrawal Guide</h1>
+      <p class="page-hero__summary">
+        Withdrawals require a verified account and generally return funds to the same payment
+        method you deposited with. We have not confirmed Pak Rummy's specific limits or
+        processing time — here's the general pattern and what to check.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <FactTable
+        caption="Withdrawal facts"
+        rows={[
+          { label: 'Minimum withdrawal', fact: SITE.minWithdrawalPkr, formatter: (v: number) => `${SITE.currencySymbol}${v}` },
+          { label: 'Maximum withdrawal', fact: SITE.maxWithdrawalPkr, formatter: (v: number) => `${SITE.currencySymbol}${v}` },
+          { label: 'Typical processing time', fact: SITE.withdrawalProcessingTime },
+        ]}
+      />
+
+      <h2>Typical withdrawal steps</h2>
+      <ol class="steps">
+        <li>Complete <a href="/account-verification/">identity verification</a> if you haven't already — this is the most common reason a first withdrawal gets delayed.</li>
+        <li>Open the withdrawal section and choose the payment method you deposited from.</li>
+        <li>Enter the amount and confirm the request.</li>
+        <li>Wait for processing — see our <a href="/guides/mobile-wallet-deposit-delay/">delayed payment guide</a> if it takes longer than expected.</li>
+      </ol>
+
+      <Callout title="Withdrawals usually return to the original payment method">
+        <p>
+          Most platforms in this category require withdrawals to go back to the same
+          wallet/account you deposited from, as a fraud-prevention measure — not a way to move
+          funds to a different account.
+        </p>
+      </Callout>
+
+      <h2>If a withdrawal is delayed or rejected</h2>
+      <ul>
+        <li>Confirm your account passed identity verification.</li>
+        <li>Check that the name on your payment method matches your verified identity.</li>
+        <li>Check whether any bonus wagering requirement is still incomplete — see <a href="/bonuses/">bonus terms</a>.</li>
+        <li>Contact <a href="/customer-service/">customer service</a> with your transaction reference if it's outside the stated processing window.</li>
+      </ul>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/deposit/">Deposit guide</a></li>
+          <li><a href="/account-verification/">Account verification</a></li>
+          <li><a href="/complaints/">File a complaint</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

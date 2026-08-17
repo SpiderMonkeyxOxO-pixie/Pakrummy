@@ -1,0 +1,136 @@
+---
+import '@/styles/global.css';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import ResponsibleGamingBar from '@/components/ResponsibleGamingBar.astro';
+import { SITE } from '@/config/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogType?: 'website' | 'article';
+  /** Defaults to the site's square app-icon-derived image — see DEFAULT_OG_IMAGE below. */
+  ogImage?: string;
+  ogImageAlt?: string;
+  robots?: string;
+  jsonLd?: Record<string, unknown>;
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const {
+  title,
+  description,
+  path,
+  ogType = 'website',
+  ogImage,
+  ogImageAlt,
+  robots = 'index, follow, max-image-preview:large',
+  jsonLd,
+  publishedTime,
+  modifiedTime,
+} = Astro.props;
+
+const canonical = new URL(path, SITE.productionUrl).toString();
+const { ga4MeasurementId, gtmContainerId, googleSiteVerification, bingWebmasterVerification } =
+  SITE.analytics;
+
+/**
+ * We don't have a designed 1200x630 share asset — see docs/required-verification.md.
+ * This is the site's real app icon upscaled to clear platform minimums (Facebook's
+ * documented minimum is 200x200; this ships at 400x400), not a placeholder. It's
+ * square, so we use the Twitter "summary" card, not "summary_large_image" — that's
+ * reserved for pages that pass a proper landscape ogImage explicitly.
+ */
+const DEFAULT_OG_IMAGE = { url: '/images/og-default.png', width: 400, height: 400 };
+const resolvedOgImage = ogImage
+  ? { url: ogImage, width: undefined as number | undefined, height: undefined as number | undefined }
+  : DEFAULT_OG_IMAGE;
+const ogImageUrl = new URL(resolvedOgImage.url, SITE.productionUrl).toString();
+const resolvedOgImageAlt = ogImageAlt ?? `${SITE.siteName} logo`;
+const isLargeCard = Boolean(ogImage);
+---
+
+<!doctype html>
+<html lang={SITE.htmlLang}>
+  <head>
+    <script is:inline>
+      /* Progressive enhancement guard: .reveal only starts hidden once we
+         know JS + the observer script can actually run to reveal it — see
+         global.css. Without this, a script failure would hide content
+         permanently. */
+      document.documentElement.classList.add('js-ready');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={robots} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.siteName} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:image" content={ogImageUrl} />
+    {resolvedOgImage.width && <meta property="og:image:width" content={String(resolvedOgImage.width)} />}
+    {resolvedOgImage.height && <meta property="og:image:height" content={String(resolvedOgImage.height)} />}
+    <meta property="og:image:alt" content={resolvedOgImageAlt} />
+
+    <meta name="twitter:card" content={isLargeCard ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={resolvedOgImageAlt} />
+
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+    <meta name="theme-color" content="#07151C" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/images/pak-rummy-app-icon.png" type="image/png" sizes="190x190" />
+    <link rel="apple-touch-icon" href="/images/pak-rummy-app-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    {googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification} />}
+    {bingWebmasterVerification && <meta name="msvalidate.01" content={bingWebmasterVerification} />}
+
+    {
+      jsonLd && (
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+      )
+    }
+
+    {
+      gtmContainerId && (
+        <script
+          is:inline
+          set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmContainerId}');`}
+        />
+      )
+    }
+    {
+      ga4MeasurementId && !gtmContainerId && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`} />
+          <script
+            is:inline
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${ga4MeasurementId}');`}
+          />
+        </>
+      )
+    }
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <ResponsibleGamingBar />
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

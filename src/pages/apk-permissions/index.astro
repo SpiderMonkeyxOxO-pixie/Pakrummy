@@ -1,0 +1,117 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FactTable from '@/components/FactTable.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy APK Permissions Explained | Pak Rummy Official';
+const description =
+  'What Android permissions a real-money Rummy app typically needs, which ones are red flags, and what we have confirmed for Pak Rummy specifically.';
+const path = '/apk-permissions/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Download', href: '/download/' },
+  { name: 'APK Permissions', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+
+const reasonable = [
+  ['Internet / network access', 'Required for any online multiplayer game.'],
+  ['Storage (media/files)', 'Used to save the downloaded APK and, sometimes, in-app assets or screenshots.'],
+  ['Notifications', 'Used for game invites, promotions, or table alerts.'],
+  ['Camera', 'Reasonable only if the app performs selfie-based identity verification (KYC) for withdrawals.'],
+];
+
+const redFlags = [
+  ['Read SMS messages', 'Not needed for gameplay. Common in predatory lending apps bundled with gaming apps — treat as a serious red flag.'],
+  ['Contacts', 'Not needed for a card game. A request for your full contact list is disproportionate.'],
+  ['Call logs / phone state beyond basic device ID', 'Rarely justified; be cautious if paired with aggressive collections-style behaviour.'],
+  ['Accessibility service', 'Extremely broad access. Legitimate real-money apps very rarely need this — verify carefully before granting it.'],
+];
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy APK Permissions Explained</h1>
+      <p class="page-hero__summary">
+        A real-money card game app has no functional reason to read your SMS messages or contact
+        list. This page lists which Android permissions are reasonable for an app like Pak Rummy,
+        which ones deserve scrutiny, and what we've confirmed about Pak Rummy's actual permission
+        list.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>Pak Rummy's confirmed permissions</h2>
+      {
+        SITE.appPermissionsSummary.status === 'verified' ? (
+          <>
+            <p>
+              Extracted directly from the app's <code>AndroidManifest.xml</code> on {SITE.appPermissionsSummary.verifiedOn}.
+              Nothing on the "worth questioning" list below appears — no SMS, contacts, call-log, or
+              accessibility-service access is requested.
+            </p>
+            <ul>
+              {SITE.appPermissionsSummary.value?.map((permission: string) => <li><code>{permission}</code></li>)}
+            </ul>
+          </>
+        ) : (
+          <FactTable
+            caption="Permission verification status"
+            rows={[{ label: 'Permissions summary', fact: SITE.appPermissionsSummary }]}
+          />
+        )
+      }
+
+      <h2>Generally reasonable for this app category</h2>
+      <div class="scroll-table">
+        <table class="fact-table">
+          <thead>
+            <tr><th>Permission</th><th>Why it's typically fine</th></tr>
+          </thead>
+          <tbody>
+            {reasonable.map(([perm, why]) => (
+              <tr><td>{perm}</td><td>{why}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Worth questioning before you grant it</h2>
+      <div class="scroll-table">
+        <table class="fact-table">
+          <thead>
+            <tr><th>Permission</th><th>Why it's a red flag here</th></tr>
+          </thead>
+          <tbody>
+            {redFlags.map(([perm, why]) => (
+              <tr><td>{perm}</td><td>{why}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>What to do if a permission surprises you</h2>
+      <p>
+        Android shows requested permissions before you complete installation. If something on
+        the "worth questioning" list appears, you can decline the install and report the file —
+        see our <a href="/complaints/">complaints page</a> — or wait for a verified official
+        source through our <a href="/download/">download page</a>.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/safety/">APK safety checklist</a></li>
+          <li><a href="/install/">Installation walkthrough</a></li>
+          <li><a href="/download/">Download status</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,734 @@
+/*
+ * Latin-subset only, font-display: optional (not the fontsource default
+ * `swap`). This trades an occasional first-visit fallback-font render for
+ * eliminating font-swap layout shift (kept CLS at 0 in Lighthouse — see
+ * docs/qa-report.md).
+ */
+@font-face {
+  font-family: 'Space Grotesk Variable';
+  font-style: normal;
+  font-display: optional;
+  font-weight: 300 700;
+  src: url('@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans Variable';
+  font-style: normal;
+  font-display: optional;
+  font-weight: 200 800;
+  src: url('@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: optional;
+  font-weight: 500;
+  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: optional;
+  font-weight: 600;
+  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /*
+   * Pakistan-inspired palette. Pakistan green is the brand foundation;
+   * vibrant gaming green is reserved for CTAs, highlights, glow, and
+   * interactive states — see docs for the rule against an all-green UI.
+   */
+  --color-navy: #031713; /* deep midnight green/black */
+  --color-navy-raised: #072620;
+  --color-navy-card: #0b3129;
+  --color-emerald: #01411c; /* Pakistan green */
+  --color-emerald-strong: #10b981; /* vibrant gaming green */
+  --color-emerald-deep: #0c9a6c; /* hover state for vibrant green */
+  --color-pk-green: #01411c;
+  --color-gold: #f5b942;
+  --color-gold-strong: #ffd27a;
+  --color-ivory: #f7f8f3; /* soft white */
+  --color-slate: #91bdb0; /* muted mint */
+  --color-crimson: #d97a70; /* muted red */
+  --color-crimson-bg: #2a1512;
+  --color-badge-verified-text: #7ce8bc;
+
+  --color-bg: var(--color-navy);
+  --color-bg-raised: var(--color-navy-raised);
+  --color-bg-card: var(--color-navy-card);
+  --color-text: var(--color-ivory);
+  --color-text-muted: var(--color-slate);
+  --color-accent: var(--color-gold);
+  --color-accent-strong: var(--color-gold-strong);
+  --color-brand: var(--color-emerald);
+  --color-brand-strong: var(--color-emerald-strong);
+  --color-border: #12392c;
+  --color-focus: var(--color-gold);
+
+  /* Light-section tokens (soft-white bands, e.g. homepage rhythm) */
+  --color-bg-light: #f7f8f3;
+  --color-bg-light-raised: #eaf2ec;
+  --color-text-on-light: #04241a;
+  --color-text-on-light-muted: #4c6b60;
+  --color-border-light: #dbe8e1;
+
+  /* Status semantics — never reuse "verified" green for unverified facts */
+  --status-verified: #10b981;
+  --status-verified-bg: rgba(16, 185, 129, 0.14);
+  --status-verified-border: rgba(16, 185, 129, 0.4);
+  --status-pending: #f5b942;
+  --status-pending-bg: rgba(245, 185, 66, 0.14);
+  --status-pending-border: rgba(245, 185, 66, 0.4);
+  --status-unavailable: #d97a70;
+  --status-unavailable-bg: rgba(217, 122, 112, 0.14);
+  --status-unavailable-border: rgba(217, 122, 112, 0.4);
+
+  --font-heading: 'Space Grotesk Variable', 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 22px;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --container-max: 1200px;
+
+  --glow-green: 0 0 0 1px rgba(16, 185, 129, 0.4), 0 8px 28px rgba(16, 185, 129, 0.28);
+  --glow-gold: 0 0 0 1px rgba(245, 185, 66, 0.35), 0 8px 24px rgba(245, 185, 66, 0.2);
+  --shadow-card: 0 12px 32px rgba(1, 8, 6, 0.35);
+  --shadow-card-hover: 0 18px 40px rgba(1, 8, 6, 0.45);
+}
+
+/*
+ * Drop-in scope: wrap a homepage <section> in .section-light and every
+ * existing component inside it (Callout, FactTable, GameCard, badges,
+ * link-list…) re-themes for a soft-white background automatically, since
+ * they all read these same custom properties rather than hard-coded colors.
+ */
+.section-light {
+  --color-bg: var(--color-bg-light);
+  --color-bg-raised: var(--color-bg-light-raised);
+  --color-bg-card: #ffffff;
+  --color-ivory: var(--color-text-on-light);
+  --color-text: var(--color-text-on-light);
+  --color-slate: var(--color-text-on-light-muted);
+  --color-text-muted: var(--color-text-on-light-muted);
+  --color-border: var(--color-border-light);
+  --color-crimson-bg: #fbe9e6;
+  --color-navy: var(--color-text-on-light);
+  /* Pale gold/mint reads fine on our dark backgrounds but fails WCAG AA on
+     white — swap in darker, still on-brand tones wherever text sits on
+     var(--color-bg-light) so links and badges stay readable. */
+  --color-gold: #8a5c12;
+  --color-gold-strong: #8a5c12;
+  --color-badge-verified-text: #0a6b4a;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  display: block;
+}
+
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+table {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  color: var(--color-ivory);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-4);
+}
+
+h1 {
+  font-size: clamp(2rem, 1.5rem + 2.3vw, 3.25rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 1.25rem + 1.2vw, 2.25rem);
+}
+
+h3 {
+  font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.5rem);
+}
+
+p {
+  margin: 0 0 var(--space-4);
+  max-width: 68ch;
+}
+
+a {
+  color: var(--color-gold-strong);
+  text-underline-offset: 3px;
+}
+
+a:not([class]) {
+  color: var(--color-gold-strong);
+}
+
+ul,
+ol {
+  padding-left: 1.25em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--space-6);
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: -3rem;
+  background: var(--color-gold);
+  color: var(--color-navy);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  z-index: 1000;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: var(--space-3);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  line-height: 1.2;
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--color-emerald-strong);
+  color: #032018;
+  border-color: var(--color-emerald-strong);
+  box-shadow: var(--glow-green);
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  background: var(--color-emerald-deep);
+  border-color: var(--color-emerald-deep);
+  transform: translateY(-1px);
+}
+
+/* Button "shine" sweep on hover — decorative, disabled under reduced motion */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, 0.35) 40%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.btn-primary:hover::after {
+  transform: translateX(120%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover {
+    transform: none;
+  }
+  .btn-primary::after {
+    display: none;
+  }
+}
+
+.btn-secondary {
+  background: rgba(247, 248, 243, 0.04);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  backdrop-filter: blur(6px);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold-strong);
+}
+
+.btn-disabled,
+.btn[aria-disabled='true'] {
+  background: var(--color-bg-card);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.section {
+  padding-block: var(--space-7);
+}
+
+.section-tight {
+  padding-block: var(--space-6);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  color: var(--color-gold-strong);
+  font-weight: 500;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-emerald-strong);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  flex-shrink: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+}
+
+.badge-verified {
+  color: var(--color-badge-verified-text);
+  border-color: var(--status-verified-border);
+  background: var(--status-verified-bg);
+}
+
+.badge-unverified {
+  color: var(--color-gold-strong);
+  border-color: var(--status-pending-border);
+  background: var(--status-pending-bg);
+}
+
+/* Small pill "chip" for trust/status rows, e.g. in the hero */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: rgba(247, 248, 243, 0.05);
+  color: var(--color-text);
+  backdrop-filter: blur(8px);
+}
+
+.chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chip-dot--verified {
+  background: var(--status-verified);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+}
+
+.chip-dot--pending {
+  background: var(--status-pending);
+  box-shadow: 0 0 6px rgba(245, 185, 66, 0.8);
+}
+
+.chip-dot--unavailable {
+  background: var(--status-unavailable);
+}
+
+.callout {
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-raised);
+}
+
+.callout-warning {
+  border-color: rgba(217, 122, 112, 0.4);
+  background: var(--color-crimson-bg);
+}
+
+table.fact-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+table.fact-table caption {
+  text-align: left;
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+  color: var(--color-ivory);
+  font-family: var(--font-heading);
+}
+
+table.fact-table th,
+table.fact-table td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+table.fact-table th {
+  width: 40%;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  table.fact-table,
+  table.fact-table tbody,
+  table.fact-table tr,
+  table.fact-table th,
+  table.fact-table td {
+    display: block;
+    width: 100%;
+  }
+
+  table.fact-table tr {
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-2);
+  }
+
+  table.fact-table th,
+  table.fact-table td {
+    border-bottom: none;
+    padding: 0.25rem 0;
+  }
+}
+
+.scroll-table {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.container-prose {
+  max-width: 900px;
+}
+
+.page-hero {
+  background: radial-gradient(120% 140% at 15% -10%, rgba(16, 185, 129, 0.16) 0%, transparent 55%),
+    linear-gradient(180deg, var(--color-navy-raised) 0%, var(--color-navy) 100%);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: var(--space-6) var(--space-7);
+}
+
+.page-hero__summary {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  max-width: 72ch;
+}
+
+.fine-print {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.two-col {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.two-col > * {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.link-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2);
+}
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin: 0;
+}
+
+.faq__item dt {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.faq__item dd {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.steps {
+  padding-left: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.steps li {
+  padding-left: var(--space-2);
+}
+
+.next-steps {
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.grid-games {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.grid-games > * {
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .grid-games {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-games {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* --- Decorative Pakistani-inspired pattern & glass utilities ------------ */
+
+.pk-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  overflow: hidden;
+}
+
+.glass-panel {
+  background: rgba(247, 248, 243, 0.06);
+  border: 1px solid rgba(247, 248, 243, 0.12);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.section-light .glass-panel {
+  background: rgba(1, 65, 28, 0.04);
+  border: 1px solid rgba(1, 65, 28, 0.1);
+}
+
+/*
+ * Scroll-reveal: content is visible by default. It only goes through a
+ * fade/rise-in state once we've confirmed (a) JS ran at all — see the
+ * early `js-ready` class in BaseLayout — and (b) the reveal script itself
+ * attached, via `.reveal-armed` — so a script error anywhere else on the
+ * page, an ad blocker, or JS being disabled can never leave real content
+ * permanently invisible.
+ */
+.js-ready.reveal-armed .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Must outrank the rule above (3 class selectors) or the hidden state wins
+   even after .is-visible is applied — that was a real, shipped bug here. */
+.js-ready.reveal-armed .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@keyframes pk-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-anim {
+  animation: pk-float 6s ease-in-out infinite;
+}
+
+.tilt-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.tilt-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card:hover {
+    transform: none;
+  }
+}

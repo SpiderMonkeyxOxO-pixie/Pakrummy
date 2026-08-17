@@ -1,0 +1,40 @@
+---
+import { SITE } from '@/config/site';
+---
+
+<aside class="rg-bar" aria-label="Responsible gaming notice">
+  <p>
+    <strong>{SITE.minimumAge}+.</strong> Real-money gaming involves financial risk and is for adults
+    only. This site is an independent information resource, not the game operator.
+    <a href="/responsible-gaming/">Responsible gaming</a>
+  </p>
+</aside>
+
+<style>
+  .rg-bar {
+    background: var(--color-crimson-bg);
+    border-bottom: 1px solid #5a2a2c;
+  }
+
+  .rg-bar p {
+    max-width: none;
+    margin: 0;
+    padding: 0.5rem var(--space-4);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--color-ivory);
+    text-align: center;
+  }
+
+  .rg-bar a {
+    color: var(--color-gold-strong);
+    margin-left: var(--space-2);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    .rg-bar p {
+      font-size: 0.85rem;
+    }
+  }
+</style>

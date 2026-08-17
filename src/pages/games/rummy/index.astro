@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+import { GAMES } from '@/config/games';
+
+const title = 'Rummy on Pak Rummy: Rules, Variants, and Formats';
+const description =
+  '13-card Rummy is the confirmed core game on Pak Rummy. Here are the rules, common formats, and where to check table-specific details.';
+const path = '/games/rummy/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Games', href: '/games/' },
+  { name: 'Rummy', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+const game = GAMES.find((g) => g.slug === 'rummy')!;
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Rummy on Pak Rummy</h1>
+      <p class="page-hero__summary">
+        13-card Rummy is the game the app is named for and the one confirmed format available.
+        The objective: arrange all 13 cards into valid sequences and sets before your opponents,
+        with at least one pure sequence required to declare.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      {game.verificationNote && (
+        <Callout title="How we confirmed this">
+          <p>{game.verificationNote}</p>
+        </Callout>
+      )}
+
+      <h2>Core rules</h2>
+      <ul>
+        <li>Each player is dealt 13 cards from one or two standard decks plus jokers, depending on table size.</li>
+        <li>A valid hand needs at least two sequences, one of which must be a "pure" sequence (three or more consecutive cards of the same suit, no joker used).</li>
+        <li>Remaining cards must form additional sequences or sets (same rank, different suits).</li>
+        <li>Players draw and discard one card per turn until someone declares a valid hand.</li>
+      </ul>
+
+      <h2>Common formats</h2>
+      <p>
+        Pak Rummy tables commonly follow the three standard formats used across the category:
+        Points Rummy (single-round scoring), Pool Rummy (cumulative scoring with elimination at a
+        points threshold), and Deals Rummy (a fixed number of pre-agreed rounds). For the scoring
+        math behind each, see our
+        <a href="/guides/rummy-scoring-explained/">Rummy scoring guide</a>.
+      </p>
+
+      <Callout title="Table-specific rules and stakes are unverified">
+        <p>
+          Exact point values, table stakes, and any table-specific rule variations are configured
+          per table inside the app — we haven't independently catalogued them. Always check the
+          table's own info screen before joining.
+        </p>
+      </Callout>
+
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li>Check our <a href="/download/">download status page</a> before installing anything.</li>
+        <li>Complete <a href="/register-login/">registration</a> and, before you plan to withdraw, <a href="/account-verification/">account verification</a>.</li>
+        <li>Start with a low-stake or practice table while you learn the app's specific interface.</li>
+      </ol>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/guides/rummy-scoring-explained/">Rummy scoring explained</a></li>
+          <li><a href="/download/">Download status</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+
+      <p class="fine-print">
+        Real-money Rummy involves financial risk. Play within a budget you've set in advance —
+        see our <a href="/responsible-gaming/">responsible gaming</a> page.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

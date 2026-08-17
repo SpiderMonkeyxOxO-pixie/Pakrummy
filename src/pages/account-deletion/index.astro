@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'How to Delete Your Pak Rummy Account | Pak Rummy Official';
+const description =
+  'General guidance on requesting account deletion and data removal from a real-money gaming app, including what to do before you ask.';
+const path = '/account-deletion/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Help', href: '/customer-service/' },
+  { name: 'Account Deletion', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Account Deletion</h1>
+      <p class="page-hero__summary">
+        We haven't confirmed Pak Rummy's specific account deletion process, so we can't give you
+        exact in-app steps yet. Here's what to do before requesting deletion and what to expect
+        generally from apps in this category.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>Before you request deletion</h2>
+      <ol class="steps">
+        <li>Withdraw any remaining balance — most platforms won't process a withdrawal after an account is closed.</li>
+        <li>Save any transaction history or receipts you might need for your own records.</li>
+        <li>Cancel any active bonus or promotion enrollment tied to the account.</li>
+      </ol>
+
+      <h2>Typical deletion process</h2>
+      <p>
+        Most real-money gaming apps require deletion requests through in-app support or a support
+        email, rather than a self-service button, partly because of regulatory record-keeping
+        requirements. Expect to confirm your identity as part of the request.
+      </p>
+
+      <Callout title="Data retention after deletion">
+        <p>
+          Even after account deletion, operators typically retain some transaction records for a
+          period required by financial regulation. See our
+          <a href="/privacy-policy/">privacy policy</a> for how we handle any data you share with
+          PakRummyOfficial.com directly — separate from your Pak Rummy account.
+        </p>
+      </Callout>
+
+      <h2>How to request it</h2>
+      <p>
+        Use the in-app support option if one is available, or contact
+        <a href="/customer-service/">customer service</a> channels once we've verified them. We'll
+        publish exact in-app steps here once we can confirm them.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/withdrawal/">Withdrawal guide</a></li>
+          <li><a href="/privacy-policy/">Privacy policy</a></li>
+          <li><a href="/customer-service/">Customer service</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

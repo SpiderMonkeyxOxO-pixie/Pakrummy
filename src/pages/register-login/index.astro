@@ -1,0 +1,75 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Registration and Login Guide | Pak Rummy Official';
+const description =
+  'How registration and login typically work for real-money Rummy apps like Pak Rummy, plus what to do if you get locked out.';
+const path = '/register-login/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Guides', href: '/guides/' },
+  { name: 'Registration and Login', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Registration and Login</h1>
+      <p class="page-hero__summary">
+        Registration for real-money Rummy apps in this category typically starts with a mobile
+        number and an OTP, followed by identity verification before you can deposit. Here's the
+        general flow and where to go if something goes wrong.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>Typical registration steps</h2>
+      <ol class="steps">
+        <li>Open the app after installing it — see our <a href="/install/">install guide</a> if you haven't yet.</li>
+        <li>Enter your mobile number and confirm the OTP sent by SMS.</li>
+        <li>Set a password or PIN, depending on the app's flow.</li>
+        <li>Complete any requested profile details.</li>
+        <li>Complete identity verification before your first withdrawal — see <a href="/account-verification/">account verification</a>.</li>
+      </ol>
+
+      <h2>Typical login steps</h2>
+      <p>
+        Most apps in this category let you log back in with your registered mobile number and
+        either your password or a fresh OTP. If biometric login is offered, it usually needs to
+        be enabled once from inside account settings after your first successful login.
+      </p>
+
+      <h2>If you can't log in</h2>
+      <ul>
+        <li>Confirm you're using the mobile number you originally registered with.</li>
+        <li>Request a new OTP rather than reusing an expired one.</li>
+        <li>Check you have a stable connection — some login flows time out on slow networks.</li>
+        <li>If the app itself won't open, see <a href="/common-errors/">common app errors</a>.</li>
+        <li>If none of that works, contact <a href="/customer-service/">customer service</a> with your registered number ready.</li>
+      </ul>
+
+      <h2>What's specific to Pak Rummy</h2>
+      <p>
+        We haven't yet independently confirmed Pak Rummy's exact registration fields or OTP
+        provider. This page describes the general pattern for apps in this category; we'll update
+        it with Pak Rummy–specific detail once we can verify it.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/account-verification/">Account verification</a></li>
+          <li><a href="/common-errors/">Common app errors</a></li>
+          <li><a href="/customer-service/">Customer service</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

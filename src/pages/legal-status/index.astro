@@ -1,0 +1,74 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Legal Status of Real-Money Rummy in Pakistan';
+const description =
+  'A plain, non-legal-advice explanation of how legal status and eligibility for real-money Rummy apps generally work in Pakistan.';
+const path = '/legal-status/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Company', href: '/about/' },
+  { name: 'Legal Status', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Legal Status</h1>
+      <p class="page-hero__summary">
+        We do not make a blanket claim that real-money gaming is legal throughout Pakistan, and
+        nothing on this page is legal advice. Availability and your own eligibility depend on
+        applicable law where you live and the platform's own policies.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title="This page is pending review by qualified Pakistani legal counsel">
+        <p>
+          This is a drafted editorial explanation, not a legal opinion. It has not yet been
+          reviewed by a lawyer licensed in Pakistan. Do not treat it as confirmation that any
+          specific activity is lawful for you. See <a href="/disclaimer/">our disclaimer</a>.
+        </p>
+      </Callout>
+
+      <h2>What we can say</h2>
+      <ul>
+        <li>Laws around gaming, gambling, and games of skill vary and can change, and their application to any specific app depends on facts we are not positioned to assess for you.</li>
+        <li>Platform-level eligibility (age, location, verification) is separate from — and does not substitute for — legal compliance in your jurisdiction.</li>
+        <li>We do not know of, and do not claim, any specific government approval, license, or regulatory endorsement for Pak Rummy.</li>
+      </ul>
+
+      <h2>What we won't do</h2>
+      <ul>
+        <li>We won't tell you an activity is "legal" or "illegal" for you personally — that requires qualified legal advice specific to your situation.</li>
+        <li>We won't reuse restriction lists written for a different country's legal framework, including India's, since they don't describe Pakistani law.</li>
+        <li>We won't claim a specific license, certification, or regulatory status without documentary evidence.</li>
+      </ul>
+
+      <h2>What to do if you're unsure</h2>
+      <p>
+        If you need certainty about your own legal position, consult a lawyer licensed in
+        Pakistan. If you're weighing the decision to play at all, our
+        <a href="/responsible-gaming/">responsible gaming</a> page addresses the practical and
+        financial-risk side of that decision, which applies regardless of legal status.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/disclaimer/">Disclaimer</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+          <li><a href="/age-restrictions/">Age restrictions</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

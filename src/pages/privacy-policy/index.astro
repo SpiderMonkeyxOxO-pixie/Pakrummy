@@ -1,0 +1,110 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Privacy Policy | Pak Rummy Official';
+const description =
+  'How PakRummyOfficial.com handles data from visitors to this site. Draft template pending legal review, distinct from the Pak Rummy operator.';
+const path = '/privacy-policy/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Legal', href: '/terms/' },
+  { name: 'Privacy Policy', href: path },
+];
+const effectiveDate = '17 August 2026';
+const effectiveDateISO = '2026-08-17';
+const jsonLd = buildStandardPageSchema({
+  title,
+  description,
+  path,
+  crumbs,
+  datePublished: effectiveDateISO,
+  dateModified: effectiveDateISO,
+});
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Privacy Policy</h1>
+      <p class="page-hero__summary">
+        This policy covers data collected by PakRummyOfficial.com only. It does not cover data
+        collected by the Pak Rummy app itself — see that app's own privacy policy for how it
+        handles your account, payment, or identity-verification data.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title="Draft template pending review by qualified Pakistani legal counsel">
+        <p>
+          This is an original draft, not copied from any other site, and has not yet been legally
+          reviewed. See <code>docs/legal-review-checklist.md</code> in the project repository.
+        </p>
+      </Callout>
+
+      <p class="fine-print">Effective date: {effectiveDate} &middot; Last revised: {effectiveDate}</p>
+
+      <h2>1. Who operates this site</h2>
+      <p>{SITE.publisherName}, reachable at <a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a>, is the operator of this website for privacy purposes.</p>
+
+      <h2>2. Information we collect</h2>
+      <ul>
+        <li><strong>Standard web logs:</strong> IP address, browser, device, and pages visited, collected automatically by any web server.</li>
+        <li><strong>Analytics:</strong> aggregated usage data, only if and once an analytics tool is configured — see Section 5.</li>
+        <li><strong>Information you send us directly:</strong> anything included in an email to our editorial contact address.</li>
+      </ul>
+      <p>We do not collect gaming account credentials, deposit or withdrawal data, or identity-verification documents — we have no systems to receive them.</p>
+
+      <h2>3. How we use it</h2>
+      <p>To operate and improve this site, respond to correspondence, and understand aggregate traffic patterns.</p>
+
+      <h2>4. Legal basis (where applicable)</h2>
+      <p>Where a legal basis framework applies to a visitor, we rely on legitimate interest for basic site operation and consent for optional analytics cookies, per Section 5.</p>
+
+      <h2>5. Cookies and analytics</h2>
+      <p>See our <a href="/cookie-policy/">cookie policy</a> for full detail. We do not run analytics until a tool is explicitly configured, and we do not invent or hard-code tracking identifiers.</p>
+
+      <h2>6. Data sharing</h2>
+      <p>We do not sell personal data. We may share aggregated, non-identifying analytics with standard processors (e.g., a hosting provider or analytics platform) strictly to operate the site.</p>
+
+      <h2>7. Retention</h2>
+      <p>Web logs are retained only as long as needed for security and operational purposes. Emails are retained until no longer needed for the purpose you sent them.</p>
+
+      <h2>8. Security</h2>
+      <p>We apply reasonable technical measures to protect data we hold, including HTTPS-only delivery of this site.</p>
+
+      <h2>9. Your rights</h2>
+      <p>You may request access to, correction of, or deletion of any personal data you've sent us directly by emailing <a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a>.</p>
+
+      <h2>10. Account deletion</h2>
+      <p>This site holds no gaming account data to delete. For Pak Rummy account deletion, see our <a href="/account-deletion/">account deletion guide</a>.</p>
+
+      <h2>11. Children and minors</h2>
+      <p>This site is not directed at children and we do not knowingly collect data from users under {SITE.minimumAge}.</p>
+
+      <h2>12. International processing</h2>
+      <p>Depending on our hosting provider, data may be processed outside Pakistan. We select providers that apply reasonable technical and organizational safeguards.</p>
+
+      <h2>13. Contact</h2>
+      <p><a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a></p>
+
+      <h2>14. Changes to this policy</h2>
+      <p>We'll update the "Last revised" date above whenever this policy changes.</p>
+
+      <div class="next-steps">
+        <h2>Related legal pages</h2>
+        <ul class="link-list">
+          <li><a href="/terms/">Terms of use</a></li>
+          <li><a href="/cookie-policy/">Cookie policy</a></li>
+          <li><a href="/disclaimer/">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

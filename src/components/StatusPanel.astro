@@ -1,0 +1,204 @@
+---
+import { SITE } from '@/config/site';
+import { isVerifiedFact, factText } from '@/lib/verification';
+
+const checksumOk = isVerifiedFact(SITE.appSha256) && isVerifiedFact(SITE.appLastScanDate);
+
+interface StatusItem {
+  label: string;
+  value: string;
+  verified: boolean;
+  icon: string;
+}
+
+const items: StatusItem[] = [
+  {
+    label: 'Current version',
+    value: factText(SITE.appVersion),
+    verified: isVerifiedFact(SITE.appVersion),
+    icon: 'tag',
+  },
+  {
+    label: 'Last checked',
+    value: factText(SITE.appLastVerifiedDate),
+    verified: isVerifiedFact(SITE.appLastVerifiedDate),
+    icon: 'clock',
+  },
+  {
+    label: 'Android requirement',
+    value: factText(SITE.appMinAndroidVersion),
+    verified: isVerifiedFact(SITE.appMinAndroidVersion),
+    icon: 'android',
+  },
+  {
+    label: 'Download availability',
+    value: isVerifiedFact(SITE.officialDownloadUrl) ? 'Available (self-hosted)' : 'Not yet publicly verified',
+    verified: isVerifiedFact(SITE.officialDownloadUrl),
+    icon: 'download',
+  },
+  {
+    label: 'Official support',
+    value: factText(SITE.operatorSupportEmail),
+    verified: isVerifiedFact(SITE.operatorSupportEmail),
+    icon: 'support',
+  },
+  {
+    label: 'Source & checksum',
+    value: checksumOk ? 'Verified by us (self-hosted file)' : 'Not yet publicly verified',
+    verified: checksumOk,
+    icon: 'shield',
+  },
+];
+
+const icons: Record<string, string> = {
+  tag: 'M4 4h7l9 9-7 7-9-9V4Z M8 8h.01',
+  clock: 'M12 6v6l4 2 M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z',
+  android: 'M6 18v-6a6 6 0 0 1 12 0v6 M6 18h12 M9 4l-1.5-2 M15 4l1.5-2 M9 10v0 M15 10v0',
+  download: 'M12 4v11 M7 11l5 5 5-5 M5 20h14',
+  support: 'M4 12a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3 M4 17v-5h3v6H6a2 2 0 0 1-2-2Z',
+  shield: 'M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z M9.5 12l1.8 1.8L15 10',
+};
+---
+
+<div class="status-panel">
+  <div class="status-panel__head">
+    <p class="eyebrow">Pak Rummy Status Center</p>
+    <p class="status-panel__note">Updated the moment we verify something new — never guessed.</p>
+  </div>
+  <div class="status-panel__grid">
+    {
+      items.map((item) => (
+        <div class={`status-item status-item--${item.verified ? 'verified' : 'pending'}`}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d={icons[item.icon]} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <div>
+            <span class="status-item__label">{item.label}</span>
+            <span class="status-item__value">{item.value}</span>
+          </div>
+          <span class={`status-item__dot status-item__dot--${item.verified ? 'verified' : 'pending'}`} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .status-panel {
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+
+  .status-panel__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .status-panel__note {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .status-panel__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .status-item {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    min-width: 0;
+  }
+
+  .status-item > div {
+    min-width: 0;
+  }
+
+  .status-item__value {
+    overflow-wrap: break-word;
+  }
+
+  .status-item--verified {
+    border-color: var(--status-verified-border);
+  }
+
+  .status-item--pending {
+    border-color: var(--status-pending-border);
+  }
+
+  .status-item svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--color-text-muted);
+  }
+
+  .status-item--verified svg {
+    color: var(--status-verified);
+  }
+
+  .status-item--pending svg {
+    color: var(--status-pending);
+  }
+
+  .status-item__label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .status-item__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 0.15rem;
+  }
+
+  .status-item__dot {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .status-item__dot--verified {
+    background: var(--status-verified);
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+  }
+
+  .status-item__dot--pending {
+    background: var(--status-pending);
+    box-shadow: 0 0 6px rgba(245, 185, 66, 0.8);
+  }
+
+  @media (min-width: 640px) {
+    .status-panel__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .status-panel__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

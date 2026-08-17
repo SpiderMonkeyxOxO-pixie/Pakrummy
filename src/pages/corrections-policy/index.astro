@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTAButton from '@/components/CTAButton.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Corrections Policy | Pak Rummy Official';
+const description =
+  'How to report an error on PakRummyOfficial.com and how we log and publish corrections once verified.';
+const path = '/corrections-policy/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Company', href: '/about/' },
+  { name: 'Corrections Policy', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Corrections Policy</h1>
+      <p class="page-hero__summary">
+        If something on this site is wrong, out of date, or unclear, tell us. We'd rather fix it
+        quickly and visibly than leave an error standing.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>How to report an error</h2>
+      <p>
+        Email <a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a>
+        with the page URL, the specific claim you believe is wrong, and — where possible — a
+        source we can check it against.
+      </p>
+      <CTAButton href={`mailto:${SITE.editorialContactEmail}`} label={`Report an error`} variant="secondary" />
+
+      <h2>What happens next</h2>
+      <ol class="steps">
+        <li>We review the report against our verification standard in our <a href="/editorial-policy/">editorial policy</a>.</li>
+        <li>If confirmed, we correct the page and note the change on the affected content's "Last updated" date.</li>
+        <li>For a factual error significant enough to affect a reader's decision, we log it on our <a href="/updates/">updates page</a>.</li>
+      </ol>
+
+      <h2>What we correct without argument</h2>
+      <ul>
+        <li>Factual errors we can verify against a primary source.</li>
+        <li>Outdated information we can confirm has changed.</li>
+        <li>Broken links or incorrect internal references.</li>
+      </ul>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/editorial-policy/">Editorial policy</a></li>
+          <li><a href="/updates/">Updates log</a></li>
+          <li><a href="/contact/">Contact us</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

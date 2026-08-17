@@ -1,0 +1,131 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Terms of Use | Pak Rummy Official';
+const description =
+  'Terms governing use of PakRummyOfficial.com, an independent information resource. Draft template pending legal review.';
+const path = '/terms/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Legal', href: path },
+  { name: 'Terms of Use', href: path },
+];
+const effectiveDate = '17 August 2026';
+const effectiveDateISO = '2026-08-17';
+const jsonLd = buildStandardPageSchema({
+  title,
+  description,
+  path,
+  crumbs,
+  datePublished: effectiveDateISO,
+  dateModified: effectiveDateISO,
+});
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Terms of Use</h1>
+      <p class="page-hero__summary">
+        These terms govern your use of PakRummyOfficial.com — an information, verification, and
+        support resource. They do not govern your use of the Pak Rummy app itself, which is
+        subject to the operator's own terms.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title="Draft template pending review by qualified Pakistani legal counsel">
+        <p>
+          This is an original draft, not copied from any other site. It has not yet been reviewed
+          by a lawyer licensed in Pakistan and should not be relied on as final until it is. See
+          <code>docs/legal-review-checklist.md</code> in the project repository.
+        </p>
+      </Callout>
+
+      <p class="fine-print">Effective date: {effectiveDate} &middot; Last revised: {effectiveDate}</p>
+
+      <h2>1. Eligibility</h2>
+      <p>
+        This site is intended for users {SITE.minimumAge} years of age or older. By using this
+        site, you confirm you meet that minimum age.
+      </p>
+
+      <h2>2. Scope of this site</h2>
+      <p>
+        {SITE.positioning} We do not create user accounts, process deposits or withdrawals, or
+        store gaming account credentials of any kind.
+      </p>
+
+      <h2>3. Accuracy of information</h2>
+      <p>
+        We label facts as verified only when confirmed against a primary source, per our
+        <a href="/editorial-policy/">editorial policy</a>. Unverified information is marked as
+        such. We do not guarantee that any third-party app, download, or payment channel referenced
+        on this site is accurate, current, safe, or lawful for your use.
+      </p>
+
+      <h2>4. Prohibited conduct</h2>
+      <p>
+        You may not use this site to distribute malware, scrape content for republication without
+        attribution, impersonate PakRummyOfficial.com, or attempt to circumvent its security
+        controls.
+      </p>
+
+      <h2>5. Intellectual property</h2>
+      <p>
+        Original content on this site — including text, design, and structured data — is owned by
+        {SITE.publisherName} unless otherwise credited. Third-party trademarks referenced here,
+        including "Pak Rummy," belong to their respective owners and are used descriptively.
+      </p>
+
+      <h2>6. Limitation of liability</h2>
+      <p>
+        This site is provided "as is." To the maximum extent permitted by applicable law,
+        {SITE.publisherName} is not liable for losses arising from your use of the Pak Rummy app,
+        any third-party payment method, or reliance on information later found to be inaccurate,
+        beyond our obligation to correct it under our
+        <a href="/corrections-policy/">corrections policy</a>.
+      </p>
+
+      <h2>7. Complaints and disputes</h2>
+      <p>
+        Complaints about this site's content should go to
+        <a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a>. See our
+        <a href="/complaints/">complaints page</a> for account-specific issues, which we cannot
+        resolve directly.
+      </p>
+
+      <h2>8. Changes to these terms</h2>
+      <p>
+        We may update these terms as the site evolves. The "Last revised" date above reflects the
+        most recent change.
+      </p>
+
+      <h2>9. Termination</h2>
+      <p>
+        We may restrict access to this site for users who violate Section 4, without notice.
+      </p>
+
+      <h2>10. Contact</h2>
+      <p>
+        <a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a>
+      </p>
+
+      <div class="next-steps">
+        <h2>Related legal pages</h2>
+        <ul class="link-list">
+          <li><a href="/privacy-policy/">Privacy policy</a></li>
+          <li><a href="/disclaimer/">Disclaimer</a></li>
+          <li><a href="/cookie-policy/">Cookie policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

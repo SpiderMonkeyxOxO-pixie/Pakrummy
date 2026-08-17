@@ -1,0 +1,32 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '@/layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const updates = await getCollection('updates');
+  return updates.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'updates'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const path = `/updates/${entry.slug}/`;
+---
+
+<ArticleLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  path={path}
+  author="PakRummyOfficial.com Editorial Team"
+  publishDate={entry.data.publishDate}
+  hubLabel="Updates"
+  hubHref="/updates/"
+>
+  <Content />
+</ArticleLayout>

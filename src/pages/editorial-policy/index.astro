@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Editorial Policy | Pak Rummy Official';
+const description =
+  'How PakRummyOfficial.com sources, verifies, and labels facts about the Pak Rummy app, and what we refuse to publish without evidence.';
+const path = '/editorial-policy/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Company', href: '/about/' },
+  { name: 'Editorial Policy', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Editorial Policy</h1>
+      <p class="page-hero__summary">
+        Every fact on this site is labelled as either independently verified or explicitly not
+        yet verified — we don't blend the two. This page explains our verification standard and
+        what we will never publish without evidence.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>Our verification standard</h2>
+      <p>
+        A fact is marked "verified" only when we've confirmed it against a primary source — the
+        operator directly, a file we tested ourselves, or a documented, traceable record. Anything
+        else, including plausible or commonly repeated claims, stays labelled "Not yet publicly
+        verified" until it clears that bar.
+      </p>
+
+      <h2>What we will not publish without evidence</h2>
+      <ul>
+        <li>Guaranteed earnings, guaranteed withdrawals, or guaranteed wins.</li>
+        <li>Claims of zero fraud or complete safety.</li>
+        <li>Legal, government, or regulatory approval.</li>
+        <li>ISO or other certification claims.</li>
+        <li>Specific user counts, ratings, reviews, or winning totals.</li>
+        <li>A specific launch date or operator legal identity we haven't confirmed.</li>
+      </ul>
+
+      <h2>How we handle the reference site</h2>
+      <p>
+        We researched publicly available Pak Rummy brand and product information, including the
+        pakrummy.com website, purely to understand the product category and identify inaccuracies
+        worth avoiding. We do not copy its content, templates, or claims, and this site is not
+        affiliated with, endorsed by, or a mirror of that site.
+      </p>
+
+      <h2>Corrections</h2>
+      <p>
+        See our <a href="/corrections-policy/">corrections policy</a> for how to report an error
+        and how we log fixes. Report anything to
+        <a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a>.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/corrections-policy/">Corrections policy</a></li>
+          <li><a href="/authors/">Authors</a></li>
+          <li><a href="/about/">About us</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

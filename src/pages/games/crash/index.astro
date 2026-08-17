@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+import { GAMES } from '@/config/games';
+
+const title = 'Crash on Pak Rummy: How the Multiplier Game Works';
+const description =
+  'Crash is confirmed available on the Pak Rummy app. How the rising-multiplier, cash-out-before-it-crashes mechanic works.';
+const path = '/games/crash/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Games', href: '/games/' },
+  { name: 'Crash', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+const game = GAMES.find((g) => g.slug === 'crash')!;
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <img
+        src="/images/crash-game-art.png"
+        alt="Crash game artwork from the Pak Rummy app"
+        width="96"
+        height="96"
+        style="border-radius: var(--radius-md); margin-bottom: var(--space-4);"
+      />
+      <Breadcrumbs items={crumbs} />
+      <h1>Crash on Pak Rummy</h1>
+      <p class="page-hero__summary">
+        Crash uses the same core mechanic as Aviator, without the flight theme: a multiplier
+        climbs from 1.00x once a round starts, and you choose when to cash out. Wait too long and
+        the round "crashes," and any stake still in play is lost.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      {game.verificationNote && (
+        <Callout title="How we confirmed this">
+          <p>{game.verificationNote}</p>
+        </Callout>
+      )}
+
+      <h2>How a round works</h2>
+      <ol class="steps">
+        <li>Place your stake before the round starts.</li>
+        <li>The multiplier rises continuously once the round begins.</li>
+        <li>Cash out at any point to lock in your stake × the current multiplier.</li>
+        <li>If the round crashes before you cash out, your stake for that round is lost.</li>
+        <li>Some implementations let you set an automatic cash-out multiplier in advance — check the game's own controls.</li>
+      </ol>
+
+      <Callout variant="warning" title="Outcome timing is not verified as provably fair">
+        <p>
+          We have not confirmed whether Pak Rummy's Crash implementation publishes a
+          cryptographic, independently verifiable method for its round outcomes. Don't assume it
+          does — check the game's own info screen.
+        </p>
+      </Callout>
+
+      <h2>How this differs from Aviator</h2>
+      <p>
+        The app's manifest lists "Carsh" (its own internal name, misspelled) and "CrashX" as
+        separate modules from "Aviator" — almost certainly different visual skins of the same
+        rising-multiplier genre rather than meaningfully different games. See our
+        <a href="/games/aviator/">Aviator page</a> for the flight-themed version.
+      </p>
+
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li>Check our <a href="/download/">download status page</a> before installing anything.</li>
+        <li>Complete <a href="/register-login/">registration</a> before you play for real money.</li>
+        <li>Set a per-round stake and a session budget before you start — this genre moves fast.</li>
+      </ol>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/games/aviator/">Aviator</a></li>
+          <li><a href="/games/">All games</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+
+      <p class="fine-print">
+        Crash is a fast-paced, real-money chance game. Play within a budget you've set in advance
+        — see our <a href="/responsible-gaming/">responsible gaming</a> page.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Authors | Pak Rummy Official';
+const description = 'Who writes and verifies the content on PakRummyOfficial.com.';
+const path = '/authors/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Company', href: '/about/' },
+  { name: 'Authors', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Authors</h1>
+      <p class="page-hero__summary">
+        Content on this site is currently produced and verified collectively by the
+        PakRummyOfficial.com editorial team rather than under individual bylines. We'll list named
+        contributors here once the team is staffed publicly — we won't invent names or bios to
+        fill this page in the meantime.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>PakRummyOfficial.com Editorial Team</h2>
+      <p>
+        Responsible for research, fact verification, and publishing across the site. Follows the
+        standard set out in our <a href="/editorial-policy/">editorial policy</a> and corrects
+        errors per our <a href="/corrections-policy/">corrections policy</a>.
+      </p>
+      <p>
+        Contact: <a href={`mailto:${SITE.editorialContactEmail}`}>{SITE.editorialContactEmail}</a>
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/editorial-policy/">Editorial policy</a></li>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

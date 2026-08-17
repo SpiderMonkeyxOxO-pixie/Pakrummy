@@ -1,0 +1,108 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FactTable from '@/components/FactTable.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Is Pak Rummy Safe? APK Verification Checklist | Pak Rummy Official';
+const description =
+  'A practical checklist for verifying any Pak Rummy APK before you install it: source, checksum, permissions, and what we have confirmed so far.';
+const path = '/safety/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Help', href: '/customer-service/' },
+  { name: 'APK Safety', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Is Pak Rummy Safe?</h1>
+      <p class="page-hero__summary">
+        We can't tell you "Pak Rummy is completely safe" — no one honestly can about any
+        real-money app. What we can give you is a concrete checklist for verifying a specific APK
+        file yourself, and our current verification status for Pak Rummy specifically.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title="We don't make blanket safety claims">
+        <p>
+          We won't tell you an app is risk-free, government-approved, or fraud-proof unless we
+          have documentary evidence — and we don't have that for Pak Rummy today. Real-money
+          gaming always carries financial risk regardless of the app's technical safety. See our
+          <a href="/responsible-gaming/">responsible gaming</a> page.
+        </p>
+      </Callout>
+
+      <h2>Our current verification status</h2>
+      <FactTable
+        caption="What we've checked"
+        rows={[
+          { label: 'Official download URL confirmed', fact: SITE.officialDownloadUrl },
+          { label: 'SHA-256 checksum confirmed', fact: SITE.appSha256 },
+          { label: 'Last scan date', fact: SITE.appLastScanDate },
+          {
+            label: 'Permissions reviewed',
+            fact: SITE.appPermissionsSummary,
+            formatter: (v: string[]) => `${v.length} permissions — see the full list on our APK permissions page`,
+          },
+        ]}
+      />
+
+      <h2>Checklist: verify any APK before installing</h2>
+      <ol class="steps">
+        <li>
+          <strong>Check the source.</strong> Does the domain match what's described in our
+          <a href="/official-domains/">official domains guidance</a>?
+        </li>
+        <li>
+          <strong>Verify the checksum.</strong> If the source publishes a SHA-256 hash, generate
+          your own from the downloaded file and confirm they match exactly — on Windows via
+          <code>certutil -hashfile file.apk SHA256</code>, on macOS/Linux via
+          <code>shasum -a 256 file.apk</code>.
+        </li>
+        <li>
+          <strong>Scan the file.</strong> Upload it to a reputable multi-engine scanner (for
+          example VirusTotal) before installing, not after.
+        </li>
+        <li>
+          <strong>Review requested permissions.</strong> See our
+          <a href="/apk-permissions/">permissions guide</a> for what's reasonable versus a red
+          flag for a card-game app.
+        </li>
+        <li>
+          <strong>Check for a publisher signature you recognize</strong> if you've installed a
+          previous version — a signature mismatch on an "update" is a strong sign of tampering.
+        </li>
+      </ol>
+
+      <h2>What "verified by us" means for the current download</h2>
+      <p>
+        For the file currently linked on our <a href="/download/">download page</a>, we performed
+        steps 1, 2, 4, and 5 above ourselves on {SITE.appLastScanDate.value}: we host the file
+        directly, computed its SHA-256 checksum, and extracted its permissions and package details
+        straight from the manifest. We have <strong>not</strong> run it through a third-party
+        multi-engine scanner (step 3) — we don't have API access to one from this environment.
+        That step is still worth doing yourself before you install, and we'll add a scan result
+        here once we can run one.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/download/">Download status</a></li>
+          <li><a href="/official-domains/">Official domains guidance</a></li>
+          <li><a href="/apk-permissions/">APK permissions guide</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,119 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { SITE } from '@/config/site';
+import {
+  buildJsonLdGraph,
+  getOrganizationSchema,
+  getWebsiteSchema,
+  getWebPageSchema,
+  getArticleSchema,
+  getBreadcrumbSchema,
+} from '@/lib/schema';
+
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  author: string;
+  publishDate: string;
+  updatedDate?: string;
+  hubLabel: string;
+  hubHref: string;
+}
+
+const { title, description, path, author, publishDate, updatedDate, hubLabel, hubHref } = Astro.props;
+const canonical = new URL(path, SITE.productionUrl).toString();
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: hubLabel, href: hubHref },
+  { name: title, href: path },
+];
+
+const breadcrumbInput = crumbs.map((c) => ({ name: c.name, url: new URL(c.href, SITE.productionUrl).toString() }));
+
+const jsonLd = buildJsonLdGraph([
+  getOrganizationSchema(),
+  getWebsiteSchema(),
+  getWebPageSchema({
+    url: canonical,
+    name: title,
+    description,
+    breadcrumb: breadcrumbInput,
+    datePublished: publishDate,
+    dateModified: updatedDate ?? publishDate,
+  }),
+  getArticleSchema({
+    url: canonical,
+    headline: title,
+    description,
+    datePublished: publishDate,
+    dateModified: updatedDate ?? publishDate,
+    authorName: author,
+  }),
+  getBreadcrumbSchema(breadcrumbInput),
+]);
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  ogType="article"
+  jsonLd={jsonLd}
+  publishedTime={publishDate}
+  modifiedTime={updatedDate ?? publishDate}
+>
+  <div class="container section-tight">
+    <Breadcrumbs items={crumbs} />
+    <article class="article">
+      <header class="article__header">
+        <h1>{title}</h1>
+        <p class="article__meta">
+          By {author} &middot; Published {publishDate}
+          {updatedDate && updatedDate !== publishDate && <> &middot; Updated {updatedDate}</>}
+        </p>
+      </header>
+      <div class="article__body">
+        <slot />
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .article {
+    max-width: 72ch;
+  }
+
+  .article__meta {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .article__body :global(h2) {
+    margin-top: var(--space-6);
+  }
+
+  .article__body :global(h3) {
+    margin-top: var(--space-5);
+  }
+
+  .article__body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block: var(--space-4);
+  }
+
+  .article__body :global(th),
+  .article__body :global(td) {
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  .article__body :global(a) {
+    color: var(--color-gold-strong);
+  }
+</style>

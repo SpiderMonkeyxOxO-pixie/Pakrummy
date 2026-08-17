@@ -1,0 +1,73 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Account Verification (KYC) Guide | Pak Rummy Official';
+const description =
+  "What identity verification typically involves for real-money gaming apps and why it's required before your first withdrawal.";
+const path = '/account-verification/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Help', href: '/customer-service/' },
+  { name: 'Account Verification', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Account Verification</h1>
+      <p class="page-hero__summary">
+        Identity verification (KYC) is standard across real-money gaming apps before a first
+        withdrawal is allowed. It exists to confirm you're the account holder and that you're old
+        enough to play — here's what it typically involves.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>What verification typically requires</h2>
+      <ul>
+        <li>A government-issued ID (such as a CNIC) to confirm your identity and age.</li>
+        <li>A selfie or short liveness check, to confirm the ID belongs to the account holder.</li>
+        <li>A matching name on the payment method you use to deposit and withdraw.</li>
+      </ul>
+
+      <Callout title="We haven't confirmed Pak Rummy's exact requirements">
+        <p>
+          The list above reflects common practice for apps in this category, not a confirmed Pak
+          Rummy requirement list. We'll update this page once we can verify it directly.
+        </p>
+      </Callout>
+
+      <h2>Why verification matters for you, not just the operator</h2>
+      <p>
+        Verification protects your withdrawal, not just the platform's compliance — an unverified
+        account is typically the reason a withdrawal request gets held or rejected. Completing it
+        early, before you need to withdraw, avoids delays later.
+      </p>
+
+      <h2>If verification is rejected</h2>
+      <ul>
+        <li>Check that your ID photo is well-lit, uncropped, and not expired.</li>
+        <li>Make sure the name on your ID matches the name on your payment method exactly.</li>
+        <li>Retake the selfie/liveness check somewhere with even lighting and no filters.</li>
+        <li>If it's still rejected, contact <a href="/customer-service/">customer service</a> with your registered number.</li>
+      </ul>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/withdrawal/">Withdrawal guide</a></li>
+          <li><a href="/deposit/">Deposit guide</a></li>
+          <li><a href="/account-deletion/">Account deletion</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Common Pak Rummy App Errors and Fixes | Pak Rummy Official';
+const description =
+  'Fixes for the installation, login, and connection errors most commonly seen on Android real-money gaming apps like Pak Rummy.';
+const path = '/common-errors/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Guides', href: '/guides/' },
+  { name: 'Common App Errors', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+
+const errors = [
+  {
+    q: '"App not installed" during installation',
+    a: "Usually caused by insufficient storage, a corrupted download, or an existing older version with a mismatched signature. Free up storage, re-download the file, and uninstall any previous version before reinstalling.",
+  },
+  {
+    q: '"Parse error" while installing',
+    a: 'Almost always a corrupted or incomplete download, or an APK built for a different Android version than yours. Re-download from your source and check your Android version against the app\'s minimum requirement.',
+  },
+  {
+    q: 'App installs but crashes on open',
+    a: 'Try clearing the app\'s cache and storage from Android Settings → Apps, then reopen it. If it still crashes, your device may not meet the app\'s minimum Android version or available RAM.',
+  },
+  {
+    q: 'OTP never arrives during registration',
+    a: 'Check your signal and that SMS isn\'t being blocked by a spam filter, wait for the resend timer, and confirm you entered your number correctly including the country code if required.',
+  },
+  {
+    q: '"Update required" but no update available from your source',
+    a: 'If you installed from an APK link that hasn\'t been updated, check our download page for a current, verifiable version rather than searching for a fresh unverified link.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Common Pak Rummy App Errors</h1>
+      <p class="page-hero__summary">
+        Most installation and login errors on Android real-money gaming apps trace back to a
+        handful of causes: storage space, a corrupted download, an Android version mismatch, or a
+        blocked SMS. Here's how to diagnose and fix the most common ones.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <dl class="faq">
+        {
+          errors.map((item) => (
+            <div class="faq__item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <h2>Still stuck?</h2>
+      <p>
+        If none of the above resolves it, check our <a href="/install/">install walkthrough</a>
+        for the full process, or contact <a href="/customer-service/">customer service</a> with
+        your device model, Android version, and a screenshot of the exact error.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/install/">Installation walkthrough</a></li>
+          <li><a href="/register-login/">Registration and login</a></li>
+          <li><a href="/customer-service/">Customer service</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

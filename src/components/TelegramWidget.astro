@@ -1,0 +1,61 @@
+---
+import { SITE } from '@/config/site';
+import { isVerifiedFact } from '@/lib/verification';
+
+const telegram = isVerifiedFact(SITE.operatorSocialProfiles)
+  ? SITE.operatorSocialProfiles.value.find((p) => p.platform === 'Telegram')
+  : undefined;
+---
+
+{
+  telegram && (
+    <a
+      href={telegram.url}
+      class="telegram-widget"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat with Pak Rummy on Telegram (opens in a new tab)"
+    >
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+        <path
+          d="M21.5 4.5 3 11.7c-.9.36-.9 1.65.02 1.98l4.2 1.5 1.6 5.15c.2.63 1 .82 1.47.35l2.4-2.4 4.3 3.2c.66.5 1.6.13 1.78-.68l3.2-14.6c.2-.9-.7-1.63-1.47-1.7Z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linejoin="round"
+        />
+        <path d="M8.3 15.1 18 8.2l-8.1 8.1-.2 3.3" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+      </svg>
+    </a>
+  )
+}
+
+<style>
+  .telegram-widget {
+    position: fixed;
+    right: max(var(--space-4), env(safe-area-inset-right));
+    bottom: max(var(--space-4), env(safe-area-inset-bottom));
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #29a9eb;
+    color: #ffffff;
+    box-shadow: 0 10px 26px rgba(1, 8, 6, 0.45), 0 0 0 1px rgba(247, 248, 243, 0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .telegram-widget:hover,
+  .telegram-widget:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(1, 8, 6, 0.5), 0 0 0 1px rgba(247, 248, 243, 0.25);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .telegram-widget:hover {
+      transform: none;
+    }
+  }
+</style>

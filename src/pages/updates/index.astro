@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Updates Log | Pak Rummy Official';
+const description = 'Dated log of verified changes to Pak Rummy app information and to this site, with what changed and how it was confirmed.';
+const path = '/updates/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Updates', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs, type: 'CollectionPage' });
+
+const updates = (await getCollection('updates')).sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Updates</h1>
+      <p class="page-hero__summary">
+        A dated log of what changed — on the Pak Rummy app once we can confirm it, and on this
+        site itself. Each entry says exactly what was verified and how.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <ul class="guide-list">
+        {
+          updates.map((entry) => (
+            <li class="card">
+              <span class={`badge ${entry.data.verified ? 'badge-verified' : 'badge-unverified'}`}>
+                {entry.data.verified ? 'Verified' : 'Unverified'}
+              </span>
+              <h2><a href={`/updates/${entry.slug}/`}>{entry.data.title}</a></h2>
+              <p>{entry.data.description}</p>
+              <p class="fine-print">{entry.data.publishDate}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .guide-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .guide-list h2 {
+    font-size: 1.2rem;
+    margin: var(--space-2) 0 var(--space-2);
+  }
+
+  .guide-list a {
+    color: var(--color-ivory);
+    text-decoration: none;
+  }
+
+  .guide-list a:hover,
+  .guide-list a:focus-visible {
+    color: var(--color-gold-strong);
+  }
+</style>

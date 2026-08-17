@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Guides | Pak Rummy Official';
+const description = 'Every how-to and troubleshooting guide published by PakRummyOfficial.com, in one place.';
+const path = '/guides/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Guides', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs, type: 'CollectionPage' });
+
+const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+const categoryLabels: Record<string, string> = {
+  install: 'Install',
+  account: 'Account',
+  payments: 'Payments',
+  games: 'Games',
+  troubleshooting: 'Troubleshooting',
+};
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Guides</h1>
+      <p class="page-hero__summary">
+        Long-form, evergreen how-to and troubleshooting content, distinct from our core product
+        pages like <a href="/install/">Install</a> and <a href="/deposit/">Deposit</a>. New guides
+        are added here as we publish them.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <ul class="guide-list">
+        {
+          guides.map((guide) => (
+            <li class="card">
+              <span class="badge badge-unverified">{categoryLabels[guide.data.category] ?? guide.data.category}</span>
+              <h2><a href={`/guides/${guide.slug}/`}>{guide.data.title}</a></h2>
+              <p>{guide.data.description}</p>
+              <p class="fine-print">By {guide.data.author} &middot; {guide.data.publishDate}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .guide-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .guide-list h2 {
+    font-size: 1.2rem;
+    margin: var(--space-2) 0 var(--space-2);
+  }
+
+  .guide-list a {
+    color: var(--color-ivory);
+    text-decoration: none;
+  }
+
+  .guide-list a:hover,
+  .guide-list a:focus-visible {
+    color: var(--color-gold-strong);
+  }
+</style>

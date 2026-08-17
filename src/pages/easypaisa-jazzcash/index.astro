@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Easypaisa and JazzCash Payments | Pak Rummy Official';
+const description =
+  "General guidance on using Easypaisa and JazzCash for mobile gaming payments in Pakistan, and Pak Rummy's current verification status.";
+const path = '/easypaisa-jazzcash/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Guides', href: '/guides/' },
+  { name: 'Easypaisa and JazzCash', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Easypaisa and JazzCash on Pak Rummy</h1>
+      <p class="page-hero__summary">
+        Easypaisa and JazzCash are the two dominant mobile wallets in Pakistan and the most common
+        payment rails for local gaming apps. We have not confirmed whether Pak Rummy supports
+        either directly — here's what we know generally and what remains unverified.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <div class="wallet-logos">
+        <img src="/images/easypaisa-logo.png" alt="Easypaisa" width="148" height="39" />
+        <img src="/images/jazzcash-logo.png" alt="JazzCash" width="148" height="39" />
+      </div>
+
+      <Callout variant="warning" title="Pak Rummy support status: not yet publicly verified">
+        <p>
+          We haven't confirmed that Pak Rummy accepts Easypaisa or JazzCash deposits or
+          withdrawals directly. Don't assume support based on this page — check inside the app's
+          own payment screen, and see our <a href="/deposit/">deposit guide</a> for what we track.
+        </p>
+      </Callout>
+
+      <h2>How Easypaisa and JazzCash generally work for gaming apps</h2>
+      <p>
+        Both wallets let you pay directly from your mobile balance, either through an in-app
+        redirect to the wallet's own confirmation screen or through a manual account-number
+        transfer with a reference code. Withdrawals, where supported, are typically sent back to
+        the same wallet number used to deposit.
+      </p>
+
+      <h2>What to check before paying through either wallet</h2>
+      <ul>
+        <li>Confirm the payment flow happens inside the app itself, not a manual transfer to a personal number.</li>
+        <li>Keep your transaction ID and timestamp until the deposit is confirmed and reflected.</li>
+        <li>If a deposit doesn't reflect right away, see our guide on <a href="/guides/mobile-wallet-deposit-delay/">delayed mobile wallet deposits</a> before assuming it failed.</li>
+      </ul>
+
+      <h2>What we'll confirm and publish</h2>
+      <p>
+        Once we can verify Pak Rummy's actual supported methods, minimum and maximum transaction
+        amounts, and typical processing time, we'll publish them on this page and cross-link them
+        from <a href="/deposit/">deposits</a> and <a href="/withdrawal/">withdrawals</a>.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/deposit/">Deposit guide</a></li>
+          <li><a href="/withdrawal/">Withdrawal guide</a></li>
+          <li><a href="/guides/mobile-wallet-deposit-delay/">Delayed deposit troubleshooting</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .wallet-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    align-items: center;
+    background: var(--color-ivory);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    margin-bottom: var(--space-5);
+    width: fit-content;
+  }
+</style>

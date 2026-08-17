@@ -1,0 +1,113 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Official Domains and Impersonation Protection';
+const description =
+  'How to check whether a Pak Rummy website or download link is genuine before you trust it, and what we have and have not confirmed ourselves.';
+const path = '/official-domains/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Help', href: '/customer-service/' },
+  { name: 'Official Domains', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Official Domains</h1>
+      <p class="page-hero__summary">
+        We have not yet independently confirmed which domain(s) are authentic, operator-controlled
+        Pak Rummy properties. Rather than guess, this page explains the method we use to check —
+        so you can apply the same checks to any link you're handed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title="Real-money app impersonation is common">
+        <p>
+          Real-money gaming apps are a frequent impersonation target because a fake copy can
+          intercept deposits or credentials directly. Treat any unfamiliar link — including ones
+          from search ads, SMS, or WhatsApp forwards — as unverified until you've checked it.
+        </p>
+      </Callout>
+
+      <div class="icon-check">
+        <img
+          src="/images/pak-rummy-app-icon.png"
+          alt="The official Pak Rummy app icon"
+          width="64"
+          height="64"
+        />
+        <p>
+          This is the app icon on the build we've verified ourselves — see our
+          <a href="/download/">download page</a>. A copycat site showing a different icon under
+          the "Pak Rummy" name is a red flag on its own.
+        </p>
+      </div>
+
+      <h2>How we verify a domain</h2>
+      <ol class="steps">
+        <li>Check how long the domain has been registered and whether its registration details are consistent with a real operator (not a proof of legitimacy on its own, but a fast red flag when a "long-established" brand's domain is only weeks old).</li>
+        <li>Look for the same domain referenced consistently across the operator's own official channels, not just one social post or ad.</li>
+        <li>Check whether the site publishes verifiable app facts — version, package name, a checksum — rather than only marketing copy.</li>
+        <li>Compare the visual branding and copy against known official material for inconsistencies.</li>
+        <li>Avoid any domain that pressures you to pay, register, or "verify your account" before you've even downloaded the app.</li>
+      </ol>
+
+      <h2>Red flags for a fake or copycat site</h2>
+      <ul>
+        <li>Countdown timers or "limited slots" messaging pushing you to act immediately.</li>
+        <li>A download button that starts a file transfer automatically, without a click.</li>
+        <li>Multiple competing "download" buttons pointing to different files.</li>
+        <li>No published checksum, version number, or package name anywhere on the site.</li>
+        <li>Requests for banking OTPs or full card details before you've installed anything.</li>
+      </ul>
+
+      <h2>What we'll publish once we can confirm it</h2>
+      <p>
+        Once we can trace a domain back to the real Pak Rummy operator with confidence, we'll name
+        it here explicitly alongside how we verified it, and we'll link our
+        <a href="/download/">download page</a> to it directly.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/download/">Download status</a></li>
+          <li><a href="/safety/">APK safety checklist</a></li>
+          <li><a href="/complaints/">Report a suspected fake site</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .icon-check {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    background: var(--color-bg-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+
+  .icon-check img {
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+  }
+
+  .icon-check p {
+    margin: 0;
+  }
+</style>

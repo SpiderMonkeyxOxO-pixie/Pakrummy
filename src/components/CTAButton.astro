@@ -1,0 +1,55 @@
+---
+interface Props {
+  href: string | null;
+  label: string;
+  variant?: 'primary' | 'secondary';
+  unverifiedLabel?: string;
+  reason?: string;
+  external?: boolean;
+}
+
+const {
+  href,
+  label,
+  variant = 'primary',
+  unverifiedLabel = 'Not yet publicly verified',
+  reason,
+  external = false,
+} = Astro.props;
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={`btn btn-${variant}`}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+    >
+      {label}
+      {external && <span class="visually-hidden"> (opens in a new tab)</span>}
+    </a>
+  ) : (
+    <span class="cta-disabled">
+      <button type="button" class={`btn btn-${variant} btn-disabled`} aria-disabled="true" disabled>
+        {unverifiedLabel}
+      </button>
+      {reason && <small class="cta-reason">{reason}</small>}
+    </span>
+  )
+}
+
+<style>
+  .cta-disabled {
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 320px;
+  }
+
+  .cta-reason {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+</style>

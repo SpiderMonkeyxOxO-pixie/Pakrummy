@@ -1,0 +1,83 @@
+---
+import type { GameEntry } from '@/config/games';
+
+interface Props {
+  game: GameEntry;
+}
+
+const { game } = Astro.props;
+const href = game.verified ? `/games/${game.slug}/` : undefined;
+---
+
+{
+  href ? (
+    <a class="game-card tilt-card" href={href}>
+      <span class="game-card__suit" aria-hidden="true">♠</span>
+      {game.icon && <img src={game.icon} alt="" width="48" height="48" class="game-card__icon" loading="lazy" />}
+      <span class="game-card__name">{game.name}</span>
+      <span class="badge badge-verified">Confirmed</span>
+      {game.shortDescription && <span class="game-card__desc">{game.shortDescription}</span>}
+    </a>
+  ) : (
+    <div class="game-card game-card--pending" aria-disabled="true">
+      <span class="game-card__name">{game.name}</span>
+      <span class="badge badge-unverified">Not yet confirmed</span>
+      {game.statusNote && <span class="game-card__desc">{game.statusNote}</span>}
+    </div>
+  )
+}
+
+<style>
+  .game-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    text-decoration: none;
+    color: var(--color-ivory);
+    min-height: 44px;
+    overflow: hidden;
+  }
+
+  .game-card__suit {
+    position: absolute;
+    top: -6px;
+    right: 4px;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--color-emerald-strong);
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  a.game-card:hover,
+  a.game-card:focus-visible {
+    border-color: var(--status-verified-border);
+  }
+
+  .game-card--pending {
+    opacity: 0.7;
+  }
+
+  .game-card__icon {
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+  }
+
+  .game-card__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .game-card__desc {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+</style>

@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Callout from '@/components/Callout.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+import { GAMES } from '@/config/games';
+
+const title = 'Slots on Pak Rummy: How Reel Games Work';
+const description =
+  'The Pak Rummy app bundles a large library of slot titles. How reels, paylines, and RNG outcomes work, and what stays unverified about odds.';
+const path = '/games/slots/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Games', href: '/games/' },
+  { name: 'Slots', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+const game = GAMES.find((g) => g.slug === 'slots')!;
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <img
+        src="/images/slots-game-art.webp"
+        alt="Slots game artwork"
+        width="96"
+        height="96"
+        style="border-radius: var(--radius-md); margin-bottom: var(--space-4);"
+      />
+      <Breadcrumbs items={crumbs} />
+      <h1>Slots on Pak Rummy</h1>
+      <p class="page-hero__summary">
+        "Slots" isn't a single game — the app bundles a large library of individually themed
+        reel-spinning titles. Unlike Rummy, Teen Patti, or Poker, slots involve no skill: every
+        spin's outcome is decided by a random number generator, not player decisions.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      {game.verificationNote && (
+        <Callout title="How we confirmed this">
+          <p>{game.verificationNote}</p>
+        </Callout>
+      )}
+
+      <h2>How slot games generally work</h2>
+      <ul>
+        <li><strong>Reels and paylines:</strong> symbols spin across a fixed grid; matching symbols along a payline pay out according to a paytable specific to that title.</li>
+        <li><strong>Random outcomes:</strong> each spin is generated independently by a random number generator — there's no pattern to predict, and past spins don't affect future ones.</li>
+        <li><strong>Bet size:</strong> your stake per spin is usually adjustable within a minimum and maximum set by that title.</li>
+        <li><strong>Bonus features:</strong> many titles include free-spin rounds, multipliers, or jackpot features, each with its own rules shown in that title's in-app paytable or info screen.</li>
+      </ul>
+
+      <Callout variant="warning" title="Odds and RTP are unverified">
+        <p>
+          We have not obtained or verified the Return to Player (RTP) percentage, volatility, or
+          payout odds for any individual slot title on the app. Any specific number you see
+          elsewhere claiming to be Pak Rummy's slot RTP has not been confirmed by us — check the
+          title's own in-app paytable, if one is shown, rather than trusting a third-party claim.
+        </p>
+      </Callout>
+
+      <h2>Slots vs. skill-based games on this app</h2>
+      <p>
+        Rummy, Teen Patti, and Poker involve genuine decision-making that affects your outcome.
+        Slots — along with Aviator and Crash — don't; your result is determined by chance once you
+        commit your stake. That distinction matters for how much control you actually have over
+        the outcome of any given session.
+      </p>
+
+      <h2>Getting started</h2>
+      <ol class="steps">
+        <li>Check our <a href="/download/">download status page</a> before installing anything.</li>
+        <li>Complete <a href="/register-login/">registration</a> before you play for real money.</li>
+        <li>Check each title's own paytable and bet limits before you spin — they vary title to title.</li>
+      </ol>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/games/">All games</a></li>
+          <li><a href="/download/">Download status</a></li>
+          <li><a href="/responsible-gaming/">Responsible gaming</a></li>
+        </ul>
+      </div>
+
+      <p class="fine-print">
+        Slots are pure-chance, real-money games. Play within a budget you've set in advance — see
+        our <a href="/responsible-gaming/">responsible gaming</a> page.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

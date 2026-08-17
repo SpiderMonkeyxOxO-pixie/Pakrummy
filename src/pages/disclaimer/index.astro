@@ -1,0 +1,85 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Disclaimer | Pak Rummy Official';
+const description = 'What PakRummyOfficial.com is not, and the limits of the information published here.';
+const path = '/disclaimer/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Legal', href: '/terms/' },
+  { name: 'Disclaimer', href: path },
+];
+const effectiveDate = '17 August 2026';
+const effectiveDateISO = '2026-08-17';
+const jsonLd = buildStandardPageSchema({
+  title,
+  description,
+  path,
+  crumbs,
+  datePublished: effectiveDateISO,
+  dateModified: effectiveDateISO,
+});
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Disclaimer</h1>
+      <p class="page-hero__summary">{SITE.positioning}</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <p class="fine-print">Effective date: {effectiveDate} &middot; Last revised: {effectiveDate}</p>
+
+      <h2>Not the game operator</h2>
+      <p>
+        We are not Pak Rummy's developer, publisher, or operator, and we have no relationship
+        that grants us access to accounts, payments, or support systems.
+      </p>
+
+      <h2>Not financial or legal advice</h2>
+      <p>
+        Nothing on this site is financial or legal advice. Our <a href="/legal-status/">legal
+        status page</a> is explicitly a non-legal-advice explanation pending review by qualified
+        counsel.
+      </p>
+
+      <h2>No guarantee of outcomes</h2>
+      <p>
+        We make no guarantee about winnings, withdrawal success, app safety, or the availability
+        of any bonus. Real-money gaming involves genuine financial risk — see
+        <a href="/responsible-gaming/">responsible gaming</a>.
+      </p>
+
+      <h2>Third-party links</h2>
+      <p>
+        This site links to the Pak Rummy app and, once verified, official download sources. We
+        are not responsible for content or practices on third-party sites we link to, and a link
+        is not an endorsement beyond what we've explicitly verified and stated.
+      </p>
+
+      <h2>Accuracy</h2>
+      <p>
+        We label facts as verified only when confirmed against a primary source — see our
+        <a href="/editorial-policy/">editorial policy</a>. We correct errors per our
+        <a href="/corrections-policy/">corrections policy</a> but cannot guarantee every page is
+        current at every moment.
+      </p>
+
+      <div class="next-steps">
+        <h2>Related pages</h2>
+        <ul class="link-list">
+          <li><a href="/legal-status/">Legal status</a></li>
+          <li><a href="/editorial-policy/">Editorial policy</a></li>
+          <li><a href="/terms/">Terms of use</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

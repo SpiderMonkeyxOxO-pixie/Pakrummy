@@ -1,0 +1,12 @@
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+
+/downloads/pakrummy.apk
+  Content-Type: application/vnd.android.package-archive
+  Content-Disposition: attachment; filename="pakrummy.apk"
+
+/404
+  X-Robots-Tag: noindex, follow

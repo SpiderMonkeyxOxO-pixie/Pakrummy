@@ -1,0 +1,101 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FactTable from '@/components/FactTable.astro';
+import CTAButton from '@/components/CTAButton.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Customer Service | Pak Rummy Official';
+const description =
+  'Verified Pak Rummy support channels (email and live chat) and how to reach PakRummyOfficial.com separately for corrections, complaints, or press queries.';
+const path = '/customer-service/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Help', href: path },
+  { name: 'Customer Service', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Pak Rummy Customer Service</h1>
+      <p class="page-hero__summary">
+        We are not the game operator and cannot access, escalate, or resolve your Pak Rummy
+        account issues directly. This page shows the support channels the operator has given us
+        directly, and how to reach PakRummyOfficial.com separately.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <h2>Pak Rummy operator support</h2>
+      <FactTable
+        caption="Operator support channels"
+        rows={[
+          { label: 'Support email', fact: SITE.operatorSupportEmail },
+          { label: 'Live chat', fact: SITE.operatorSupportChatUrl },
+        ]}
+      />
+
+      <Callout title="What &quot;verified&quot; means here">
+        <p>
+          These channels were supplied to us directly by the site operator — a primary source
+          under our <a href="/editorial-policy/">editorial policy</a> — and we confirmed the live
+          chat link actually loads a working chat widget rather than a dead or placeholder page.
+          We have <strong>not</strong> independently tested response time, or confirmed a human
+          consistently monitors either channel — that's a different, harder claim than "this
+          address/URL is real and came from the operator."
+        </p>
+      </Callout>
+
+      <div class="support-actions">
+        <CTAButton href={`mailto:${SITE.operatorSupportEmail.value}`} label={`Email ${SITE.operatorSupportEmail.value}`} variant="primary" />
+        <CTAButton href={SITE.operatorSupportChatUrl.value} label="Open live chat" variant="secondary" external />
+      </div>
+
+      <p class="fine-print">
+        Before using any support channel you find elsewhere, cross-check it against our
+        <a href="/official-domains/">official domains guidance</a> — fake support accounts are a
+        common way scammers approach players who are already having a problem.
+      </p>
+
+      <h2>Reach PakRummyOfficial.com</h2>
+      <p>
+        Use this for corrections, questions about our verification process, or press queries —
+        not for account issues, deposits, or withdrawals, which we have no access to.
+      </p>
+      <CTAButton href={`mailto:${SITE.editorialContactEmail}`} label={`Email ${SITE.editorialContactEmail}`} variant="secondary" />
+
+      <h2>If you have an urgent account issue</h2>
+      <p>
+        Try the operator's live chat or support email above, or check the app itself for an
+        in-app support option. If you suspect fraud or a scam impersonating Pak Rummy, see our
+        <a href="/complaints/">complaints page</a>.
+      </p>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/complaints/">File a complaint</a></li>
+          <li><a href="/common-errors/">Common app errors</a></li>
+          <li><a href="/official-domains/">Official domains guidance</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .support-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-block: var(--space-5);
+  }
+</style>
