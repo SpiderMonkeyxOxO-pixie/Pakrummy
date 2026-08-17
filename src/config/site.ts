@@ -140,9 +140,15 @@ export const SITE = {
     'No dedicated responsible-gaming contact has been confirmed. Players under financial or emotional distress should contact a licensed counsellor or a national helpline directly.'
   ),
 
-  /** Analytics: left undefined on purpose. Populate via environment variables, never hard-coded. */
+  /**
+   * Analytics. GA4 ships with a real default (site operator-supplied,
+   * confirmed 2026-08-17) so tracking works out of the box after a clone +
+   * build with no server-side env var setup required. `PUBLIC_GA4_ID` can
+   * still override it (e.g. for a staging property) — this is not a secret,
+   * a GA4 measurement ID is visible in any page's rendered HTML by design.
+   */
   analytics: {
-    ga4MeasurementId: import.meta.env.PUBLIC_GA4_ID as string | undefined,
+    ga4MeasurementId: (import.meta.env.PUBLIC_GA4_ID as string | undefined) ?? 'G-CYNZS7ZZG9',
     gtmContainerId: import.meta.env.PUBLIC_GTM_ID as string | undefined,
     bingWebmasterVerification: import.meta.env.PUBLIC_BING_VERIFICATION as string | undefined,
     googleSiteVerification: import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION as string | undefined,
