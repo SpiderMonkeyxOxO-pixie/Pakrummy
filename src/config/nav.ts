@@ -33,9 +33,9 @@ export const PRIMARY_NAV: NavItem[] = [
       { label: 'Withdrawal Guide', href: '/withdrawal/' },
       { label: 'Easypaisa and JazzCash', href: '/easypaisa-jazzcash/' },
       { label: 'Common App Errors', href: '/common-errors/' },
-      { label: 'Blog', href: '/blog/' },
     ],
   },
+  { label: 'Blog', href: '/blog/' },
   {
     label: 'Help',
     href: '/customer-service/',
