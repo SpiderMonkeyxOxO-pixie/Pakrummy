@@ -50,6 +50,6 @@ export function buildStandardPageSchema({
       datePublished,
       dateModified,
     }),
-    getBreadcrumbSchema(breadcrumbInput),
+    getBreadcrumbSchema(breadcrumbInput, canonical),
   ]);
 }

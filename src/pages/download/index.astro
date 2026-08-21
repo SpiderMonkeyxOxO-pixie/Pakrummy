@@ -23,7 +23,7 @@ const jsonLd = buildJsonLdGraph([
   getOrganizationSchema(),
   getWebsiteSchema(),
   getWebPageSchema({ url: canonical, name: title, description, breadcrumb: breadcrumbInput }),
-  getBreadcrumbSchema(breadcrumbInput),
+  getBreadcrumbSchema(breadcrumbInput, canonical),
   softwareSchema,
 ]);
 ---

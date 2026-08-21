@@ -35,9 +35,18 @@ export interface BreadcrumbInput {
   url: string;
 }
 
-export function getBreadcrumbSchema(items: BreadcrumbInput[]) {
+/**
+ * `pageUrl` must match the `{url}#breadcrumb` id that `getWebPageSchema`
+ * references via its `breadcrumb` property — otherwise that reference
+ * points at a node this function never actually creates. (It didn't, for
+ * a while — every page's BreadcrumbList was floating in the graph with no
+ * `@id` at all, so Google's Rich Results Test correctly flagged the
+ * referenced-but-undefined node as invalid. Fixed 2026-08-21.)
+ */
+export function getBreadcrumbSchema(items: BreadcrumbInput[], pageUrl: string) {
   return {
     '@type': 'BreadcrumbList',
+    '@id': `${pageUrl}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,

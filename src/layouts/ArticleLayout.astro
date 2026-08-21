@@ -52,7 +52,7 @@ const jsonLd = buildJsonLdGraph([
     dateModified: updatedDate ?? publishDate,
     authorName: author,
   }),
-  getBreadcrumbSchema(breadcrumbInput),
+  getBreadcrumbSchema(breadcrumbInput, canonical),
 ]);
 ---
 
