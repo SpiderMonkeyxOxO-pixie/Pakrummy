@@ -23,9 +23,11 @@ Organization + WebSite + WebPage + BreadcrumbList, **plus** `SoftwareApplication
 
 **Update, 2026-08-17**: all three fields were verified this same day (see `docs/required-verification.md`) after the site operator supplied and confirmed an APK, and the node now appears automatically — no template change was needed, exactly as designed. `downloadUrl` is resolved to an absolute URL (`https://pakrummyofficial.com/downloads/pakrummy.apk`) via `new URL(..., SITE.productionUrl)` rather than left relative, since JSON-LD URL properties should be absolute.
 
-## Guide articles (`/guides/[slug]/`) and update entries (`/updates/[slug]/`)
+## Guide articles (`/guides/[slug]/`), blog posts (`/blog/[slug]/`), and update entries (`/updates/[slug]/`)
 
-Organization + WebSite + `WebPage` + `Article` + BreadcrumbList, via `ArticleLayout.astro` → `getArticleSchema()`. `author` is always a real `Person` sub-node built from the frontmatter `author` field (currently "PakRummyOfficial.com Editorial Team" for all entries, since no named individual bylines exist yet — see `/authors/` and `docs/required-verification.md`). No `Person` is fabricated with a fake name or headshot.
+Organization + WebSite + `WebPage` + `Article`/`BlogPosting` + BreadcrumbList, via `ArticleLayout.astro` → `getArticleSchema()`. `author` is always a real `Person` sub-node built from the frontmatter `author` field (currently "PakRummyOfficial.com Editorial Team" for all entries, since no named individual bylines exist yet — see `/authors/` and `docs/required-verification.md`). No `Person` is fabricated with a fake name or headshot.
+
+**Added 2026-08-21**: `getArticleSchema()` accepts an optional `type: 'Article' | 'BlogPosting'` (defaults to `'Article'`), and `ArticleLayout` exposes it as a `schemaType` prop. `/blog/[slug]/` passes `schemaType="BlogPosting"` — the more accurate Schema.org type for commentary/strategy-style entries — while `/guides/[slug]/` and `/updates/[slug]/` keep the default `Article`, unchanged.
 
 **Fixed 2026-08-17**: `ArticleLayout` previously omitted the `WebPage` node entirely, even though `Article.mainEntityOfPage` referenced `{url}#webpage` — a dangling `@id` that pointed at nothing defined in the graph. Not invalid JSON-LD, but inconsistent with every other template and with the claim below that all internal references resolve. Added the `WebPage` node (carrying the same breadcrumb reference and dates as the `Article`) so `mainEntityOfPage` now resolves to a real node, matching the pattern `buildStandardPageSchema()` already used everywhere else.
 
@@ -38,7 +40,7 @@ Organization + WebSite + `WebPage` + `Article` + BreadcrumbList, via `ArticleLay
 
 ## Validation performed
 
-Every build's JSON-LD blocks were parsed with `JSON.parse()` across all 46 indexable pages (47 built pages minus the noindexed `/404`) as part of the QA crawl (`docs/qa-report.md`) — 0 parse failures, one graph per page.
+Every build's JSON-LD blocks were parsed with `JSON.parse()` across all indexable pages (48 built pages minus the noindexed `/404`, as of the 2026-08-21 blog addition) as part of the QA crawl (`docs/qa-report.md`) — 0 parse failures, one graph per page.
 
 **Correcting the record**: this doc previously claimed every graph's internal `@id` references (`isPartOf`, `publisher`, `breadcrumb`, `mainEntityOfPage`) resolved to a real node. That was true for everything except `breadcrumb` — see the `BreadcrumbList` fix above, caught by an actual Google Rich Results Test run against the live site, not by this project's own tooling. `JSON.parse()`-based validation only catches structural (syntax) invalidity; it says nothing about whether an `@id` reference points at a node that actually exists elsewhere in the graph. As of 2026-08-21, a dedicated script checks exactly that (every `WebPage`-family node's `breadcrumb.@id` against the set of `@id`s actually defined in its own graph) — 0 broken references across all 46 pages. Re-run that check, not just `JSON.parse()`, after any future schema change.
 

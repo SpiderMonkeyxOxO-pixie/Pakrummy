@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Pak Rummy Blog | Pak Rummy Official';
+const description = 'Rummy strategy, Pakistan mobile gaming context, and responsible-gaming reading from PakRummyOfficial.com.';
+const path = '/blog/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Blog', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs, type: 'CollectionPage' });
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+const categoryLabels: Record<string, string> = {
+  strategy: 'Strategy',
+  pakistan: 'Pakistan',
+  'responsible-gaming': 'Responsible Gaming',
+  payments: 'Payments',
+  industry: 'Industry',
+};
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Blog</h1>
+      <p class="page-hero__summary">
+        General-knowledge reading on Rummy strategy, the Pakistan mobile gaming context, and
+        playing responsibly — distinct from our verified product facts on pages like
+        <a href="/download/">Download</a> and <a href="/games/">Games</a>. New posts are added here
+        as we publish them, not on a padded schedule.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      {
+        posts.length === 0 ? (
+          <p>No posts published yet. Check back soon.</p>
+        ) : (
+          <ul class="blog-list">
+            {posts.map((post) => (
+              <li class="card">
+                <span class="badge badge-unverified">{categoryLabels[post.data.category] ?? post.data.category}</span>
+                <h2><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h2>
+                <p>{post.data.description}</p>
+                <p class="fine-print">By {post.data.author} &middot; {post.data.publishDate}</p>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .blog-list h2 {
+    font-size: 1.2rem;
+    margin: var(--space-2) 0 var(--space-2);
+  }
+
+  .blog-list a {
+    color: var(--color-ivory);
+    text-decoration: none;
+  }
+
+  .blog-list a:hover,
+  .blog-list a:focus-visible {
+    color: var(--color-gold-strong);
+  }
+</style>

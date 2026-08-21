@@ -50,6 +50,7 @@ export const GET: APIRoute = () => {
   lines.push(`- [Easypaisa and JazzCash](${abs('/easypaisa-jazzcash/')}): Mobile-wallet payment guidance for Pakistan.`);
   lines.push(`- [Common App Errors](${abs('/common-errors/')}): Fixes for the most frequent install/login errors.`);
   lines.push(`- [APK Permissions](${abs('/apk-permissions/')}): Which Android permissions are reasonable, and which are red flags.`);
+  lines.push(`- [Blog](${abs('/blog/')}): Rummy strategy, Pakistan mobile gaming context, and responsible-gaming reading.`);
   for (const game of VERIFIED_GAMES) {
     lines.push(`- [${game.name}](${abs(`/games/${game.slug}/`)}): Rules and format for ${game.name} on Pak Rummy.`);
   }

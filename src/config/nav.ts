@@ -33,6 +33,7 @@ export const PRIMARY_NAV: NavItem[] = [
       { label: 'Withdrawal Guide', href: '/withdrawal/' },
       { label: 'Easypaisa and JazzCash', href: '/easypaisa-jazzcash/' },
       { label: 'Common App Errors', href: '/common-errors/' },
+      { label: 'Blog', href: '/blog/' },
     ],
   },
   {
@@ -84,6 +85,7 @@ export const FOOTER_NAV: FooterColumn[] = [
       { label: 'Easypaisa and JazzCash', href: '/easypaisa-jazzcash/' },
       { label: 'Common App Errors', href: '/common-errors/' },
       { label: 'All Guides', href: '/guides/' },
+      { label: 'Blog', href: '/blog/' },
     ],
   },
   {

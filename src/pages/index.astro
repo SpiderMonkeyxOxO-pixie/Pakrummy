@@ -26,6 +26,9 @@ const updates = (await getCollection('updates')).sort(
 const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
   (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
 );
+const blogPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
 
 const jsonLd = buildJsonLdGraph([
   getOrganizationSchema(),
@@ -68,7 +71,8 @@ const faqs = [
 
 const latestItems = [
   ...updates.slice(0, 2).map((entry) => ({ title: entry.data.title, href: `/updates/${entry.slug}/`, date: entry.data.publishDate })),
-  ...guides.slice(0, 2).map((entry) => ({ title: entry.data.title, href: `/guides/${entry.slug}/` })),
+  ...guides.slice(0, 1).map((entry) => ({ title: entry.data.title, href: `/guides/${entry.slug}/` })),
+  ...blogPosts.slice(0, 1).map((entry) => ({ title: entry.data.title, href: `/blog/${entry.slug}/` })),
 ];
 ---
 
@@ -174,7 +178,8 @@ const latestItems = [
             ))}
           </ul>
           <p class="fine-print">
-            <a href="/updates/">All updates</a> &middot; <a href="/guides/">All guides</a>
+            <a href="/updates/">All updates</a> &middot; <a href="/guides/">All guides</a> &middot;
+            <a href="/blog/">All blog posts</a>
           </p>
         </div>
       </section>

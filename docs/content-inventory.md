@@ -1,6 +1,6 @@
 # Content inventory
 
-## Published pages (45 indexable + 1 noindex 404 = 46 total)
+## Published pages (47 indexable + 1 noindex 404 = 48 total, updated 2026-08-21)
 
 ### Brand and application (8)
 
@@ -24,9 +24,10 @@ Each of the six game pages carries an on-page "How we confirmed this" callout ci
 
 `/terms/`, `/privacy-policy/`, `/cookie-policy/`, `/disclaimer/`, `/dmca/`
 
-### Publishing infrastructure (2 hubs + entries)
+### Publishing infrastructure (3 hubs + entries)
 
 - `/guides/` hub + 3 published articles (`enable-unknown-sources-android`, `rummy-scoring-explained`, `mobile-wallet-deposit-delay`)
+- `/blog/` hub + 1 published post (`rummy-strategy-fundamentals-for-beginners`) — added 2026-08-21, see below
 - `/updates/` hub + 1 published entry (`site-launch`)
 - `/sitemap/` (HTML sitemap)
 - `/404` (noindex)
@@ -41,12 +42,13 @@ Each of the six game pages carries an on-page "How we confirmed this" callout ci
 
 ## Content collections
 
-Two Astro content collections back the publishing infrastructure, schema-validated in `src/content/config.ts`:
+Three Astro content collections back the publishing infrastructure, schema-validated in `src/content/config.ts`:
 
 - **`guides`** — long-form, evergreen how-to/troubleshooting articles, distinct from the core product pages (e.g. `/install/`). Each entry requires `title`, `description` (≤200 chars), `publishDate`, `author`, `category`, and at least 2 `relatedLinks`.
+- **`blog`** — added 2026-08-21 in response to a request for regular blog publishing. Same shape as `guides` but with a `category` enum scoped to blog-style topics (`strategy`, `pakistan`, `responsible-gaming`, `payments`, `industry`) rather than how-to categories, and rendered with `BlogPosting` JSON-LD instead of `Article` (`ArticleLayout`'s `schemaType` prop — see `docs/schema-inventory.md`). Deliberately scoped to evergreen, general-knowledge topics (card strategy, payment-ecosystem context, responsible-gaming reading) rather than an operator "news" feed — the site has one operator and a limited pool of independently verifiable facts, so a cadence that required fabricated news to sustain would violate the site's core no-fabrication rule. The first post (`rummy-strategy-fundamentals-for-beginners`) follows this pattern: general Rummy strategy knowledge, no invented operator claims.
 - **`updates`** — dated changelog-style entries with a `verified: boolean` flag, rendered with a Verified/Unverified badge on `/updates/`.
 
-Adding a new guide or update is a matter of dropping a new `.md` file into `src/content/guides/` or `src/content/updates/`; `[slug].astro` in each directory generates the route and page automatically via `getStaticPaths()`.
+Adding a new guide, blog post, or update is a matter of dropping a new `.md` file into `src/content/guides/`, `src/content/blog/`, or `src/content/updates/`; `[slug].astro` in each directory generates the route and page automatically via `getStaticPaths()`.
 
 ## Word-count sanity
 

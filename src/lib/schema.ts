@@ -100,11 +100,13 @@ export interface ArticleSchemaInput {
   dateModified: string;
   authorName: string;
   image?: string;
+  /** Defaults to 'Article'. Use 'BlogPosting' for genuinely blog-style entries (commentary, strategy, opinion) — see the /blog/ collection. */
+  type?: 'Article' | 'BlogPosting';
 }
 
 export function getArticleSchema(input: ArticleSchemaInput) {
   const schema: Record<string, unknown> = {
-    '@type': 'Article',
+    '@type': input.type ?? 'Article',
     '@id': `${input.url}#article`,
     headline: input.headline,
     description: input.description,

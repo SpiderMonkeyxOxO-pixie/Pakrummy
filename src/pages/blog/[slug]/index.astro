@@ -1,0 +1,47 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import ArticleLayout from '@/layouts/ArticleLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const path = `/blog/${post.slug}/`;
+---
+
+<ArticleLayout
+  title={post.data.title}
+  description={post.data.description}
+  path={path}
+  author={post.data.author}
+  publishDate={post.data.publishDate}
+  updatedDate={post.data.updatedDate}
+  hubLabel="Blog"
+  hubHref="/blog/"
+  schemaType="BlogPosting"
+>
+  <Content />
+
+  {
+    post.data.relatedLinks && (
+      <div class="next-steps">
+        <h2>Related pages</h2>
+        <ul class="link-list">
+          {post.data.relatedLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</ArticleLayout>

@@ -20,9 +20,11 @@ export interface Props {
   updatedDate?: string;
   hubLabel: string;
   hubHref: string;
+  /** Defaults to 'Article'. Pass 'BlogPosting' for /blog/ entries — see src/lib/schema.ts. */
+  schemaType?: 'Article' | 'BlogPosting';
 }
 
-const { title, description, path, author, publishDate, updatedDate, hubLabel, hubHref } = Astro.props;
+const { title, description, path, author, publishDate, updatedDate, hubLabel, hubHref, schemaType } = Astro.props;
 const canonical = new URL(path, SITE.productionUrl).toString();
 
 const crumbs = [
@@ -51,6 +53,7 @@ const jsonLd = buildJsonLdGraph([
     datePublished: publishDate,
     dateModified: updatedDate ?? publishDate,
     authorName: author,
+    type: schemaType,
   }),
   getBreadcrumbSchema(breadcrumbInput, canonical),
 ]);

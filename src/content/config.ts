@@ -22,6 +22,28 @@ const guides = defineCollection({
   }),
 });
 
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(200),
+    publishDate: z.string(),
+    updatedDate: z.string().optional(),
+    author: z.string(),
+    category: z.enum(['strategy', 'pakistan', 'responsible-gaming', 'payments', 'industry']),
+    relatedLinks: z
+      .array(
+        z.object({
+          label: z.string(),
+          href: z.string(),
+        })
+      )
+      .min(2)
+      .optional(),
+    draft: z.boolean().optional().default(false),
+  }),
+});
+
 const updates = defineCollection({
   type: 'content',
   schema: z.object({
@@ -34,4 +56,4 @@ const updates = defineCollection({
   }),
 });
 
-export const collections = { guides, updates };
+export const collections = { guides, blog, updates };
