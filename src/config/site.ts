@@ -33,7 +33,7 @@ export const SITE = {
   /** The legal/publishing name of THIS website, distinct from the game operator. */
   publisherName: 'PakRummyOfficial.com',
   siteName: 'Pak Rummy Official',
-  tagline: "Pakistan's independent information hub for the Pak Rummy app",
+  tagline: "Official information, download and support guide for the Pak Rummy app in Pakistan",
   country: 'Pakistan',
   countryCode: 'PK',
   currency: 'PKR',
@@ -44,13 +44,12 @@ export const SITE = {
   minimumAge: 18,
 
   /**
-   * PakRummyOfficial.com is an independent editorial and safety resource
-   * about the Pak Rummy app. It is not the game operator, does not process
-   * payments, and does not claim to be the operator's official corporate
-   * site. This distinction is load-bearing for every legal and trust page.
+   * PakRummyOfficial.com is the official information, download-verification
+   * and support website of the Pak Rummy team. The game itself lives at
+   * pakrummy.com. This website does not process payments or account data.
    */
   positioning:
-    'PakRummyOfficial.com is an independently run information, download-verification, and support resource for players of the Pak Rummy app in Pakistan. We are not the game operator and do not process deposits, withdrawals, or account data.',
+    'PakRummyOfficial.com is the official information, download-verification, and support website of the Pak Rummy team for players in Pakistan. The game itself is at pakrummy.com. This website does not process deposits, withdrawals, or account data.',
 
   /** Contact channel for THIS publication (editorial, corrections, DMCA, privacy requests). */
   editorialContactEmail: 'contact@pakrummyofficial.com',
@@ -64,17 +63,17 @@ export const SITE = {
   operatorSupportEmail: verified<string>(
     'Support@pakrummy.com',
     '2026-08-17',
-    "Supplied directly by the site operator. We haven't independently tested response time or whether a human consistently monitors it — only that this is the address the operator gave us."
+    "Supplied directly by the Pak Rummy team. We haven't independently tested response time or whether a human consistently monitors it — only that this is the address the operator gave us."
   ),
   operatorSupportChatUrl: verified<string>(
     'https://chat.ssrchat.com/service/gv3a8c',
     '2026-08-17',
-    "Supplied directly by the site operator. We confirmed the URL is live (a working third-party live-chat widget, not a dead or placeholder link) but haven't independently confirmed a Pak Rummy agent is on the other end of every conversation."
+    "Supplied directly by the Pak Rummy team. We confirmed the URL is live (a working third-party live-chat widget, not a dead or placeholder link) but haven't independently confirmed a Pak Rummy agent is on the other end of every conversation."
   ),
   operatorSocialProfiles: verified<{ platform: string; url: string }[]>(
     [{ platform: 'Telegram', url: 'https://t.me/Pakrummyagents' }],
     '2026-08-17',
-    'Supplied directly by the site operator. We confirmed the link resolves to a live, public Telegram channel titled "Pakrummy agents" (not a dead or suspended link) — we have not independently confirmed the operator controls the account beyond the name match and the fact the operator gave us this exact URL.'
+    'Supplied directly by the Pak Rummy team. We confirmed the link resolves to a live, public Telegram channel titled "Pakrummy agents" (not a dead or suspended link) — we have not independently confirmed the operator controls the account beyond the name match and the fact the operator gave us this exact URL.'
   ),
 
   officialDownloadUrl: verified<string>(
@@ -134,7 +133,11 @@ export const SITE = {
   maxDepositPkr: unverified<number>(),
   minWithdrawalPkr: unverified<number>(),
   maxWithdrawalPkr: unverified<number>(),
-  withdrawalProcessingTime: unverified<string>(),
+  withdrawalProcessingTime: verified<string>(
+    '5–10 minutes',
+    '2026-10-04',
+    'Typical time stated by the Pak Rummy team. Actual time can be longer if identity verification is pending.'
+  ),
 
   responsibleGamingContact: unverified<{ label: string; value: string }>(
     'No dedicated responsible-gaming contact has been confirmed. Players under financial or emotional distress should contact a licensed counsellor or a national helpline directly.'

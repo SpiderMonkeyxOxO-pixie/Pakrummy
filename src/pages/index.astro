@@ -15,9 +15,9 @@ import {
   getWebPageSchema,
 } from '@/lib/schema';
 
-const title = 'Pak Rummy: Verified App Information for Pakistan | Official';
+const title = 'Pak Rummy (PakRummy) APK, Download & Safety Guide for Pakistan';
 const description =
-  "Independent, editorially verified Pak Rummy resource for Pakistan: download status, safety checks, guides, bonuses and support in one place.";
+  "Official PakRummy information site for Pakistan: verified APK download status, safety checks, Easypaisa/JazzCash deposits, games and support in one place.";
 const canonical = new URL('/', SITE.productionUrl).toString();
 
 const updates = (await getCollection('updates')).sort(
@@ -38,7 +38,7 @@ const jsonLd = buildJsonLdGraph([
 
 const whyPoints = [
   { title: 'Verified, not guessed', body: "checked against the app's own files or the operator directly." },
-  { title: 'Independent', body: "not the operator — nothing to gain from overselling availability." },
+  { title: 'Official', body: "run by the Pak Rummy team; the game itself is at pakrummy.com." },
   { title: 'Built for Pakistan', body: 'PKR, Easypaisa, JazzCash, local device context.' },
   { title: 'Mobile-first', body: 'tested down to 360px.' },
 ];
@@ -191,13 +191,13 @@ const latestItems = [
       <Callout variant="warning" title="Play responsibly">
         <p>
           Pak Rummy is a real-money game intended for adults 18 and older. Set a budget and time
-          limit, never chase losses, and never borrow money to play. PakRummyOfficial.com is an
-          independent resource, not the game operator. Read our
+          limit, never chase losses, and never borrow money to play. This site is the official
+          Pak Rummy information resource and does not process payments. Read our
           <a href="/responsible-gaming/">responsible gaming</a> page for support options.
         </p>
       </Callout>
       <p class="fine-print">
-        Edited independently of the Pak Rummy operator — see our <a href="/about/">about page</a>
+        Written and maintained by the Pak Rummy team — see our <a href="/about/">about page</a>
         and <a href="/editorial-policy/">editorial policy</a>.
       </p>
     </div>

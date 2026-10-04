@@ -4,9 +4,9 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import { SITE } from '@/config/site';
 import { buildStandardPageSchema } from '@/lib/pageSchema';
 
-const title = 'About PakRummyOfficial.com | Independent Pak Rummy Resource';
+const title = 'About PakRummyOfficial.com | Official Pak Rummy Information';
 const description =
-  "Who runs PakRummyOfficial.com, why it exists, and how it differs from the Pak Rummy game operator's own site.";
+  "Who runs PakRummyOfficial.com, why it exists, and how it relates to the Pak Rummy game at pakrummy.com.";
 const path = '/about/';
 const crumbs = [
   { name: 'Home', href: '/' },
@@ -28,16 +28,15 @@ const jsonLd = buildStandardPageSchema({ title, description, path, crumbs, type:
     <div class="container container-prose">
       <h2>What we do</h2>
       <p>
-        We research and publish verification status for the Pak Rummy Android app: download
+        We publish verification status for the Pak Rummy Android app: download
         sources, file safety, app version tracking, payment guidance, and support information —
         clearly separating what we've confirmed from what we haven't.
       </p>
 
       <h2>What we don't do</h2>
       <ul>
-        <li>We don't operate the Pak Rummy app or any real-money gaming product.</li>
-        <li>We don't process deposits, withdrawals, or account registration.</li>
-        <li>We don't have access to any player's account, balance, or personal data held by the operator.</li>
+        <li>This website doesn't process deposits, withdrawals, or account registration. Those happen inside the Pak Rummy app, available via <a href="https://pakrummy.com">pakrummy.com</a>.</li>
+        <li>This website doesn't hold any player's account, balance, or personal data.</li>
         <li>We don't publish claims we can't back with a verifiable source — see our <a href="/editorial-policy/">editorial policy</a>.</li>
       </ul>
 

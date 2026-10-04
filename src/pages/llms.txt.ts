@@ -17,7 +17,7 @@ export const GET: APIRoute = () => {
   lines.push(`> ${SITE.positioning}`);
   lines.push('');
   lines.push(
-    `${SITE.siteName} covers the Pak Rummy Android app for players in ${SITE.country} (${SITE.language}): verified download facts, safety checks, game rules, payment guides, and support-channel status. Every fact is labelled either independently verified or "Not yet publicly verified" — nothing in between.`
+    `${SITE.siteName} is the official information website of the Pak Rummy team (the game is at pakrummy.com) and covers the Pak Rummy Android app for players in ${SITE.country} (${SITE.language}): verified download facts, safety checks, game rules, payment guides, and support-channel status. Every fact is labelled either independently verified or "Not yet publicly verified" — nothing in between.`
   );
   lines.push('');
   lines.push(
