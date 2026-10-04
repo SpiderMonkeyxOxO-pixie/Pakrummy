@@ -27,7 +27,7 @@ export const GAMES: GameEntry[] = [
     verified: true,
     shortDescription:
       'Classic 13-card Indian Rummy, the game the Pak Rummy app is named for, including Points, Pool, and Deals variants.',
-    icon: '/images/rummy-game-art.png',
+    icon: '/images/rummy-icon.webp',
     verificationNote: `${MODULE_VERIFICATION} Module name: "Rummy".`,
   },
   {
@@ -35,7 +35,7 @@ export const GAMES: GameEntry[] = [
     name: 'Teen Patti',
     verified: true,
     shortDescription: 'A 3-card betting game built around blind and seen play, popular across South Asia.',
-    icon: '/images/teen-patti-game-art.webp',
+    icon: '/images/teen-patti-icon.webp',
     verificationNote: `${MODULE_VERIFICATION} Module name: "TeenPatti".`,
   },
   {
@@ -43,7 +43,7 @@ export const GAMES: GameEntry[] = [
     name: 'Poker',
     verified: true,
     shortDescription: 'Community-card poker play built on the app\'s core poker module.',
-    icon: '/images/poker-game-art.png',
+    icon: '/images/poker-icon.webp',
     verificationNote: `${MODULE_VERIFICATION} Module name: "PokerBase".`,
   },
   {
@@ -51,7 +51,7 @@ export const GAMES: GameEntry[] = [
     name: 'Slots',
     verified: true,
     shortDescription: 'A large library of reel-spinning slot titles bundled with the app.',
-    icon: '/images/slots-game-art.webp',
+    icon: '/images/slots-icon.webp',
     verificationNote: `${MODULE_VERIFICATION} Module name: "SlotIcon", plus roughly 250 individually named slot titles bundled alongside it.`,
   },
   {
@@ -59,7 +59,7 @@ export const GAMES: GameEntry[] = [
     name: 'Aviator',
     verified: true,
     shortDescription: 'A rising-multiplier flight game — cash out before it flies away.',
-    icon: '/images/aviator-game-art.jpg',
+    icon: '/images/aviator-icon.webp',
     verificationNote: `${MODULE_VERIFICATION} Module name: "Aviator" (the manifest also lists several same-genre variants: CrashX, Aviatrix, JetX, Zeppelin).`,
   },
   {
@@ -67,7 +67,7 @@ export const GAMES: GameEntry[] = [
     name: 'Crash',
     verified: true,
     shortDescription: 'A rising-multiplier game — cash out before the round crashes.',
-    icon: '/images/crash-game-art.png',
+    icon: '/images/crash-icon.webp',
     verificationNote: `${MODULE_VERIFICATION} Module name: "Carsh" (sic — a typo in the app's own code, not ours) plus "CrashX".`,
   },
   {
@@ -75,7 +75,7 @@ export const GAMES: GameEntry[] = [
     name: 'Ludo',
     verified: true,
     shortDescription: 'The classic 4-player race-to-home board game, played with dice and tokens.',
-    icon: '/images/ludo-game-art.webp',
+    icon: '/images/ludo-icon.webp',
     verificationNote:
       "Confirmed by the site operator directly (2026-08-17), plus a second technical pass on our own: there's no module literally named \"Ludo\" in the app's manifest, but there is one named \"Nudo\", and we checked whether that's just a sparse/orphaned entry versus a real module. It isn't — \"Nudo\" has the identical file footprint (appears in the main module catalog, plus its own per-module sub-manifest, nothing more or less) as every one of the other confirmed games, including Rummy itself. That's consistent with an internal codename rather than a placeholder — the app's own code already has one confirmed case of this pattern (\"Carsh\" for Crash). We still can't independently prove \"Nudo\" is Ludo specifically (its own sub-manifest's display name is also \"Nudo\", not a translated \"Ludo\"), so this rests on the operator's direct confirmation plus supporting-not-conclusive technical evidence — a different evidence bar than the other six, and we're saying so rather than blending it in.",
   },

@@ -14,6 +14,7 @@ export default defineConfig({
   ],
   build: {
     format: 'directory',
+    inlineStylesheets: 'always',
   },
   server: {
     port: 4321,
