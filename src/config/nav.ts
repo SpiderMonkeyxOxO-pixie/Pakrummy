@@ -95,6 +95,7 @@ export const FOOTER_NAV: FooterColumn[] = [
       { label: 'APK Safety', href: '/safety/' },
       { label: 'APK Permissions', href: '/apk-permissions/' },
       { label: 'Official Domains', href: '/official-domains/' },
+      { label: 'Card Rummy vs Pak Rummy', href: '/card-rummy-vs-pak-rummy/' },
       { label: 'Account Verification', href: '/account-verification/' },
       { label: 'Account Deletion', href: '/account-deletion/' },
       { label: 'Complaints', href: '/complaints/' },

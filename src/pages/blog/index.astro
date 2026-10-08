@@ -23,6 +23,7 @@ const categoryLabels: Record<string, string> = {
   'responsible-gaming': 'Responsible Gaming',
   payments: 'Payments',
   industry: 'Industry',
+  rules: 'Rules',
 };
 ---
 
@@ -48,11 +49,25 @@ const categoryLabels: Record<string, string> = {
         ) : (
           <ul class="blog-list">
             {posts.map((post) => (
-              <li class="card">
-                <span class="badge badge-unverified">{categoryLabels[post.data.category] ?? post.data.category}</span>
-                <h2><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h2>
-                <p>{post.data.description}</p>
-                <p class="fine-print">By {post.data.author} &middot; {post.data.publishDate}</p>
+              <li class="card blog-list__item">
+                {post.data.image && (
+                  <a href={`/blog/${post.slug}/`} class="blog-list__thumb-link" tabindex="-1" aria-hidden="true">
+                    <img
+                      class="blog-list__thumb"
+                      src={post.data.image}
+                      alt=""
+                      width="1200"
+                      height="630"
+                      loading="lazy"
+                    />
+                  </a>
+                )}
+                <div class="blog-list__content">
+                  <span class="badge badge-unverified">{categoryLabels[post.data.category] ?? post.data.category}</span>
+                  <h2><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h2>
+                  <p>{post.data.description}</p>
+                  <p class="fine-print">By {post.data.author} &middot; {post.data.publishDate}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -72,9 +87,52 @@ const categoryLabels: Record<string, string> = {
     gap: var(--space-4);
   }
 
+  .blog-list__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .blog-list__thumb-link {
+    display: block;
+  }
+
+  .blog-list__thumb {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+  }
+
+  .blog-list__content {
+    padding: 0 var(--space-4) var(--space-4);
+  }
+
   .blog-list h2 {
     font-size: 1.2rem;
     margin: var(--space-2) 0 var(--space-2);
+  }
+
+  @media (min-width: 640px) {
+    .blog-list__item {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .blog-list__thumb-link {
+      flex: 0 0 240px;
+    }
+
+    .blog-list__thumb {
+      height: 100%;
+    }
+
+    .blog-list__content {
+      padding: var(--space-4) var(--space-4) var(--space-4) 0;
+    }
   }
 
   .blog-list a {

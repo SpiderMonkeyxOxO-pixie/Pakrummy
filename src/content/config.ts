@@ -30,7 +30,9 @@ const blog = defineCollection({
     publishDate: z.string(),
     updatedDate: z.string().optional(),
     author: z.string(),
-    category: z.enum(['strategy', 'pakistan', 'responsible-gaming', 'payments', 'industry']),
+    category: z.enum(['strategy', 'pakistan', 'responsible-gaming', 'payments', 'industry', 'rules']),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
     relatedLinks: z
       .array(
         z.object({

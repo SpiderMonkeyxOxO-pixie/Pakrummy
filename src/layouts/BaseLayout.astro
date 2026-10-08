@@ -13,6 +13,9 @@ export interface Props {
   /** Defaults to the site's square app-icon-derived image — see DEFAULT_OG_IMAGE below. */
   ogImage?: string;
   ogImageAlt?: string;
+  /** Pass both when ogImage is a known-dimension asset (e.g. the 1200x630 blog hero images). */
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   robots?: string;
   jsonLd?: Record<string, unknown>;
   publishedTime?: string;
@@ -26,6 +29,8 @@ const {
   ogType = 'website',
   ogImage,
   ogImageAlt,
+  ogImageWidth,
+  ogImageHeight,
   robots = 'index, follow, max-image-preview:large',
   jsonLd,
   publishedTime,
@@ -44,9 +49,7 @@ const { ga4MeasurementId, gtmContainerId, googleSiteVerification, bingWebmasterV
  * reserved for pages that pass a proper landscape ogImage explicitly.
  */
 const DEFAULT_OG_IMAGE = { url: '/images/og-default.png', width: 400, height: 400 };
-const resolvedOgImage = ogImage
-  ? { url: ogImage, width: undefined as number | undefined, height: undefined as number | undefined }
-  : DEFAULT_OG_IMAGE;
+const resolvedOgImage = ogImage ? { url: ogImage, width: ogImageWidth, height: ogImageHeight } : DEFAULT_OG_IMAGE;
 const ogImageUrl = new URL(resolvedOgImage.url, SITE.productionUrl).toString();
 const resolvedOgImageAlt = ogImageAlt ?? `${SITE.siteName} logo`;
 const isLargeCard = Boolean(ogImage);

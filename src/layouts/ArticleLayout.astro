@@ -22,9 +22,13 @@ export interface Props {
   hubHref: string;
   /** Defaults to 'Article'. Pass 'BlogPosting' for /blog/ entries — see src/lib/schema.ts. */
   schemaType?: 'Article' | 'BlogPosting';
+  /** 1200x630 hero/share image path, e.g. /images/blog-[slug]-hero.webp. */
+  image?: string;
+  imageAlt?: string;
 }
 
-const { title, description, path, author, publishDate, updatedDate, hubLabel, hubHref, schemaType } = Astro.props;
+const { title, description, path, author, publishDate, updatedDate, hubLabel, hubHref, schemaType, image, imageAlt } =
+  Astro.props;
 const canonical = new URL(path, SITE.productionUrl).toString();
 
 const crumbs = [
@@ -54,6 +58,7 @@ const jsonLd = buildJsonLdGraph([
     dateModified: updatedDate ?? publishDate,
     authorName: author,
     type: schemaType,
+    image: image ? new URL(image, SITE.productionUrl).toString() : undefined,
   }),
   getBreadcrumbSchema(breadcrumbInput, canonical),
 ]);
@@ -67,6 +72,10 @@ const jsonLd = buildJsonLdGraph([
   jsonLd={jsonLd}
   publishedTime={publishDate}
   modifiedTime={updatedDate ?? publishDate}
+  ogImage={image}
+  ogImageAlt={imageAlt}
+  ogImageWidth={image ? 1200 : undefined}
+  ogImageHeight={image ? 630 : undefined}
 >
   <div class="container section-tight">
     <Breadcrumbs items={crumbs} />
@@ -78,6 +87,18 @@ const jsonLd = buildJsonLdGraph([
           {updatedDate && updatedDate !== publishDate && <> &middot; Updated {updatedDate}</>}
         </p>
       </header>
+      {
+        image && (
+          <img
+            class="article__hero"
+            src={image}
+            alt={imageAlt ?? title}
+            width="1200"
+            height="630"
+            loading="eager"
+          />
+        )
+      }
       <div class="article__body">
         <slot />
       </div>
@@ -93,6 +114,15 @@ const jsonLd = buildJsonLdGraph([
   .article__meta {
     color: var(--color-text-muted);
     font-size: 0.9rem;
+  }
+
+  .article__hero {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin: var(--space-4) 0 var(--space-5);
   }
 
   .article__body :global(h2) {

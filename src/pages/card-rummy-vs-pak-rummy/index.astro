@@ -1,0 +1,169 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FactTable from '@/components/FactTable.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { GAMES } from '@/config/games';
+import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const title = 'Card Rummy vs Pak Rummy: Which APK Can You Actually Verify? (2026)';
+const description =
+  "A side-by-side verification check — not a marketing comparison — between Card Rummy and Pak Rummy's own published APK, payment, and domain facts, with every unverified claim labelled.";
+const path = '/card-rummy-vs-pak-rummy/';
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Help', href: '/customer-service/' },
+  { name: 'Card Rummy vs Pak Rummy', href: path },
+];
+const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
+
+const researchDate = '2026-10-08';
+const verifiedGames = GAMES.filter((g) => g.verified);
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <h1>Card Rummy vs Pak Rummy</h1>
+      <p class="page-hero__summary">
+        If you found this page searching for "Card Rummy" or "Card Rummy download," here's what we
+        can actually verify about each app, side by side &mdash; and what's just a claim on someone's
+        own marketing page, including ours. We're not neutral, so we're not pretending to be: see
+        the disclosure below before you read the table.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container container-prose">
+      <Callout variant="warning" title="Who publishes this page">
+        <p>
+          PakRummyOfficial.com is run by the Pak Rummy team &mdash; see our
+          <a href="/about/">about page</a>. We are not affiliated with Card Rummy, have not
+          installed or tested its app ourselves, and have no commercial relationship with it. Every
+          Card Rummy fact below is cited to the domain it came from and checked on {researchDate};
+          none of it is independently verified by us the way our own figures are. Read our
+          <a href="/editorial-policy/">editorial policy</a> for what "verified" means on this site.
+        </p>
+      </Callout>
+
+      <h2>Verification scorecard</h2>
+      <p>
+        Both apps are real-money card-game APKs distributed outside the Google Play Store and
+        aimed at Pakistani players. That distribution model is exactly why file-level verification
+        matters more than marketing copy &mdash; so that's what this table compares.
+      </p>
+
+      <h3>Pak Rummy &mdash; what we've verified ourselves</h3>
+      <FactTable
+        caption="Pak Rummy, verified by PakRummyOfficial.com"
+        rows={[
+          { label: 'App name', fact: SITE.brandName },
+          { label: 'Current version', fact: SITE.appVersion },
+          { label: 'File size', fact: SITE.appFileSizeMb, formatter: (v: number) => `${v} MB` },
+          { label: 'Package name', fact: SITE.appPackageName },
+          { label: 'SHA-256 checksum published', fact: SITE.appSha256 },
+          { label: 'Minimum Android version', fact: SITE.appMinAndroidVersion },
+          { label: 'Payment methods confirmed by operator', fact: SITE.paymentMethods },
+          {
+            label: 'Current bonus confirmed by operator',
+            fact: SITE.currentBonus,
+            formatter: (v: { headline: string }) => v.headline,
+          },
+        ]}
+      />
+
+      <h3>Card Rummy &mdash; what's publicly claimed (not independently verified)</h3>
+      <FactTable
+        caption={`Card Rummy, per its own sites, checked ${researchDate}`}
+        rows={[
+          { label: 'App name', fact: 'Card Rummy' },
+          { label: 'Claimed version', fact: 'v1.231 — stated the same across the domains we checked' },
+          {
+            label: 'Claimed file size',
+            fact: '49 MB on cardrummyapp.com.pk vs 46.14 MB on cardrummy.app for the same stated version — the two figures don’t match',
+          },
+          { label: 'Package name published', fact: 'Not published on any Card Rummy domain we checked' },
+          { label: 'SHA-256 checksum published', fact: 'Not published on any Card Rummy domain we checked' },
+          { label: 'Minimum Android version', fact: 'Android 5.0+, per cardrummyapp.com.pk' },
+          {
+            label: 'Payment methods claimed',
+            fact: 'JazzCash, Easypaisa, bank card (stated max PKR 20,000/transaction), per cardrummyapp.com.pk',
+          },
+          {
+            label: 'Bonus claimed',
+            fact: '"100% recharge bonus" on first deposit, plus a stated 5–30% recharge rebate by VIP level, per cardrummyapp.com.pk',
+          },
+        ]}
+      />
+      <p class="fine-print">
+        Pak Rummy's payment methods and current bonus are also labelled "Not yet publicly
+        verified" above &mdash; that's not a gap we're hiding only on the competitor's side. See our
+        <a href="/bonuses/">bonus verification status</a> and
+        <a href="/easypaisa-jazzcash/">Easypaisa/JazzCash guidance</a> for why.
+      </p>
+
+      <h2>Why Card Rummy shows up on five different domains</h2>
+      <p>
+        Searching for Card Rummy surfaces at least five separate domains publishing near-identical
+        download pages for what claims to be the same app: cardrummyapp.com.pk, cardrummy.org.pk,
+        card-rummy.com.pk, cardrummyapp.com, and cardrummy.app. None of them discloses an operator
+        legal name or physical address &mdash; only a generic "eriocardrummy" developer label and a
+        contact form.
+      </p>
+      <p>
+        That pattern &mdash; the same app pushed through several competing domains with no consistent
+        operator identity &mdash; is precisely the red flag our own
+        <a href="/official-domains/">official domains guidance</a> tells you to watch for, whoever
+        the app is. The file-size mismatch above (49 MB vs 46.14 MB for "the same" version) is a
+        concrete example of what that inconsistency looks like once you actually check two of the
+        domains against each other instead of trusting the first one you land on.
+      </p>
+
+      <h2>Games offered</h2>
+      <p>
+        Pak Rummy's game list is confirmed directly from the app's own bundled module manifest, not
+        just its marketing copy &mdash; {verifiedGames.length} games, listed on our
+        <a href="/games/">games hub</a>: {verifiedGames.map((g) => g.name).join(', ')}.
+      </p>
+      <p>
+        Card Rummy's sites claim "30+ games" across multiplayer, skill, and slot categories,
+        including Rummy, Teen Patti, Dragon vs Tiger, Poker, and Mines &mdash; per cardrummyapp.com.pk.
+        We haven't tested the app to confirm that list reflects what's actually playable.
+      </p>
+
+      <h2>How to apply this checklist to either app yourself</h2>
+      <ol class="steps">
+        <li><strong>Check the source.</strong> A brand distributed across several competing domains with no consistent operator identity is a red flag on its own &mdash; see our <a href="/official-domains/">official domains guidance</a>.</li>
+        <li><strong>Verify the checksum.</strong> If the source publishes a SHA-256 hash, recompute it yourself from the downloaded file and confirm it matches exactly before installing.</li>
+        <li><strong>Scan the file.</strong> Upload it to a reputable multi-engine scanner before installing, not after.</li>
+        <li><strong>Review requested permissions</strong> against what's reasonable for a card-game app &mdash; see our <a href="/apk-permissions/">permissions guide</a>.</li>
+        <li><strong>Treat bonus and payment claims as marketing until you see them inside the app itself</strong> at registration and at your own deposit screen, regardless of which app it is.</li>
+      </ol>
+      <p>
+        Full walkthrough: our <a href="/safety/">APK safety checklist</a>.
+      </p>
+
+      <Callout variant="warning" title="Play responsibly">
+        <p>
+          Both apps described here are real-money games intended for adults 18 and older.
+          Verification status is not the same thing as a recommendation to play, and financial risk
+          applies regardless of which app checks out better on this page. See our
+          <a href="/responsible-gaming/">responsible gaming</a> page, and our
+          <a href="/legal-status/">legal status</a> page &mdash; this is not legal advice.
+        </p>
+      </Callout>
+
+      <div class="next-steps">
+        <h2>Next steps</h2>
+        <ul class="link-list">
+          <li><a href="/safety/">APK safety checklist</a></li>
+          <li><a href="/official-domains/">Official domains guidance</a></li>
+          <li><a href="/download/">Pak Rummy download status</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
