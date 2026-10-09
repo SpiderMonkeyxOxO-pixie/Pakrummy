@@ -1,7 +1,7 @@
 ---
 title: "How the Aviator Game Works: Multiplier and Cash-Out Explained"
 description: "A plain, non-hype explanation of how the Aviator crash game works: how the multiplier rises, when to cash out, and why the crash point can't be predicted."
-publishDate: "2026-10-08"
+publishDate: "2026-10-09"
 author: "PakRummyOfficial.com Editorial Team"
 category: "rules"
 image: "/images/blog-how-aviator-game-works-hero.webp"
