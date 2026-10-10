@@ -1,7 +1,7 @@
 ---
 title: "How Crash Games Work: The Multiplier Mechanic Explained"
 description: "How crash games actually work: the rising multiplier, what \"crash point\" means, why each round is independent, and how Aviator fits into the genre."
-publishDate: "2026-10-08"
+publishDate: "2026-10-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "rules"
 image: "/images/blog-how-crash-games-work-hero.webp"
