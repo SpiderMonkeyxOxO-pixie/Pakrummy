@@ -1,7 +1,7 @@
 ---
 title: "Easypaisa Withdrawal Charges: What to Expect"
 description: "How Easypaisa withdrawal charges typically work for mobile gaming and wallet apps in Pakistan, and what to check before you withdraw."
-publishDate: "2026-10-08"
+publishDate: "2026-10-12"
 author: "PakRummyOfficial.com Editorial Team"
 category: "payments"
 image: "/images/blog-easypaisa-withdrawal-charges-hero.webp"
