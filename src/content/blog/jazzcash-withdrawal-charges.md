@@ -1,7 +1,7 @@
 ---
 title: "JazzCash Withdrawal Charges: What to Expect"
 description: "How JazzCash withdrawal charges typically work for mobile gaming and wallet apps in Pakistan, and what to check before you confirm a withdrawal."
-publishDate: "2026-10-08"
+publishDate: "2026-10-13"
 author: "PakRummyOfficial.com Editorial Team"
 category: "payments"
 image: "/images/blog-jazzcash-withdrawal-charges-hero.webp"
