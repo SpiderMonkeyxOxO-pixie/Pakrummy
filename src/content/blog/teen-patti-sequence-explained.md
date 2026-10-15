@@ -1,7 +1,7 @@
 ---
 title: "Teen Patti Hand Sequence Explained (With Examples)"
 description: "Teen Patti hand sequence ranked from Trail to High Card, with worked examples for each — the exact order used to decide who wins a hand."
-publishDate: "2026-10-08"
+publishDate: "2026-10-15"
 author: "PakRummyOfficial.com Editorial Team"
 category: "rules"
 image: "/images/blog-teen-patti-sequence-explained-hero.webp"
