@@ -1,7 +1,7 @@
 ---
 title: "Teen Patti Variations: Muflis, AK-47, and Common Modes"
 description: "The most common Teen Patti variations explained: Muflis (lowest hand wins), AK-47, and other popular modes, and how they change standard play."
-publishDate: "2026-10-08"
+publishDate: "2026-10-16"
 author: "PakRummyOfficial.com Editorial Team"
 category: "rules"
 image: "/images/blog-teen-patti-variations-hero.webp"
