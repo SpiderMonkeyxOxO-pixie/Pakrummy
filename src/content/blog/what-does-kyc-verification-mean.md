@@ -1,7 +1,7 @@
 ---
 title: "What Does KYC Verification Mean for a Gaming App?"
 description: "KYC verification explained in plain terms: why real-money gaming apps require it, what documents are typically needed, and how it affects withdrawals."
-publishDate: "2026-10-08"
+publishDate: "2026-10-18"
 author: "PakRummyOfficial.com Editorial Team"
 category: "payments"
 image: "/images/blog-what-does-kyc-verification-mean-hero.webp"
