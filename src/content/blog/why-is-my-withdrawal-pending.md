@@ -1,7 +1,7 @@
 ---
 title: "Why Is My Withdrawal Pending? Common Reasons Explained"
 description: "The most common reasons a gaming app withdrawal shows as pending: verification delays, processing windows, and when to actually be concerned."
-publishDate: "2026-10-08"
+publishDate: "2026-10-19"
 author: "PakRummyOfficial.com Editorial Team"
 category: "payments"
 image: "/images/blog-why-is-my-withdrawal-pending-hero.webp"
