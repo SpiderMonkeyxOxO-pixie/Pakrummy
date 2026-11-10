@@ -39,9 +39,9 @@ Say you're dealt these 13 cards: 3♠ 4♠ 5♠ · 7♥ 8♥ 9♥ · 10♣ 10♦
 
 Two groups are already sitting in your hand: **3♠-4♠-5♠** (a pure sequence — three consecutive spades, no joker) and **7♥-8♥-9♥** (a second pure sequence). **10♣-10♦-10♠** is a complete set. That's three valid groups using 9 of your 13 cards, with the pure-sequence requirement already satisfied twice over.
 
-The remaining four cards — K♣, K♥, 2♦, and J♠ — don't connect to anything yet. Over the next few turns, you discard the 2♦ and J♠ since neither fits your existing groups or has a realistic path to one, and you draw toward completing K♣-K♥ into a set. When you draw a third King, or pick up a 6 (the wild joker) to substitute for one, K♣-K♥-[King or wild 6] becomes your fourth group.
+The remaining four cards — K♣, K♥, 2♦, and J♠ — don't connect to anything yet. Over the next few turns, you discard the 2♦ and J♠ since neither fits your existing groups or has a realistic path to one, drawing two replacement cards in their place: a 6♦ (that round's wild joker) completes K♣-K♥ into a three-card set, and a 10♥ extends your 7♥-8♥-9♥ sequence to four cards.
 
-Final declared hand: 3♠-4♠-5♠ (pure sequence) + 7♥-8♥-9♥ (pure sequence) + 10♣-10♦-10♠ (set) + K♣-K♥-6♦(wild) (set). That's 2 sequences + 2 sets, with two pure sequences — a clean, valid declaration.
+Final declared hand: 3♠-4♠-5♠ (pure sequence) + 7♥-8♥-9♥-10♥ (pure sequence) + 10♣-10♦-10♠ (set) + K♣-K♥-6♦(wild) (set) — 13 cards in total. That's 2 sequences + 2 sets, with two pure sequences — a clean, valid declaration.
 
 ## How scoring works once someone declares
 

@@ -21,6 +21,13 @@ const game = GAMES.find((g) => g.slug === 'rummy')!;
 <BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
   <section class="page-hero">
     <div class="container">
+      <img
+        src="/images/rummy-game-art.png"
+        alt="Rummy game artwork from the Pak Rummy app"
+        width="96"
+        height="96"
+        style="border-radius: var(--radius-md); margin-bottom: var(--space-4);"
+      />
       <Breadcrumbs items={crumbs} />
       <h1>Rummy on Pak Rummy</h1>
       <p class="page-hero__summary">
@@ -74,6 +81,8 @@ const game = GAMES.find((g) => g.slug === 'rummy')!;
       <div class="next-steps">
         <h2>Next steps</h2>
         <ul class="link-list">
+          <li><a href="/blog/13-card-rummy-rules-beginners-walkthrough/">13-card Rummy: a complete beginner's walkthrough</a></li>
+          <li><a href="/blog/rummy-strategy-fundamentals-for-beginners/">Five Rummy strategy fundamentals</a></li>
           <li><a href="/guides/rummy-scoring-explained/">Rummy scoring explained</a></li>
           <li><a href="/download/">Download status</a></li>
           <li><a href="/responsible-gaming/">Responsible gaming</a></li>
