@@ -27,7 +27,7 @@ PakRummyOfficial.com is run by the Pak Rummy team — see our [about page](/abou
 
 ## Why this category attracts scams
 
-Online earning apps are a recurring target for fraud in Pakistan specifically because the business model — deposit money, expect it back with more — depends entirely on trust that's easy to fake and hard to verify from outside. Pakistani media has documented real cases of this going wrong: reporting has covered apps like ITV Pakistan shutting down abruptly after collecting user deposits, leaving users unable to withdraw. That's not a hypothetical risk — it's a pattern that's actually happened, which is exactly why a checklist approach matters more than trusting a polished app icon or a confident tagline.
+Online earning apps are a recurring target for fraud in Pakistan specifically because the business model — deposit money, expect it back with more — depends entirely on trust that's easy to fake and hard to verify from outside. This isn't a hypothetical risk: apps disappearing after collecting user deposits, or restricting withdrawals once enough money has come in, is a documented pattern in this category, not an isolated incident — which is exactly why a checklist approach matters more than trusting a polished app icon or a confident tagline. We're deliberately not naming specific other apps as scams here without documented, verifiable evidence for each one — see our [editorial policy](/editorial-policy/) for why.
 
 ## The checklist
 

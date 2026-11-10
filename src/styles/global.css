@@ -88,6 +88,12 @@
   --status-verified: #10b981;
   --status-verified-bg: rgba(16, 185, 129, 0.14);
   --status-verified-border: rgba(16, 185, 129, 0.4);
+  /* A real, sourced fact (the operator told us) that we haven't independently
+     re-confirmed ourselves — distinct from both "verified" and "unverified". */
+  --status-operator: #5b9bd5;
+  --status-operator-bg: rgba(91, 155, 213, 0.14);
+  --status-operator-border: rgba(91, 155, 213, 0.4);
+  --color-badge-operator-text: #a9cdef;
   --status-pending: #f5b942;
   --status-pending-bg: rgba(245, 185, 66, 0.14);
   --status-pending-border: rgba(245, 185, 66, 0.4);
@@ -143,6 +149,7 @@
   --color-gold: #8a5c12;
   --color-gold-strong: #8a5c12;
   --color-badge-verified-text: #0a6b4a;
+  --color-badge-operator-text: #2a5d8a;
   background: var(--color-bg);
   color: var(--color-text);
 }
@@ -428,6 +435,12 @@ ol {
   background: var(--status-verified-bg);
 }
 
+.badge-operator-stated {
+  color: var(--color-badge-operator-text);
+  border-color: var(--status-operator-border);
+  background: var(--status-operator-bg);
+}
+
 .badge-unverified {
   color: var(--color-gold-strong);
   border-color: var(--status-pending-border);
@@ -468,6 +481,11 @@ ol {
 
 .chip-dot--unavailable {
   background: var(--status-unavailable);
+}
+
+.chip-dot--operator-stated {
+  background: var(--status-operator);
+  box-shadow: 0 0 6px rgba(91, 155, 213, 0.8);
 }
 
 .callout {

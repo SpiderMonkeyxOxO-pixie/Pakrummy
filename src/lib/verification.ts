@@ -1,13 +1,27 @@
 import type { Verified } from '@/config/site';
 
+/** Strictly "independently confirmed by us" — excludes operator-stated facts on purpose. */
 export function isVerifiedFact<T>(
   fact: Verified<T>
 ): fact is Verified<T> & { status: 'verified'; value: T } {
   return fact.status === 'verified' && fact.value !== null;
 }
 
+export function isOperatorStatedFact<T>(
+  fact: Verified<T>
+): fact is Verified<T> & { status: 'operator-stated'; value: T } {
+  return fact.status === 'operator-stated' && fact.value !== null;
+}
+
+/** True for any fact whose value we actually know — verified or operator-stated. */
+export function isKnownFact<T>(
+  fact: Verified<T>
+): fact is Verified<T> & { value: T } {
+  return (fact.status === 'verified' || fact.status === 'operator-stated') && fact.value !== null;
+}
+
 export function factText<T>(fact: Verified<T>, formatter?: (value: T) => string): string {
-  if (isVerifiedFact(fact)) {
+  if (isKnownFact(fact)) {
     return formatter ? formatter(fact.value) : String(fact.value);
   }
   return 'Not yet publicly verified';
@@ -19,6 +33,7 @@ export function isFactObject(value: unknown): value is Verified<unknown> {
     value !== null &&
     'status' in value &&
     ((value as Record<string, unknown>).status === 'verified' ||
+      (value as Record<string, unknown>).status === 'operator-stated' ||
       (value as Record<string, unknown>).status === 'unverified')
   );
 }
@@ -32,8 +47,10 @@ export function downloadCtaLabel(downloadUrl: Verified<string>): string {
   return isVerifiedFact(downloadUrl) ? 'Download Pak Rummy' : 'Check Download Status';
 }
 
-export type StatusTone = 'verified' | 'pending' | 'unavailable';
+export type StatusTone = 'verified' | 'operator-stated' | 'pending' | 'unavailable';
 
 export function factStatusTone(fact: Verified<unknown>): StatusTone {
-  return isVerifiedFact(fact) ? 'verified' : 'pending';
+  if (fact.status === 'verified') return 'verified';
+  if (fact.status === 'operator-stated') return 'operator-stated';
+  return 'pending';
 }

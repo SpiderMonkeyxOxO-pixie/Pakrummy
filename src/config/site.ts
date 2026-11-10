@@ -11,16 +11,32 @@
  */
 
 export interface Verified<T> {
-  status: 'verified' | 'unverified';
+  /**
+   * 'verified': independently confirmed by us against a primary source (a
+   * file we tested ourselves, a URL we checked resolves, etc).
+   * 'operator-stated': we know the value because the operator told us —
+   * genuinely a real fact, not a guess — but we have not independently
+   * re-confirmed it ourselves. Distinct from 'verified' on purpose: don't
+   * relabel an operator-stated fact as 'verified' just because we trust the
+   * source, and don't relabel a 'verified' fact as 'operator-stated' just to
+   * be falsely modest — pick the one that's actually true.
+   * 'unverified': we don't know, or haven't confirmed, at all.
+   */
+  status: 'verified' | 'operator-stated' | 'unverified';
   value: T | null;
-  /** ISO date the fact was last confirmed. Required when status is 'verified'. */
+  /** ISO date the fact was last confirmed or stated. Required unless status is 'unverified'. */
   verifiedOn?: string;
-  /** Where/how it was verified, or why it's still pending. */
+  /** Where/how it was verified or stated, or why it's still pending. */
   note?: string;
 }
 
 export function verified<T>(value: T, verifiedOn: string, note?: string): Verified<T> {
   return { status: 'verified', value, verifiedOn, note };
+}
+
+/** Use when a fact comes only from the operator's own word, with no independent re-confirmation by us. */
+export function operatorStated<T>(value: T, statedOn: string, note?: string): Verified<T> {
+  return { status: 'operator-stated', value, verifiedOn: statedOn, note };
 }
 
 export function unverified<T>(note?: string): Verified<T> {
@@ -60,10 +76,10 @@ export const SITE = {
   operatorLegalName: unverified<string>(
     'No verifiable corporate/legal entity name has been published by the operator.'
   ),
-  operatorSupportEmail: verified<string>(
+  operatorSupportEmail: operatorStated<string>(
     'Support@pakrummy.com',
     '2026-08-17',
-    "Supplied directly by the Pak Rummy team. We haven't independently tested response time or whether a human consistently monitors it — only that this is the address the operator gave us."
+    "Supplied directly by the Pak Rummy team. We haven't independently tested that this address works, that it reaches a human, or how quickly — this is the address the operator gave us, nothing more."
   ),
   operatorSupportChatUrl: verified<string>(
     'https://chat.ssrchat.com/service/gv3a8c',
@@ -133,10 +149,10 @@ export const SITE = {
   maxDepositPkr: unverified<number>(),
   minWithdrawalPkr: unverified<number>(),
   maxWithdrawalPkr: unverified<number>(),
-  withdrawalProcessingTime: verified<string>(
+  withdrawalProcessingTime: operatorStated<string>(
     '5–10 minutes',
     '2026-10-04',
-    'Typical time stated by the Pak Rummy team. Actual time can be longer if identity verification is pending.'
+    "Typical time stated by the Pak Rummy team — we haven't independently timed a withdrawal ourselves. Actual time can be longer if identity verification is pending."
   ),
 
   responsibleGamingContact: unverified<{ label: string; value: string }>(

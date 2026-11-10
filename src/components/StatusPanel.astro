@@ -1,13 +1,13 @@
 ---
 import { SITE } from '@/config/site';
-import { isVerifiedFact, factText } from '@/lib/verification';
+import { isVerifiedFact, factText, factStatusTone, type StatusTone } from '@/lib/verification';
 
 const checksumOk = isVerifiedFact(SITE.appSha256) && isVerifiedFact(SITE.appLastScanDate);
 
 interface StatusItem {
   label: string;
   value: string;
-  verified: boolean;
+  tone: StatusTone;
   icon: string;
 }
 
@@ -15,37 +15,37 @@ const items: StatusItem[] = [
   {
     label: 'Current version',
     value: factText(SITE.appVersion),
-    verified: isVerifiedFact(SITE.appVersion),
+    tone: factStatusTone(SITE.appVersion),
     icon: 'tag',
   },
   {
     label: 'Last checked',
     value: factText(SITE.appLastVerifiedDate),
-    verified: isVerifiedFact(SITE.appLastVerifiedDate),
+    tone: factStatusTone(SITE.appLastVerifiedDate),
     icon: 'clock',
   },
   {
     label: 'Android requirement',
     value: factText(SITE.appMinAndroidVersion),
-    verified: isVerifiedFact(SITE.appMinAndroidVersion),
+    tone: factStatusTone(SITE.appMinAndroidVersion),
     icon: 'android',
   },
   {
     label: 'Download availability',
     value: isVerifiedFact(SITE.officialDownloadUrl) ? 'Available (self-hosted)' : 'Not yet publicly verified',
-    verified: isVerifiedFact(SITE.officialDownloadUrl),
+    tone: factStatusTone(SITE.officialDownloadUrl),
     icon: 'download',
   },
   {
     label: 'Official support',
     value: factText(SITE.operatorSupportEmail),
-    verified: isVerifiedFact(SITE.operatorSupportEmail),
+    tone: factStatusTone(SITE.operatorSupportEmail),
     icon: 'support',
   },
   {
     label: 'Source & checksum',
     value: checksumOk ? 'Verified by us (self-hosted file)' : 'Not yet publicly verified',
-    verified: checksumOk,
+    tone: checksumOk ? 'verified' : 'pending',
     icon: 'shield',
   },
 ];
@@ -68,7 +68,7 @@ const icons: Record<string, string> = {
   <div class="status-panel__grid">
     {
       items.map((item) => (
-        <div class={`status-item status-item--${item.verified ? 'verified' : 'pending'}`}>
+        <div class={`status-item status-item--${item.tone}`}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
             <path d={icons[item.icon]} stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -76,7 +76,7 @@ const icons: Record<string, string> = {
             <span class="status-item__label">{item.label}</span>
             <span class="status-item__value">{item.value}</span>
           </div>
-          <span class={`status-item__dot status-item__dot--${item.verified ? 'verified' : 'pending'}`} />
+          <span class={`status-item__dot status-item__dot--${item.tone}`} />
         </div>
       ))
     }
@@ -136,6 +136,10 @@ const icons: Record<string, string> = {
     border-color: var(--status-verified-border);
   }
 
+  .status-item--operator-stated {
+    border-color: var(--status-operator-border);
+  }
+
   .status-item--pending {
     border-color: var(--status-pending-border);
   }
@@ -148,6 +152,10 @@ const icons: Record<string, string> = {
 
   .status-item--verified svg {
     color: var(--status-verified);
+  }
+
+  .status-item--operator-stated svg {
+    color: var(--status-operator);
   }
 
   .status-item--pending svg {
@@ -183,6 +191,11 @@ const icons: Record<string, string> = {
   .status-item__dot--verified {
     background: var(--status-verified);
     box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+  }
+
+  .status-item__dot--operator-stated {
+    background: var(--status-operator);
+    box-shadow: 0 0 6px rgba(91, 155, 213, 0.8);
   }
 
   .status-item__dot--pending {

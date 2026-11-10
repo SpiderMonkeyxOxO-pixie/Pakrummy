@@ -17,7 +17,7 @@ relatedLinks:
 
 ## Direct answer
 
-If you suspect online fraud in Pakistan, there are two separate tracks worth pursuing: report the crime itself to the National Cyber Crime Investigation Agency (NCCIA) — the agency that took over this function from the FIA's former Cyber Crime Wing / NR3C in 2024 — and separately pursue the money through your bank or wallet's own dispute process, since a criminal report and a financial recovery are not the same thing.
+If you suspect online fraud in Pakistan, there are two separate tracks worth pursuing: report the crime itself to the National Cyber Crime Investigation Agency (NCCIA) — the agency that took over cybercrime complaint-handling from the FIA's former Cyber Crime Wing in 2024 — and separately pursue the money through your bank or wallet's own dispute process, since a criminal report and a financial recovery are not the same thing.
 
 ## Two different problems, two different paths
 
@@ -30,7 +30,7 @@ Pursuing both, rather than just one, gives you the best realistic chance at both
 
 ## Reporting the crime
 
-The agency responsible for cybercrime complaints in Pakistan changed in 2024: the FIA's Cyber Crime Wing and the National Response Centre for Cyber Crime (NR3C) were merged into the **National Cyber Crime Investigation Agency (NCCIA)**. We're not going to publish a specific phone number or web form link here, because we found genuinely conflicting figures across different sources while researching this piece, and this site doesn't publish a number we can't personally confirm is current. Search for "NCCIA" (or, if that doesn't turn up a live official page by the time you're reading this, the FIA's own site) to find their current official contact details directly, rather than trusting a number from an older blog post — ours included, if enough time has passed.
+The agency responsible for cybercrime complaints in Pakistan changed in 2024: the FIA's Cyber Crime Wing became defunct and the **National Cyber Crime Investigation Agency (NCCIA)** took over its function, confirmed by [Arab News Pakistan's coverage of the handover](https://www.arabnews.pk/node/2528156). We're not going to publish a specific phone number or web form link here, because we found genuinely conflicting figures across different sources while researching this piece, and this site doesn't publish a number we can't personally confirm is current. Search for "NCCIA" (or, if that doesn't turn up a live official page by the time you're reading this, the FIA's own site) to find their current official contact details directly, rather than trusting a number from an older blog post — ours included, if enough time has passed.
 
 ## Recovering the money
 

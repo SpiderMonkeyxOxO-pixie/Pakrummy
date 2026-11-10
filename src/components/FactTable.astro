@@ -1,6 +1,6 @@
 ---
 import type { Verified } from '@/config/site';
-import { isVerifiedFact, factText, isFactObject } from '@/lib/verification';
+import { factText, isFactObject, factStatusTone, type StatusTone } from '@/lib/verification';
 
 interface FactRow {
   label: string;
@@ -15,17 +15,24 @@ interface Props {
 
 const { caption, rows } = Astro.props;
 
+const badgeLabel: Record<StatusTone, string> = {
+  verified: 'Verified',
+  'operator-stated': 'Operator-stated',
+  pending: 'Unverified',
+  unavailable: 'Unverified',
+};
+
 interface PreparedRow {
   label: string;
   displayValue: string;
   isFact: boolean;
-  isVerified: boolean;
+  tone: StatusTone;
 }
 
 const preparedRows: PreparedRow[] = rows.map((row: FactRow) => {
   const factIsObject = isFactObject(row.fact);
   if (!factIsObject) {
-    return { label: row.label, displayValue: row.fact as string, isFact: false, isVerified: true };
+    return { label: row.label, displayValue: row.fact as string, isFact: false, tone: 'verified' };
   }
   const fact = row.fact as Verified<unknown>;
   const formatter = row.formatter as ((v: unknown) => string) | undefined;
@@ -33,7 +40,7 @@ const preparedRows: PreparedRow[] = rows.map((row: FactRow) => {
     label: row.label,
     displayValue: factText(fact, formatter),
     isFact: true,
-    isVerified: isVerifiedFact(fact),
+    tone: factStatusTone(fact),
   };
 });
 ---
@@ -49,8 +56,8 @@ const preparedRows: PreparedRow[] = rows.map((row: FactRow) => {
             <td>
               <span>{row.displayValue}</span>
               {row.isFact && (
-                <span class={`badge ${row.isVerified ? 'badge-verified' : 'badge-unverified'}`}>
-                  {row.isVerified ? 'Verified' : 'Unverified'}
+                <span class={`badge badge-${row.tone === 'unavailable' ? 'unverified' : row.tone}`}>
+                  {badgeLabel[row.tone]}
                 </span>
               )}
             </td>

@@ -40,7 +40,7 @@ This is the mechanic that trips up most new players. A **blind** player keeps th
 | 5 | **Pair** | 9-9-4 |
 | 6 | **High Card** | No pair, sequence, or color — compare the highest card |
 
-Aces rank highest in a Trail (A-A-A beats K-K-K), but lowest when used at the bottom of a sequence (A-2-3). If two players both hold the same hand type, the one with the higher-ranking cards wins.
+Aces rank highest in a Trail (A-A-A beats K-K-K), but lowest when used at the bottom of a sequence (A-2-3). If two players both hold the same hand type, the one with the higher-ranking cards wins. This is the standard ranking order used across the traditional game — see [Wikipedia's entry on Teen Patti](https://en.wikipedia.org/wiki/Teen_Patti) for its broader history and regional context.
 
 ## Betting actions
 

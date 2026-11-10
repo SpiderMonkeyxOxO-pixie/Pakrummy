@@ -32,7 +32,7 @@ Poker is a card game where players bet on who holds the best five-card hand, fro
 | 9 | **One Pair** | 10-10-3-6-K |
 | 10 | **High Card** | No pair or sequence — highest card wins |
 
-When two hands are the same type, the one with the higher-ranking cards wins the comparison.
+When two hands are the same type, the one with the higher-ranking cards wins the comparison. This ranking order is the standard used across virtually all poker variants — see [Wikipedia's list of poker hands](https://en.wikipedia.org/wiki/List_of_poker_hands) if you want to cross-check it against another source.
 
 ## Basic betting actions
 
