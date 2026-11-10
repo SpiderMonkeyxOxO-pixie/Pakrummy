@@ -4,6 +4,8 @@ description: "Why this site exists, what it verifies today, and what's still pen
 publishDate: "2026-08-17"
 category: "site"
 verified: true
+image: "/images/update-site-launch-hero.webp"
+imageAlt: "A checklist icon beside a launch/rocket icon on a dark green background"
 ---
 
 ## What changed

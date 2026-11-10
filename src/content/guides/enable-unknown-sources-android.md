@@ -4,6 +4,8 @@ description: "Step-by-step, version-aware instructions for allowing APK installs
 publishDate: "2026-08-17"
 author: "PakRummyOfficial.com Editorial Team"
 category: "install"
+image: "/images/guide-enable-unknown-sources-android-hero.webp"
+imageAlt: "An Android settings screen with a toggle switch for installing unknown apps"
 relatedLinks:
   - label: "Install the Pak Rummy app"
     href: "/install/"

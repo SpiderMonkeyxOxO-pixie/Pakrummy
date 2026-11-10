@@ -4,6 +4,8 @@ description: "How card values, deadwood, and points work across the three most c
 publishDate: "2026-08-17"
 author: "PakRummyOfficial.com Editorial Team"
 category: "games"
+image: "/images/guide-rummy-scoring-explained-hero.webp"
+imageAlt: "A scorepad and pencil beside a hand of playing cards"
 relatedLinks:
   - label: "Rummy on the Pak Rummy app"
     href: "/games/rummy/"

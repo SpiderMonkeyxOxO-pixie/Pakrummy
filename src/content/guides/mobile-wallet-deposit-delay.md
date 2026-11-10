@@ -4,6 +4,8 @@ description: "General troubleshooting steps for a delayed Easypaisa or JazzCash 
 publishDate: "2026-08-17"
 author: "PakRummyOfficial.com Editorial Team"
 category: "payments"
+image: "/images/guide-mobile-wallet-deposit-delay-hero.webp"
+imageAlt: "A smartphone showing a loading spinner over a mobile wallet payment screen"
 relatedLinks:
   - label: "Easypaisa and JazzCash overview"
     href: "/easypaisa-jazzcash/"

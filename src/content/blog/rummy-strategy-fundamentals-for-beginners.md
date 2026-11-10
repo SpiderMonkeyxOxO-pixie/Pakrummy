@@ -4,6 +4,8 @@ description: "General 13-card Rummy strategy — sequence priority, deadwood dis
 publishDate: "2026-08-21"
 author: "PakRummyOfficial.com Editorial Team"
 category: "strategy"
+image: "/images/blog-rummy-strategy-fundamentals-for-beginners-hero.webp"
+imageAlt: "Playing cards fanned out in a player's hand above a rummy table"
 relatedLinks:
   - label: "Rummy scoring explained"
     href: "/guides/rummy-scoring-explained/"
