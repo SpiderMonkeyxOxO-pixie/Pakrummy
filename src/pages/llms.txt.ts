@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
 import { SITE } from '@/config/site';
 import { VERIFIED_GAMES } from '@/config/games';
 
@@ -8,8 +9,22 @@ function abs(path: string): string {
   return new URL(path, SITE.productionUrl).toString();
 }
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
   const lines: string[] = [];
+
+  const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+    (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+  );
+  const blog = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+  );
+  const updates = (await getCollection('updates')).sort(
+    (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+  );
+  const mostRecentDate = [...guides, ...blog, ...updates]
+    .map((entry) => entry.data.publishDate)
+    .sort()
+    .at(-1);
 
   // --- Title + summary blockquote -----------------------------------
   lines.push(`# ${SITE.siteName}`);
@@ -34,6 +49,7 @@ export const GET: APIRoute = () => {
   lines.push(`- [Install](${abs('/install/')}): Step-by-step Android installation walkthrough.`);
   lines.push(`- [Safety](${abs('/safety/')}): How to verify an APK yourself, and our current verification status.`);
   lines.push(`- [Official Domains](${abs('/official-domains/')}): How we check a domain before trusting it; impersonation red flags.`);
+  lines.push(`- [Card Rummy vs Pak Rummy](${abs('/card-rummy-vs-pak-rummy/')}): A worked comparison used as an impersonation-detection example.`);
   lines.push(`- [Games](${abs('/games/')}): Every game confirmed available on the app, checked against its own bundled module list.`);
   lines.push(`- [Bonuses](${abs('/bonuses/')}): Current promotion status and how we evaluate bonus terms.`);
   lines.push(`- [Customer Service](${abs('/customer-service/')}): Verified operator support email and live-chat channels.`);
@@ -45,14 +61,26 @@ export const GET: APIRoute = () => {
   lines.push(`- [All Guides](${abs('/guides/')}): Long-form how-to and troubleshooting articles.`);
   lines.push(`- [Registration and Login](${abs('/register-login/')}): General account setup and sign-in flow.`);
   lines.push(`- [Account Verification](${abs('/account-verification/')}): What identity verification (KYC) typically involves.`);
-  lines.push(`- [Deposit Guide](${abs('/deposit/')}): How deposits generally work; current verified payment facts.`);
-  lines.push(`- [Withdrawal Guide](${abs('/withdrawal/')}): How withdrawals generally work; current verified limits.`);
+  lines.push(`- [Deposit Guide](${abs('/deposit/')}): How deposits generally work; current verification status for payment methods and limits.`);
+  lines.push(`- [Withdrawal Guide](${abs('/withdrawal/')}): How withdrawals generally work; current verification status for limits and processing time.`);
   lines.push(`- [Easypaisa and JazzCash](${abs('/easypaisa-jazzcash/')}): Mobile-wallet payment guidance for Pakistan.`);
   lines.push(`- [Common App Errors](${abs('/common-errors/')}): Fixes for the most frequent install/login errors.`);
   lines.push(`- [APK Permissions](${abs('/apk-permissions/')}): Which Android permissions are reasonable, and which are red flags.`);
-  lines.push(`- [Blog](${abs('/blog/')}): Rummy strategy, Pakistan mobile gaming context, and responsible-gaming reading.`);
+  for (const guide of guides) {
+    lines.push(`- [${guide.data.title}](${abs(`/guides/${guide.slug}/`)}): ${guide.data.description}`);
+  }
   for (const game of VERIFIED_GAMES) {
     lines.push(`- [${game.name}](${abs(`/games/${game.slug}/`)}): Rules and format for ${game.name} on Pak Rummy.`);
+  }
+  lines.push('');
+
+  // --- Blog Posts --------------------------------------------------------
+  lines.push('## Blog Posts');
+  lines.push('');
+  lines.push(`[Blog index](${abs('/blog/')}): Rummy strategy, Pakistan mobile gaming context, and responsible-gaming reading.`);
+  lines.push('');
+  for (const post of blog) {
+    lines.push(`- [${post.data.title}](${abs(`/blog/${post.slug}/`)}): ${post.data.description}`);
   }
   lines.push('');
 
@@ -77,6 +105,9 @@ export const GET: APIRoute = () => {
   lines.push('## Optional');
   lines.push('');
   lines.push(`- [Updates Log](${abs('/updates/')}): Dated log of verified changes to the app and this site.`);
+  for (const entry of updates) {
+    lines.push(`  - [${entry.data.title}](${abs(`/updates/${entry.slug}/`)})`);
+  }
   lines.push(`- [Promo Code](${abs('/promo-code/')}): How to evaluate a promo code; current status.`);
   lines.push(`- [Complaints](${abs('/complaints/')}): Dispute process and how to report a suspected fake site.`);
   lines.push(`- [Account Deletion](${abs('/account-deletion/')})`);
@@ -84,7 +115,7 @@ export const GET: APIRoute = () => {
   lines.push(`- [HTML Sitemap](${abs('/sitemap/')})`);
   lines.push('');
 
-  lines.push(`Last updated: 2026-08-17`);
+  lines.push(`Last updated: ${mostRecentDate ?? new Date().toISOString().slice(0, 10)}`);
 
   return new Response(lines.join('\n') + '\n', {
     headers: {

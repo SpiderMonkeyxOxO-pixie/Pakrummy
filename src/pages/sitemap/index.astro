@@ -15,6 +15,7 @@ const crumbs = [
 const jsonLd = buildStandardPageSchema({ title, description, path, crumbs, type: 'CollectionPage' });
 
 const guides = await getCollection('guides', ({ data }) => !data.draft);
+const blog = await getCollection('blog', ({ data }) => !data.draft);
 const updates = await getCollection('updates');
 ---
 
@@ -47,6 +48,13 @@ const updates = await getCollection('updates');
           <h2>Guide articles</h2>
           <ul>
             {guides.map((g) => <li><a href={`/guides/${g.slug}/`}>{g.data.title}</a></li>)}
+          </ul>
+        </div>
+
+        <div>
+          <h2>Blog posts</h2>
+          <ul>
+            {blog.map((b) => <li><a href={`/blog/${b.slug}/`}>{b.data.title}</a></li>)}
           </ul>
         </div>
 

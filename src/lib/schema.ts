@@ -4,6 +4,13 @@ const WEBSITE_ID = `${SITE.productionUrl}/#website`;
 const ORGANIZATION_ID = `${SITE.productionUrl}/#publisher`;
 
 /**
+ * Every article on this site is bylined collectively (see /authors/) — there
+ * are no individual contributor profiles. Asserting that byline as a
+ * schema.org Person would be a factual claim this site can't back up.
+ */
+const EDITORIAL_TEAM_BYLINE = 'PakRummyOfficial.com Editorial Team';
+
+/**
  * The only Organization we can honestly assert is the publisher of this
  * website — not the game operator, whose legal identity is unverified.
  * See SITE.positioning and docs/required-verification.md.
@@ -115,10 +122,10 @@ export function getArticleSchema(input: ArticleSchemaInput) {
     dateModified: input.dateModified,
     inLanguage: SITE.language,
     publisher: { '@id': ORGANIZATION_ID },
-    author: {
-      '@type': 'Person',
-      name: input.authorName,
-    },
+    author:
+      input.authorName === EDITORIAL_TEAM_BYLINE
+        ? { '@id': ORGANIZATION_ID }
+        : { '@type': 'Person', name: input.authorName },
     mainEntityOfPage: { '@id': `${input.url}#webpage` },
   };
   if (input.image) schema.image = input.image;
@@ -150,8 +157,15 @@ export function getPersonSchema(input: PersonSchemaInput) {
  * SoftwareApplication graph is worse than none, per docs/schema-inventory.md.
  */
 export function getSoftwareApplicationSchema() {
-  const { officialDownloadUrl, appVersion, appPackageName, appFileSizeMb, appLastVerifiedDate } =
-    SITE;
+  const {
+    officialDownloadUrl,
+    appVersion,
+    appPackageName,
+    appFileSizeMb,
+    appLastVerifiedDate,
+    appSha256,
+    appPermissionsSummary,
+  } = SITE;
 
   if (
     officialDownloadUrl.status !== 'verified' ||
@@ -177,6 +191,28 @@ export function getSoftwareApplicationSchema() {
   }
   if (appLastVerifiedDate.status === 'verified') {
     schema.datePublished = appLastVerifiedDate.value;
+  }
+
+  // Machine-queryable mirror of the facts shown in the page's HTML fact
+  // table — without this, an agent reading only structured data can't
+  // recover the checksum or permissions list to verify the file itself.
+  const additionalProperty: Array<Record<string, unknown>> = [];
+  if (appSha256.status === 'verified') {
+    additionalProperty.push({
+      '@type': 'PropertyValue',
+      name: 'sha256',
+      value: appSha256.value,
+    });
+  }
+  if (appPermissionsSummary.status === 'verified') {
+    additionalProperty.push({
+      '@type': 'PropertyValue',
+      name: 'androidPermissions',
+      value: (appPermissionsSummary.value as string[]).join(', '),
+    });
+  }
+  if (additionalProperty.length) {
+    schema.additionalProperty = additionalProperty;
   }
 
   return schema;
