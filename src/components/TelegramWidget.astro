@@ -53,6 +53,18 @@ const telegram = isVerifiedFact(SITE.operatorSocialProfiles)
     box-shadow: 0 14px 30px rgba(1, 8, 6, 0.5), 0 0 0 1px rgba(247, 248, 243, 0.25);
   }
 
+  /* Smaller footprint on short/narrow viewports, where the fixed-position
+     widget is more likely to sit over hero content that hasn't scrolled
+     out of view yet (e.g. the version trust badge in the hero chip row). */
+  @media (max-width: 480px) {
+    .telegram-widget {
+      width: 48px;
+      height: 48px;
+      right: max(var(--space-3), env(safe-area-inset-right));
+      bottom: max(var(--space-3), env(safe-area-inset-bottom));
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .telegram-widget:hover {
       transform: none;

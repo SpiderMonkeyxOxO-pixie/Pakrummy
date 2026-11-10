@@ -22,6 +22,14 @@ export function getOrganizationSchema() {
     name: SITE.publisherName,
     url: SITE.productionUrl,
     description: SITE.positioning,
+    // The publication's own icon, already used site-wide (header, favicon,
+    // default OG image) — not a claim about owning the Pak Rummy app itself.
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/images/og-default.png', SITE.productionUrl).toString(),
+      width: 400,
+      height: 400,
+    },
   };
 }
 

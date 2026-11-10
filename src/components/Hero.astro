@@ -252,4 +252,19 @@ const downloadVerified = isVerifiedFact(SITE.officialDownloadUrl);
       grid-template-columns: 1.1fr 0.9fr;
     }
   }
+
+  /* Below the 900px breakpoint, .hero__visual sits inside the centered
+     .container rather than spanning the full .hero width — the float
+     cards' desktop negative-percentage offsets (tuned for that wider,
+     full-bleed layout) can push them past .hero's overflow:hidden edge
+     on narrower viewports like tablet width. Keep them fully inset here. */
+  @media (max-width: 899px) {
+    .hero__float-card--1 {
+      left: 2%;
+    }
+
+    .hero__float-card--2 {
+      right: 2%;
+    }
+  }
 </style>

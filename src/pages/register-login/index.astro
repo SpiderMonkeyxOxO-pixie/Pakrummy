@@ -1,7 +1,13 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTAButton from '@/components/CTAButton.astro';
+import Callout from '@/components/Callout.astro';
+import { SITE } from '@/config/site';
+import { downloadCtaLabel } from '@/lib/verification';
 import { buildStandardPageSchema } from '@/lib/pageSchema';
+
+const ctaLabel = downloadCtaLabel(SITE.officialDownloadUrl);
 
 const title = 'Pak Rummy Registration and Login Guide | Pak Rummy Official';
 const description =
@@ -30,6 +36,15 @@ const jsonLd = buildStandardPageSchema({ title, description, path, crumbs });
 
   <section class="section-tight">
     <div class="container container-prose">
+      <Callout title="Registration and login happen inside the app, not on this website">
+        <p>
+          This page explains the general process — there's no web-based login or registration
+          form here. If you haven't installed the app yet, that's the actual first step before
+          anything below applies to you.
+        </p>
+      </Callout>
+      <CTAButton href="/download/" label={ctaLabel} variant="primary" />
+
       <h2>Typical registration steps</h2>
       <ol class="steps">
         <li>Open the app after installing it — see our <a href="/install/">install guide</a> if you haven't yet.</li>
