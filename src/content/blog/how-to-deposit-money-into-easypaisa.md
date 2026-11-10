@@ -7,6 +7,8 @@ category: "payments"
 image: "/images/blog-how-to-deposit-money-into-easypaisa-hero.webp"
 imageAlt: "A smartphone with an upward arrow and coins moving toward a wallet icon on a dark green background"
 relatedLinks:
+  - label: "How to deposit money into JazzCash"
+    href: "/blog/how-to-deposit-money-into-jazzcash/"
   - label: "Easypaisa and JazzCash on Pak Rummy"
     href: "/easypaisa-jazzcash/"
   - label: "Deposit guide"
