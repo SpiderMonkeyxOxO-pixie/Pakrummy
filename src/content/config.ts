@@ -9,6 +9,8 @@ const guides = defineCollection({
     updatedDate: z.string().optional(),
     author: z.string(),
     category: z.enum(['install', 'account', 'payments', 'games', 'troubleshooting']),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
     relatedLinks: z
       .array(
         z.object({
@@ -55,6 +57,8 @@ const updates = defineCollection({
     category: z.enum(['site', 'app-version', 'content', 'policy']),
     /** True only when the change itself was confirmed against a primary source. */
     verified: z.boolean().default(false),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
   }),
 });
 

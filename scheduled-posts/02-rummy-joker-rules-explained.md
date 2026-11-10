@@ -4,6 +4,8 @@ description: "How jokers work in 13-card Rummy: the difference between printed j
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "rules"
+image: "/images/blog-rummy-joker-rules-explained-hero.webp"
+imageAlt: "A joker playing card standing out among a fanned hand of ordinary cards"
 relatedLinks:
   - label: "13-card Rummy rules: a complete beginner's walkthrough"
     href: "/blog/13-card-rummy-rules-beginners-walkthrough/"

@@ -4,6 +4,8 @@ description: "A practical method for setting a real-money gaming budget before y
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "responsible-gaming"
+image: "/images/blog-how-to-set-a-gaming-budget-hero.webp"
+imageAlt: "A small notebook with a budget written on it beside a smartphone and coins"
 relatedLinks:
   - label: "Responsible gaming"
     href: "/responsible-gaming/"

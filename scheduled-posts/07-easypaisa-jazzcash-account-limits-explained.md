@@ -4,6 +4,8 @@ description: "Why mobile wallet transaction and balance limits depend on your ac
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "payments"
+image: "/images/blog-easypaisa-jazzcash-account-limits-explained-hero.webp"
+imageAlt: "A smartphone wallet screen showing a balance limit gauge"
 relatedLinks:
   - label: "Easypaisa and JazzCash on Pak Rummy"
     href: "/easypaisa-jazzcash/"

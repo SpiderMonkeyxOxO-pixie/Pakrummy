@@ -4,6 +4,8 @@ description: "A step-by-step guide to depositing money into your JazzCash accoun
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "payments"
+image: "/images/blog-how-to-deposit-money-into-jazzcash-hero.webp"
+imageAlt: "A smartphone with an upward arrow and coins moving toward a wallet icon on a dark green background"
 relatedLinks:
   - label: "How to deposit money into Easypaisa"
     href: "/blog/how-to-deposit-money-into-easypaisa/"

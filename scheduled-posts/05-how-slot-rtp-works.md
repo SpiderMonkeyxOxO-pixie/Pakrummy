@@ -4,6 +4,8 @@ description: "What Return to Player (RTP) actually means for slot games, how it 
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "rules"
+image: "/images/blog-how-slot-rtp-works-hero.webp"
+imageAlt: "Three slot machine reels with fruit symbols on a dark green background"
 relatedLinks:
   - label: "Slots on Pak Rummy"
     href: "/games/slots/"

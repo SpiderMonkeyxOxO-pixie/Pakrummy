@@ -4,6 +4,8 @@ description: "Where to report a suspected online scam or fake app in Pakistan, w
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "pakistan"
+image: "/images/blog-how-to-report-fraud-in-pakistan-hero.webp"
+imageAlt: "A shield icon beside a smartphone on a dark green background, representing fraud reporting"
 relatedLinks:
   - label: "How to tell if an online earning app in Pakistan is legit"
     href: "/blog/is-this-online-earning-app-in-pakistan-legit/"

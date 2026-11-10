@@ -4,6 +4,8 @@ description: "Why Android shows a Play Protect warning when installing an APK fr
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "pakistan"
+image: "/images/blog-what-does-the-play-protect-warning-mean-hero.webp"
+imageAlt: "An Android Play Protect shield icon beside a smartphone installation screen"
 relatedLinks:
   - label: "APK safety checklist"
     href: "/safety/"

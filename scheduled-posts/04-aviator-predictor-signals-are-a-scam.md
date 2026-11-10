@@ -4,6 +4,8 @@ description: "Why Aviator predictor apps, hack tools, and paid signal groups can
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "industry"
+image: "/images/blog-aviator-predictor-signals-are-a-scam-hero.webp"
+imageAlt: "A smartphone showing a fake prediction chart with a red warning symbol overlaid"
 relatedLinks:
   - label: "How the Aviator game works"
     href: "/blog/how-aviator-game-works/"

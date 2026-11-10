@@ -4,6 +4,8 @@ description: "How Easypaisa and JazzCash compare on network backing, agent reach
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "payments"
+image: "/images/blog-easypaisa-vs-jazzcash-comparison-hero.webp"
+imageAlt: "The Easypaisa and JazzCash logos side by side on a dark green background"
 relatedLinks:
   - label: "Easypaisa and JazzCash on Pak Rummy"
     href: "/easypaisa-jazzcash/"

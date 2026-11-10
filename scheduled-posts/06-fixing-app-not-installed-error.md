@@ -4,6 +4,8 @@ description: "The real causes behind Android's \"App not installed\" error when 
 publishDate: "2026-11-10"
 author: "PakRummyOfficial.com Editorial Team"
 category: "pakistan"
+image: "/images/blog-fixing-app-not-installed-error-hero.webp"
+imageAlt: "A smartphone showing an Android installation error dialog"
 relatedLinks:
   - label: "Common app errors"
     href: "/common-errors/"
