@@ -7,6 +7,8 @@ category: "payments"
 image: "/images/blog-easypaisa-withdrawal-charges-hero.webp"
 imageAlt: "A smartphone with a wallet icon and coins on a dark green background"
 relatedLinks:
+  - label: "JazzCash withdrawal charges: what to expect"
+    href: "/blog/jazzcash-withdrawal-charges/"
   - label: "Easypaisa and JazzCash on Pak Rummy"
     href: "/easypaisa-jazzcash/"
   - label: "Withdrawal guide"
@@ -34,6 +36,15 @@ Easypaisa processes withdrawals to a range of destinations — bank accounts, ot
 1. Look at the exact fee shown on the confirmation screen before you approve the transaction — not a figure you remember from last time, since rates can change.
 2. If the amount that arrives is lower than expected, check whether the gap matches a disclosed fee or looks unexplained — the two call for different next steps.
 3. Keep your transaction ID and timestamp until the withdrawal is confirmed and reflects in your account.
+
+## Where to check Easypaisa's own current rates
+
+Easypaisa publishes its own Schedule of Charges directly — that's the only place to get a number we'd actually stand behind, since third-party roundups of these rates often disagree with each other and go stale within a quarter:
+
+- [Easypaisa Schedule of Charges — Retail Banking](https://easypaisa.com.pk/public-information/ScheduleofBankCharges/Schedule-of-Bank-Charges-Retail-Banking-English.pdf)
+- [Easypaisa Schedule of Charges — Branchless Banking](https://easypaisa.com.pk/public-information/ScheduleofBankCharges/Schedule-of-Bank-Charges-Branchless-Banking-English.pdf)
+
+Those cover Easypaisa's own general cash-out and transfer fees — not a Pak Rummy–specific number, since Pak Rummy's own markup (if any) on top of that is still unverified.
 
 ## Pak Rummy's own charges, specifically
 

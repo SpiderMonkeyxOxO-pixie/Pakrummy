@@ -21,7 +21,8 @@ const downloadVerified = isVerifiedFact(SITE.officialDownloadUrl);
       <p class="hero__lede">
         Check Pak Rummy download availability, Android requirements, bonuses, safety information,
         and player guides prepared specifically for players in Pakistan. This is the official
-        information site of the Pak Rummy team — the game is at pakrummy.com — and it never
+        information site of the Pak Rummy team — the game itself is at
+        <a href="https://pakrummy.com" rel="noopener">pakrummy.com</a> — and this site never
         processes deposits, withdrawals, or account data.
       </p>
 
@@ -29,6 +30,10 @@ const downloadVerified = isVerifiedFact(SITE.officialDownloadUrl);
         <CTAButton href="/download/" label={ctaLabel} variant="primary" />
         <CTAButton href="/guides/" label="Explore Player Guides" variant="secondary" />
       </div>
+
+      <p class="hero__game-link">
+        Looking for the game itself, not information about it? <a href="https://pakrummy.com" rel="noopener">Go to pakrummy.com &rarr;</a>
+      </p>
 
       <ul class="hero__chips">
         <li class="chip">
@@ -163,6 +168,17 @@ const downloadVerified = isVerifiedFact(SITE.officialDownloadUrl);
     font-size: 0.8rem;
     color: var(--color-text-muted);
     margin: 0;
+  }
+
+  .hero__game-link {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-4);
+  }
+
+  .hero__game-link a {
+    color: var(--color-gold-strong);
+    font-weight: 600;
   }
 
   .hero__visual {

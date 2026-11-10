@@ -9,6 +9,10 @@ imageAlt: "Three fanned playing cards with poker chips on a dark green table"
 relatedLinks:
   - label: "Teen Patti on the Pak Rummy app"
     href: "/games/teen-patti/"
+  - label: "Teen Patti hand sequence explained"
+    href: "/blog/teen-patti-sequence-explained/"
+  - label: "Teen Patti variations: Muflis, AK-47, and more"
+    href: "/blog/teen-patti-variations/"
   - label: "Responsible gaming"
     href: "/responsible-gaming/"
 ---

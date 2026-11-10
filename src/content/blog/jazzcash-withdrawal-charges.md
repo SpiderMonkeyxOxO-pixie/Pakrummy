@@ -7,6 +7,8 @@ category: "payments"
 image: "/images/blog-jazzcash-withdrawal-charges-hero.webp"
 imageAlt: "A smartphone with a wallet icon and coins trailing downward on a dark green background"
 relatedLinks:
+  - label: "Easypaisa withdrawal charges: what to expect"
+    href: "/blog/easypaisa-withdrawal-charges/"
   - label: "Easypaisa and JazzCash on Pak Rummy"
     href: "/easypaisa-jazzcash/"
   - label: "Withdrawal guide"
@@ -49,6 +51,14 @@ Yes — incomplete identity verification is a common cause of withdrawal delay, 
 
 **Where can I check Pak Rummy's current confirmed withdrawal process?**
 See our [withdrawal guide](/withdrawal/) for what's currently been verified.
+
+## Where to check JazzCash's own current rates
+
+JazzCash is operated by Mobilink Microfinance Bank, which publishes its own quarterly Schedule of Charges directly — that's the source we'd point you to over a third-party roundup, since those often disagree with each other and go stale within a quarter:
+
+- [Mobilink Microfinance Bank Schedule of Charges (branchless banking, current quarter)](https://mobilinkbank.com/assets/documents/SOC_Q1_2026.pdf)
+
+That covers JazzCash's own general cash-out and transfer fees for the quarter shown — not a Pak Rummy–specific number, and these schedules are reissued every quarter, so check the date on the document against today's before relying on it.
 
 ## What this page does not cover
 

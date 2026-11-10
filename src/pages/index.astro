@@ -72,8 +72,9 @@ const faqs = [
 const latestItems = [
   ...updates.slice(0, 2).map((entry) => ({ title: entry.data.title, href: `/updates/${entry.slug}/`, date: entry.data.publishDate })),
   ...guides.slice(0, 1).map((entry) => ({ title: entry.data.title, href: `/guides/${entry.slug}/` })),
-  ...blogPosts.slice(0, 1).map((entry) => ({ title: entry.data.title, href: `/blog/${entry.slug}/` })),
 ];
+
+const latestBlogPosts = blogPosts.slice(0, 4).map((entry) => ({ title: entry.data.title, href: `/blog/${entry.slug}/` }));
 ---
 
 <BaseLayout title={title} description={description} path="/" jsonLd={jsonLd}>
@@ -166,8 +167,26 @@ const latestItems = [
   </section>
 
   {
-    latestItems.length > 0 && (
+    latestBlogPosts.length > 0 && (
       <section class="section-tight">
+        <div class="container container-prose">
+          <h2>From the blog</h2>
+          <ul class="link-list">
+            {latestBlogPosts.map((item) => (
+              <li>
+                <a href={item.href}>{item.title}</a>
+              </li>
+            ))}
+          </ul>
+          <p class="fine-print"><a href="/blog/">All blog posts &rarr;</a></p>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    latestItems.length > 0 && (
+      <section class="section-tight section-light">
         <div class="container container-prose">
           <h2>Latest from us</h2>
           <ul class="link-list">
@@ -178,8 +197,7 @@ const latestItems = [
             ))}
           </ul>
           <p class="fine-print">
-            <a href="/updates/">All updates</a> &middot; <a href="/guides/">All guides</a> &middot;
-            <a href="/blog/">All blog posts</a>
+            <a href="/updates/">All updates</a> &middot; <a href="/guides/">All guides</a>
           </p>
         </div>
       </section>
