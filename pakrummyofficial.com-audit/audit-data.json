@@ -1,0 +1,161 @@
+{
+  "summary": {
+    "health_score": 68,
+    "business_type": "Informational / official-information site for a real-money rummy app (Pak Rummy); YMYL-adjacent (real-money gaming + payments)",
+    "top_findings": [
+      "/withdrawal/ contradicts itself: intro says processing time unconfirmed, fact table on same page says Verified",
+      "Operator identity unresolved sitewide despite Oct 4 'official site' repositioning (official-domains, customer-service, download, privacy-policy still hedge)",
+      "16 blog posts indexed but 0 clicks in 90 days -- zero hub pages link down to any post, homepage widget shows only 1 of 16",
+      "17% of all search impressions are people trying to reach pakrummy.com itself, converting at only 4.8% CTR with no onward path",
+      "Blog publishing cron exhausted its queue after Oct 19 -- 22 days stalled, nothing left to auto-resume"
+    ],
+    "quick_wins": [
+      "Wire existing dateModified logic into astro.config.mjs sitemap serialize() to fix zero <lastmod> sitewide",
+      "Add blog section to the human-readable /sitemap/ page (pattern already exists for guides/updates)",
+      "Fix getArticleSchema() to reference Organization @id instead of asserting Editorial Team as a Person",
+      "Port Hero.astro fetchpriority/responsive-image pattern to ArticleLayout.astro (blog LCP 2.95s vs 0.95-1.6s elsewhere)",
+      "Add above-the-fold link from homepage to pakrummy.com for the 17% of mismatched-intent visitors",
+      "Investigate why /card-rummy-vs-pak-rummy/ is unknown to Google despite being in the sitemap"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 84,
+      "what_works": [
+        "robots.txt AI-crawler block deliberate and correctly structured",
+        "Sitemap has exact 1:1 coverage, zero missing/orphaned URLs",
+        "Canonicals and trailing-slash handling consistent across all 64 pages, zero duplicate titles/descriptions",
+        "Fully static build, zero hydration directives, clean single-hop redirects, real 404 handling"
+      ],
+      "findings": [
+        {"title": "No sitewide security headers", "severity": "High", "description": "public/_headers only covers 4 narrow paths (llms.txt, robots.txt, APK content-type, /404). No CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, or Permissions-Policy anywhere.", "recommendation": "Add sitewide /* header block; CSP needs to account for inline GA4/GTM scripts in BaseLayout.astro."},
+        {"title": "llms.txt fully hardcoded, missing all new content", "severity": "Medium", "description": "src/pages/llms.txt.ts lists 0 of 16 blog posts, 0 of 3 guides, and omits /card-rummy-vs-pak-rummy/ entirely. 'Last updated' date is a literal string, not computed.", "recommendation": "Generate from content collections via getCollection(), matching the pattern already used in src/pages/sitemap/index.astro."},
+        {"title": "HTML /sitemap/ page omits individual blog posts", "severity": "Medium", "description": "Links guides/updates individually via getCollection() but only links the /blog/ index, not individual posts.", "recommendation": "Add a blog section using the same getCollection() pattern as guides/updates."},
+        {"title": "No IndexNow implementation", "severity": "Medium", "description": "No IndexNow ping anywhere in the codebase.", "recommendation": "Add IndexNow submission on publish once Bing Webmaster is verified for this domain."}
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 52,
+      "what_works": [
+        "Verified<T> fact framework is a genuine, structurally-enforced trust mechanism, not cosmetic",
+        "No templated/duplicate metadata across 64 pages",
+        "Consistent editorial byline presence and AI-citation-friendly 'Direct answer' openings on all articles"
+      ],
+      "findings": [
+        {"title": "Site contradicts itself about who runs it", "severity": "Critical", "description": "Oct 4 'official site' rewrite touched 13 files but missed /customer-service/, /official-domains/, /download/, and the /privacy-policy/ meta description, which still say the operator's identity/domains aren't confirmed.", "recommendation": "Reconcile all operator-identity language to one consistent framing; the site's own scam-checklist content treats this exact gap as a red flag."},
+        {"title": "/withdrawal/ self-contradicts on processing time", "severity": "High", "description": "Intro text says processing time is unconfirmed; the fact table on the same page marks '5-10 minutes' as Verified.", "recommendation": "Pick one accurate statement and remove the contradiction."},
+        {"title": "No named individual authors anywhere", "severity": "High", "description": "Every article bylined 'Editorial Team', not linked to /authors/ (an 87-word placeholder); article schema types the team as a Person.", "recommendation": "Either add real named reviewers or make the collective-authorship framing consistent in copy and schema."},
+        {"title": "Zero external citations sitewide", "severity": "High", "description": "None of the 20 articles links to an outside source; the only external link on the entire site is to pakrummy.com.", "recommendation": "Add citations to primary sources (wallet fee schedules, official app listings, etc.) especially on payment/trust content."},
+        {"title": "Payment-charges blog posts contain no figures", "severity": "High", "description": "The Easypaisa and JazzCash 'withdrawal charges' posts don't answer the question in their own titles.", "recommendation": "Add sourced, dated fee tables with real rupee figures."},
+        {"title": "Thin core pages", "severity": "Medium", "description": "/deposit/ 170 words, /withdrawal/ 217, /bonuses/ 205, /about/ 160, /authors/ 87, /updates/ 59.", "recommendation": "Expand with genuine substance, not padding, consistent with the site's own content philosophy."},
+        {"title": "Stale freshness signals", "severity": "Medium", "description": "Homepage hard-codes 'Last reviewed 17 August 2026'; /terms/ was edited Oct 4 but still displays 'Last revised 17 August'.", "recommendation": "Compute displayed review/revision dates from actual edit history instead of a hardcoded string."},
+        {"title": "Factual error in 13-card Rummy walkthrough", "severity": "Medium", "description": "The 'final declared hand' example totals 12 cards, not 13.", "recommendation": "Correct the example hand."}
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 58,
+      "what_works": [
+        "Titles and meta descriptions unique across all 64 pages, rewritten for SEO Oct 4, non-templated"
+      ],
+      "findings": [
+        {"title": "No hub page links down to supporting blog content", "severity": "Critical", "description": "Zero of the 7 game pages, /deposit/, /withdrawal/, /easypaisa-jazzcash/, /account-verification/, /safety/, or /legal-status/ link to any blog post. Homepage blog widget shows only 1 of 16 posts.", "recommendation": "Add contextual links from every relevant hub page to its supporting posts; raise the homepage widget beyond slice(0,1)."},
+        {"title": "Game pages compete with their own supporting blog posts", "severity": "High", "description": "Aviator, Crash, Teen Patti, Poker, and Ludo game pages target the same intent as dedicated blog posts about them; GSC shows at least one target keyword ranking on the wrong page.", "recommendation": "Differentiate titles/angles or consolidate."}
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 82,
+      "what_works": [
+        "Aug 21 BreadcrumbList @id/duplicate-entry fix verified holding sitewide",
+        "Valid JSON-LD syntax sitewide, no fabricated schema types",
+        "SoftwareApplication only renders once facts are independently verified, correctly omits fabricated offers/ratings"
+      ],
+      "findings": [
+        {"title": "Article schema types Editorial Team as a Person", "severity": "Medium", "description": "getArticleSchema() declares author as schema.org Person 'PakRummyOfficial.com Editorial Team', contradicting /authors/'s own statement that content has no individual bylines.", "recommendation": "Reference the existing Organization @id instead."},
+        {"title": "BreadcrumbList items show as 'Unnamed item' in Rich Results Test", "severity": "Medium", "description": "Distinct from the already-fixed @id bug -- likely missing an explicit name property on each ListItem.", "recommendation": "Add name to each BreadcrumbList ListItem."},
+        {"title": "SoftwareApplication schema omits SHA-256 checksum and permissions", "severity": "Medium", "description": "These facts exist in the HTML table but not in structured data, so an agent or system reading only JSON-LD can't recover them.", "recommendation": "Add as additionalProperty PropertyValue entries, gated on verified status."},
+        {"title": "5 article pages missing an image property", "severity": "Low", "description": "Guides/updates content schemas don't define an image field at all.", "recommendation": "Add an image field to the guides/updates content collection schema."}
+      ]
+    },
+    {
+      "name": "Performance",
+      "score": 75,
+      "what_works": [
+        "Homepage hero LCP 1.59s via fetchpriority + responsive srcset + inlined critical CSS",
+        "WebP adoption strong (26 of 34 image assets)",
+        "Font loading and TTFB (67-77ms sitewide) in good shape"
+      ],
+      "findings": [
+        {"title": "Blog/article template LCP fix never applied", "severity": "High", "description": "ArticleLayout.astro (serves ~25% of the site) uses a plain <img> with no fetchpriority or responsive sizing, shipping a full 1200x630 share-image as the mobile hero. Measured LCP 2.95s vs 0.95-1.6s on every other template.", "recommendation": "Port the Hero.astro Image/fetchpriority pattern to ArticleLayout.astro."},
+        {"title": "Homepage TBT needs improvement (451ms)", "severity": "Medium", "description": "Traced to GA4 gtag.js (607ms main-thread) plus a Cloudflare Web Analytics beacon running alongside it.", "recommendation": "Check for overlap/duplication between the two analytics scripts; consider deferring GA4 init slightly."},
+        {"title": "Unused image asset", "severity": "Low", "description": "rummy-game-art.png exists in public/images/ but is unreferenced anywhere; /games/rummy/ has no hero image.", "recommendation": "Either use it on /games/rummy/ or remove it."}
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 60,
+      "what_works": [
+        "robots.txt correctly separates AI training crawlers (blocked) from search and user-triggered agents (allowed) -- deliberate, not a misconfiguration",
+        "Download page accessibility tree is agent-ready (real anchors, zero div-onclick widgets)",
+        "All 19+ articles open with a 'Direct answer' section, a genuine citability asset"
+      ],
+      "findings": [
+        {"title": "llms.txt missing all new content and contradicts verified-fact rules", "severity": "High", "description": "Never reads the blog/guides/updates collections -- missing all 16 blog posts, all 3 guides, 2 standalone pages. Calls /withdrawal/ and /deposit/ facts 'verified' when site.ts marks them unverified.", "recommendation": "Generate from content collections and align claims with site.ts verification status."},
+        {"title": "Brand entity clarity is weak amid active lookalike-domain competition", "severity": "High", "description": "Lookalike domains (pakrummy.pk, pakrummy.com.pk -- the latter cited by Wikipedia) are winning the 'Pak Rummy' brand narrative in LLM training data. Organization schema has no sameAs/logo/operator link; /official-domains/ itself hedges on domain confirmation.", "recommendation": "Add Organization sameAs/logo, pursue a reciprocal link from pakrummy.com, reconcile /official-domains/ language."},
+        {"title": "AI-training block may be net-negative given the brand-narrative risk", "severity": "Medium", "description": "Blocking GPTBot/ClaudeBot/CCBot keeps this site's verified, anti-impersonation facts out of model training data while lookalikes remain in it. Blocking Google-Extended also removes Gemini app grounded-answer eligibility specifically.", "recommendation": "Consider adding ai-input=yes, unblocking PetalBot (search, not training) and Google-Extended, and evaluate allowing GPTBot/ClaudeBot/CCBot as an operator decision."},
+        {"title": "Content-Signal header not repeated in named blocked-bot robots.txt groups", "severity": "Low", "description": "Only lives in the wildcard group; the 5 explicitly named/blocked bots never read it (low impact -- already blocked by a stronger Disallow).", "recommendation": "Repeat the Content-Signal line in each named group for defense-in-depth."},
+        {"title": "Checksum/permissions not machine-queryable", "severity": "Medium", "description": "Visible in HTML table but absent from SoftwareApplication JSON-LD.", "recommendation": "See Schema category fix."}
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 78,
+      "what_works": [
+        "26 of 34 image assets are WebP, remaining exceptions justified (favicons, OG images, small logos)",
+        "No broken or placeholder image states found across any captured viewport"
+      ],
+      "findings": [
+        {"title": "Unused image asset", "severity": "Low", "description": "rummy-game-art.png unreferenced; /games/rummy/ has no hero image.", "recommendation": "Use or remove."},
+        {"title": "5 article pages missing structured-data image property", "severity": "Low", "description": "See Schema category.", "recommendation": "See Schema category fix."}
+      ]
+    },
+    {
+      "name": "Search Experience (SXO)",
+      "score": 47,
+      "what_works": [
+        "Strong, well-handled branded demand (top query 'pakrummy' at 561 impressions/28d)"
+      ],
+      "findings": [
+        {"title": "17% of impressions are people trying to reach pakrummy.com itself", "severity": "Critical", "description": "1,532 impressions in 90 days for the game domain and its typos, landing on a homepage with no visible onward link, converting at 4.8% CTR.", "recommendation": "Add a clear, above-the-fold link/CTA to pakrummy.com."},
+        {"title": "Withdrawal-charges posts don't match ranking page-type for their queries", "severity": "Critical", "description": "JazzCash post: 0 impressions in 90 days. Easypaisa post: 3 impressions at position 46-66. Competing results are fee tables and official fee-schedule PDFs; these posts have neither.", "recommendation": "Add sourced, dated fee tables with real figures."},
+        {"title": "/register-login/, old-version APK, and promo-code queries go unanswered", "severity": "High", "description": "'pak rummy 2026 registration': 30 impressions/0 clicks, only CTA is Download. Old-version APK searches: 210 impressions at 24% CTR unanswered. Promo-code demand split across 3 pages.", "recommendation": "Add targeted sections/CTAs to each page matching actual query intent."},
+        {"title": "Trust mismatch between homepage claims and page-level verification status", "severity": "Medium", "description": "Homepage claims Easypaisa/JazzCash support while /easypaisa-jazzcash/ says that support is unverified; withdrawal time is labeled Verified but is only operator-stated.", "recommendation": "Align claims with actual verification status; distinguish 'Operator-stated' from independently 'Verified'."}
+      ]
+    },
+    {
+      "name": "Backlinks",
+      "score": null,
+      "what_works": [],
+      "findings": [
+        {"title": "No usable backlink data obtainable from current sources", "severity": "High", "description": "Moz not configured, Bing verified for a different domain portfolio, Common Crawl hasn't captured this domain. Confidence ceiling 0.50 (Tier 0).", "recommendation": "Wire up Search Console's Links report via the already-authenticated GSC API."},
+        {"title": "No reciprocal link found from the operator (pakrummy.com)", "severity": "Medium", "description": "Checked on 3 operator pages (not exhaustive); only a one-way link exists from this site to the operator.", "recommendation": "Pursue a direct link from the operator as an authority/trust signal."}
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {"name": "Phase 0: Immediate, non-SEO", "timeframe": "Today", "items": ["Rotate exposed service-account/Bing/IndexNow credentials", "Provide correct GA4 property ID for pakrummyofficial.com"]},
+      {"name": "Phase 1: Critical Fixes", "timeframe": "Week 1", "items": ["Fix /withdrawal/ self-contradiction", "Reconcile operator-identity messaging sitewide", "Investigate /card-rummy-vs-pak-rummy/ indexing gap", "Add homepage link to pakrummy.com for mismatched-intent visitors", "Add fee tables to withdrawal-charges blog posts"]},
+      {"name": "Phase 2: High-Impact Improvements", "timeframe": "Weeks 2-3", "items": ["Internal linking overhaul from hubs to blog posts", "Retitle colliding game pages vs blog posts", "Wire sitemap lastmod via existing dateModified logic", "Regenerate llms.txt from content collections", "Add sitewide security headers", "Port LCP fix to ArticleLayout.astro", "Fix article author schema", "Fix BreadcrumbList unnamed items", "Restock scheduled-posts with new topics", "Investigate /customer-service/ indexing status", "Add login CTA to /register-login/", "Add old-version APK guidance"]},
+      {"name": "Phase 3: Content & Authority", "timeframe": "Month 2", "items": ["Add checksum/permissions to SoftwareApplication schema", "Add external citations to articles", "Reconcile verified-fact messaging consistency", "Fix 13-card Rummy factual error", "Consolidate overlapping-intent URLs", "Add missing cross-links between related posts", "Write Slots/Responsible-Gaming/install-troubleshooting content", "Pursue reciprocal link from operator", "Reassess AI-training-crawler block trade-off", "Add Organization sameAs/logo", "Verify in Bing Webmaster Tools + IndexNow", "Wire up GSC Links report"]},
+      {"name": "Phase 4: Monitoring & Iteration", "timeframe": "Ongoing", "items": ["Re-run GA4 analysis once correct property connected", "Capture a drift baseline", "Track GSC opportunity queries", "Fix remaining visual polish items", "Track down publication_date anomaly", "Re-check blog click-through after linking/content fixes land"]}
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}
