@@ -9,6 +9,8 @@ imageAlt: "A smartphone with an upward arrow and coins moving toward a wallet ic
 relatedLinks:
   - label: "How to deposit money into Easypaisa"
     href: "/blog/how-to-deposit-money-into-easypaisa/"
+  - label: "How to withdraw money from JazzCash"
+    href: "/blog/how-to-withdraw-money-from-jazzcash/"
   - label: "JazzCash withdrawal charges: what to expect"
     href: "/blog/jazzcash-withdrawal-charges/"
   - label: "Easypaisa and JazzCash on Pak Rummy"
@@ -53,6 +55,10 @@ Minimum deposit amounts, maximum limits, and any fees are set by JazzCash and va
 
 Don't assume a deposit has failed just because it hasn't appeared instantly — processing time varies by method, and a short delay is often normal rather than a sign something went wrong. See our guide on [delayed mobile wallet deposits](/guides/mobile-wallet-deposit-delay/) before concluding a transaction failed.
 
+## Moving money back out
+
+Once you're ready to cash out, the process runs in the other direction — see our guide on [how to withdraw money from JazzCash](/blog/how-to-withdraw-money-from-jazzcash/) for the Raast, debit card, and agent cash-out steps.
+
 ## FAQ
 
 **What funding sources work for a JazzCash deposit?**
@@ -74,6 +80,7 @@ This explains how depositing into JazzCash generally works — it isn't Pak Rumm
 ## Related reading
 
 - [How to deposit money into Easypaisa](/blog/how-to-deposit-money-into-easypaisa/)
+- [How to withdraw money from JazzCash](/blog/how-to-withdraw-money-from-jazzcash/)
 - [JazzCash withdrawal charges: what to expect](/blog/jazzcash-withdrawal-charges/)
 - [Easypaisa and JazzCash on Pak Rummy](/easypaisa-jazzcash/)
 - [Deposit guide](/deposit/)
