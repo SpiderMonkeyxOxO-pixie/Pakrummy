@@ -9,6 +9,8 @@ imageAlt: "A smartphone with an upward arrow and coins moving toward a wallet ic
 relatedLinks:
   - label: "How to deposit money into JazzCash"
     href: "/blog/how-to-deposit-money-into-jazzcash/"
+  - label: "How to withdraw money from Easypaisa"
+    href: "/blog/how-to-withdraw-money-from-easypaisa/"
   - label: "Easypaisa and JazzCash on Pak Rummy"
     href: "/easypaisa-jazzcash/"
   - label: "Deposit guide"
@@ -29,7 +31,7 @@ Easypaisa generally accepts a few ways to add money to your balance:
 - **Debit card**, added directly within the app.
 - **Agent cash deposit**, where a physical Easypaisa agent adds funds to your account for cash.
 
-Which of these is available to you depends on your account setup and verification level.
+Which of these is available to you depends on your account setup and verification level. Once money is in your Easypaisa balance, see our guide on [how to withdraw money from Easypaisa](/blog/how-to-withdraw-money-from-easypaisa/) for the reverse process.
 
 ## Step-by-step
 
@@ -64,6 +66,7 @@ This explains how depositing into Easypaisa generally works — it isn't Pak Rum
 
 ## Related reading
 
+- [How to withdraw money from Easypaisa](/blog/how-to-withdraw-money-from-easypaisa/)
 - [Easypaisa and JazzCash on Pak Rummy](/easypaisa-jazzcash/)
 - [Deposit guide](/deposit/)
 - [Delayed mobile wallet deposits](/guides/mobile-wallet-deposit-delay/)
